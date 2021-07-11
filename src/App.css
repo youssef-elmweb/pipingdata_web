@@ -243,10 +243,7 @@ aside:nth-child(3) {
   width: 17vw;
   height: max-content;
   margin: 0 auto;
-  border: 2px solid black;
-}
-.turnOn {
-  transform: rotate(45deg);
+  /*border: 2px solid black;*/
 }
 
 .Angle {

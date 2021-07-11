@@ -436,7 +436,7 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                         />
                     }
                 />     
-                    {(currentButtonLayerState === "elbow-double" || currentButtonLayerState === "elbow-double-oriented" ? [<Button key={"turn-left"} id="turn-left" className="Turn" type="button" value="turn" display={dispatchFunctions}>⥁</Button>,<Button key={"turn-right"} id="turn-right" className="Turn" type="button" value="turn" display={dispatchFunctions}>⥁</Button>] : false)}  
+                    {(currentButtonLayerState === "elbow-double" || currentButtonLayerState === "elbow-double-oriented" ? [<Button key={"turn"} id="turn" className="Turn" type="button" value="turn" display={dispatchFunctions}>⥁</Button>] : false)}  
             </Section>
 
             <Section id="app-values" className="App_values">

@@ -1,0 +1,641 @@
+/*************************************** STYLES GLOBALS ***************************************/
+* {
+  outline: 0;
+}
+
+#root {
+  background-image: url("./reffinery_3.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: contain;
+  /*background: linear-gradient(to right, rgb(192, 192, 192), transparent 50%, #eee 25%, rgb(255, 124, 238) 25%), url("./reffinery_3.png") left -70% bottom 0%, 0.05em;*/
+  height: 100vh;
+}
+
+button {
+  width: 2.5vw;
+  height: auto;
+  padding: 0;
+  border: none;
+  border-radius: 50%; 
+  background: none;
+}
+button:active:not(.Button_setting, .Setting_smart, .Utility_smart, .Turn) {
+  outline-style: none;
+  box-shadow: 0 0 5px 0 white;
+}
+.Button_setting {
+  opacity: 0.7;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+}
+a:hover {
+  color: white;
+}
+
+.link, .google:hover, .apple:hover, .Button_setting:hover {
+  transition-property: "color, border";
+  transition-delay: 0.15s;
+  transition-duration: 0.25s;
+  opacity: 1;
+}
+/*************************************** STYLES GLOBALS ***************************************/
+
+
+/**************************************** ELEMENTS FLEX ***************************************/
+.App, .App_main, .App_header, .App_logo, .App_link_logo, .App_buttons_smart, .link, 
+.App_link, .Logo, .App_buttons_smart, .App_setting_fast, .Smart_vector, #form_comment, 
+.play_stores, .Bloc_trust, .Badge_trust, .Price, .google, .apple, .App-range,
+h1, button, aside, svg {
+  display: flex;
+}
+/**************************************** ELEMENTS FLEX ***************************************/
+
+
+/**************************************** STYLES HEADER ***************************************/
+.App {
+  flex-direction: column;
+}
+
+.App_header {
+  align-items: center;
+  justify-content: space-between;
+  padding: 1% 1.5%;
+  box-shadow: 0 4px 6px rgb(100, 100, 100);
+  background-color: #282c34;
+}
+
+.App_logo {
+  width: 5%;
+  border-right: 0.25px solid silver;
+  padding-right: 1.6vw;
+}
+
+.App_link_logo {
+  width: auto;
+  height: auto;
+}
+
+.Logo {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+h1 {
+  flex: 34%;
+  justify-content: center;
+  margin-left: 28.25%;
+  font-family: "Orbitron";
+  font-size: calc(2.5px + 1.5vw); 
+  letter-spacing: 0.2vw;
+  color: white;
+}
+
+.App_link {
+  flex: auto;
+  flex: 35%;
+  justify-content: center;
+  align-items: center;
+}
+
+.link {
+  flex: 20%;
+  margin-right: 41%;
+  font-size: 11px;
+  font-weight: 700;
+  color: #BABBBD;
+}
+
+.App_setting_fast {
+  flex: auto;
+  flex-direction: column;
+  margin-left: 11%;
+  align-items: center;
+}
+
+.Setting {
+  flex: auto;
+  width: 0.15vw;
+}
+/**************************************** STYLES HEADER ***************************************/
+
+
+/***************************************** STYLES MAIN ****************************************/
+.App_main {
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0 2%;
+}
+
+aside:first-child {
+  flex: 30%;
+}
+
+aside:nth-child(2) {
+  flex: auto;
+  /*border: 1px solid red;*/
+}
+
+aside:nth-child(3) {
+  flex: 30%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/***************************************** STYLES MAIN ****************************************/
+
+
+/************************************ STYLES BLOC CONFIANCE ************************************/
+.Bloc_trust {
+  width: 300px;
+  margin: 0 auto;
+  justify-content: flex-start;
+  overflow: hidden;
+  align-items: center; 
+}
+.Badge_trust {
+  width: 200%;
+  transform: rotate(0deg);
+}
+/************************************ STYLES BLOC CONFIANCE ************************************/
+
+
+
+/***************************************** STYLES APPLI ***************************************/
+.Smart_vector {
+  flex-direction: column;
+  min-height: 40vw;
+  margin: 1.5vw auto 0;
+  background-image: url("./smartphone.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  /*border: 1px solid green; /*a retirer*/
+}
+
+.App_buttons_smart {
+  height: max-content;
+  margin: 1% 0 3.5%;
+  padding: 0 5%;
+  align-items: center;
+  justify-content: space-evenly;
+  /*border: 1px solid red; /*a retirer*/
+}
+
+.Elbow, .Elbow_double, .Elbow_double_section, .Elbow_double_oriented, .Elbow_slice {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 50%; 
+  background-color: #e74c3c; 
+}
+
+.Turn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 1.25vw;
+  height: 1.25w;
+  font-size: 1.75vw;
+  font-weight: bold;
+  color: snow;
+}
+
+.Turn_action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3vw;
+  height: 1vw;
+  font-weight: bold;
+  padding: 0;
+}
+
+.Zoning_move_left, .Zoning_move_right {
+  stroke-opacity: 0.1;
+}
+.Zoning_move_left:active, .Zoning_move_right:active {
+  stroke-opacity: 0.3;
+  cursor: move;
+}
+
+.Screen_svg {
+  display: flex;
+  justify-content: center;
+  width: 16vw;
+  height: 16vw;
+  margin: 0 auto 1vw; /* svg prend la moitié de la hauteur 40 vw regler hauteur du reste des éléments */
+  /*border: 2px solid rgb(129, 123, 123); /*a retirer*/
+  /*transform: rotate(40deg);*/
+}
+
+.Elbow_layer, .Double_elbow_layer, .Double_elbow_oriented_layer, .Elbow_slice_layer  {
+  stroke-width: 0.2px;
+}
+
+.Elbow_svg {  /*  ici voir  */
+  color: aqua;
+  font-size: 11px;
+  font-weight: bold;
+  width: 17vw;
+  height: max-content;
+  margin: 0 auto;
+  border: 2px solid black;
+}
+.turnOn {
+  transform: rotate(45deg);
+}
+
+.Angle {
+  stroke-width: 0.15px;
+}
+
+.Double_elbow_oriented_layer_dashed, .Elbow_slice_half_dashed {
+  stroke-dasharray: 0.35px 0.75px;
+  stroke-dashoffset: 1;
+  stroke-width: 0.1px;
+  opacity: 0.5;
+}
+
+.Elbow_layer_axe {
+  stroke-dashoffset: 3px;
+}
+
+p {color: white; z-index: 1999;}
+  /*stroke-dasharray: 2px; dashed pour axe en rouge */
+
+.App-range {
+  justify-content: center;
+  margin: 1.5vw 0 0;
+  padding: 0 9%; 
+}
+.range {
+  display: flex;
+  flex: auto;
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  color: white;
+  appearance: none;
+  height: 2px;
+  text-align: left;
+}
+/***************************************** STYLES APPLI ***************************************/
+
+
+/************************************* STYLES BUTTON STORES ***********************************/
+.play_stores {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 90%;
+  margin: 10% 0 13%;
+}
+
+.App_link_google, .App_link_apple {
+  display: flex;
+  flex: 1;
+  width: auto;
+  margin: 0 3%;
+  justify-content: center;
+}
+
+.google, .apple {
+  display: flex;
+  max-width: 100%;
+  border: 3px solid transparent;
+  justify-content: center;
+  border-radius: 12px;
+}
+
+.google:hover, .apple:hover {
+  border: 3px solid slategray;
+}
+/************************************* STYLES BUTTON STORES ***********************************/
+
+
+/****************************************** STYLES SPAN ***************************************/
+.Price {
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  border-radius: 25px;
+  padding: 2.5%;
+  color: white;
+  font-size: 26px;
+  font-weight: bold;
+  background-color: forestgreen;
+}
+/****************************************** STYLES SPAN ***************************************/
+
+
+/****************************************** STYLES FORM ***************************************/
+#form_comment {
+  flex-direction: column;
+  width: 85%;
+  border: 1px solid #282c34;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: aliceblue;
+  background-color: #282c34;
+}
+
+label, input, textarea {
+  padding: 3% 2%;
+  border: none;
+}
+
+input {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+textarea {
+  height: 7vw;
+  resize: none;
+  border-top: 1px solid #282c34;
+}
+
+.submit {
+  border-top: 1px solid #282c34;
+  border-radius: 0 0 10px 10px;
+  padding: 1.5vw 0;
+  color: white;
+  background-color: #4b5463;
+}
+.submit:hover {
+  transition-property: "background-color";
+  transition-delay: 0.15s;
+  transition-duration: 0.35s;
+  opacity: 1;
+  background-color: #282c34;
+}
+/****************************************** STYLES FORM ***************************************/
+
+
+/**************************************** STYLES ONECHECK *************************************/
+.theme, .language {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 4.2vw;
+  height: 1.5vw;
+  right: 30%;
+  border: 1px solid white;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+.theme {
+  margin: 0 0 5%;
+  background-color: steelblue;
+}
+.language {
+  margin: 5% 0 0;
+  background-color: yellowgreen;
+}
+  
+.buttonTheme, .buttonLanguage {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.2vw;
+  height: 1.5vw;
+  left: 0%;
+  border: 0.5px solid black;
+  border-radius: 4px;
+  font-size: 1.5vw;
+  color: black;
+  background-color: gainsboro;
+}
+  
+.dark, .light, .french, .english:not(.light) {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 9vw;
+}
+.dark {
+  font-size: 0.9vw;
+  line-height: 0.9vw;
+}
+.light {
+  height: 1.25vw;
+  font-size: 1.2vw;
+}
+.french, .english {
+  font-size: 1.5vw;
+  height: 2.1;
+}
+
+.fleche_theme, .fleche_langage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.75vw;
+  width: 100%;
+  height: 100%;
+}
+/**************************************** STYLES ONECHECK *************************************/
+
+
+.App-format-norme {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0.5vw 0 0.25vw;
+  padding: 0 2.75vw;
+  /*border: 1px solid white;*/
+}
+
+.Formats {
+  display: flex;
+  flex: 10vw;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 2vw;
+  padding: 0;
+}
+
+.Format {
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  margin-right: 0.75vw;
+  padding-block-end: 0.25vw;
+  padding-block-start: 0.25vw;
+  padding-inline-end: 1.25vw;
+  padding-inline-start: 1.25vw;
+  height: 100%;
+  font-size: 1vw;
+  font-weight: 400;
+  background-color: #525252;
+  color: white;
+}
+.Format:hover {
+  background-color: rgb(49, 82, 49);
+  transition-property: "background-color";
+  transition-duration: 350ms;
+  transition-delay: 200ms;
+}
+
+
+/********************************************** NORME *************/
+
+
+.Normes {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 5vw;
+  padding: 0.3vw 0;
+  height: max-content;
+  border-radius: 5px;
+  background-color: #525252;
+  transition-property: "justify-content";
+  transition-duration: 2s;
+  transition-delay: 2s;
+}
+
+.Iso_Ansi {
+  position: absolute;
+  left: 2.5vw;
+  display: flex;
+  align-items: center;
+  outline: 0;
+  width: 2.5vw;
+  text-align: center;
+  margin: 0;
+  appearance: none;
+  transition: 0.15s left linear;
+}
+
+.Iso_Ansi::after {
+  display: block;
+  width: 2.5vw;
+  content: "ansi";
+  margin: 0 auto;
+  border-radius: 15%;
+  text-align: center;
+  font-size: 1vw;
+  line-height: 1vw;
+  color: white;
+  background-color: rgb(49, 82, 49);
+  padding: 15% 0;
+  font-weight: bold;
+}
+
+.Iso, .Ansi {
+  display: flex;
+  align-self: center;
+  align-content: center;
+  flex: 1;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1vw;
+  line-height: 1vw;
+  font-weight: bold;
+  color: rgb(138, 136, 136);
+}
+
+/*************************************************************/
+
+.App_values {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.25vw 2vw 1vw;
+  font-weight: bold;
+  color: white;
+}
+
+.Title_diameters, .Title_values_elbow, .Title_values_principal {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  background-color: rgb(49, 82, 49);
+  border-radius: 10px;
+  margin: 0.25vw auto;
+}
+.Title_diameters {
+  font-size: 0.9vw;
+  padding: 0 1.7vw;
+}
+.Title_values_elbow, .Title_values_principal {
+  font-size: 0.7vw;
+  padding: 0 0.5vw;
+}
+
+.Diameters, .Values_elbow, .Values_principal {
+  display: flex;
+  width: max-content;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.75vw;
+  color: white;
+  line-height: 160%;
+}
+.Diameters {
+  align-items: left;
+}
+.Values_elbow {
+  align-items: left;
+}
+.Values_principal {
+  align-items: center;
+  color: rgb(47, 255, 40);
+}
+
+
+/***********************/
+
+.App_setting_smart {
+  display: flex;
+  align-items: center;
+  margin: 2.5vw 0.2vw 1.25vw;
+  padding: 0 2.5vw;
+}
+
+.Setting_smart, .Utility_smart {
+  display: flex;
+  flex: 1;
+  border-radius: 0;
+}
+.Setting_smart {
+  justify-content: flex-end;
+}
+
+.Setting_smart_img, .Utility_smart_img {
+  display: flex;
+  width: 1.5vw;
+  height: 1.41vw;
+  opacity: 0.75;
+}
+.Setting_smart_img:hover, .Utility_smart_img:hover {
+  opacity: 1;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Link = (props) => {
     const thisHref = props.href;
     const thisClass = props.className;

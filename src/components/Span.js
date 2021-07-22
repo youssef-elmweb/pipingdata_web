@@ -1,9 +1,9 @@
-
+import React from 'react';
 
 const Span = (props) => {
-    const thisId = props.id;
-    const thisClass = props.className;
-    const thisContainer = props.container;
+    var thisId = props.id;
+    var thisClass = props.className;
+    var thisContainer = props.container;
     var thisDisplay = props.display;
 
     return (

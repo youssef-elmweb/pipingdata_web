@@ -3,7 +3,7 @@ const Svg = (props) => {
     const thisComponentSvg = props.children;
 
     return (
-        <svg className={thisClass} xmlns="http://www.w3.org/2000/svg" viewBox={props.viewBox} fill="none" strokeWidth="0.2px">
+        <svg id="circle" className={thisClass} xmlns="http://www.w3.org/2000/svg" viewBox={props.viewBox} fill="none" strokeWidth="0.2px">
             {thisComponentSvg}
         </svg>
     );

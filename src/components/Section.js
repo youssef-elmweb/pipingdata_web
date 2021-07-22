@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Section = (props) => {
 
     const thisId = props.id;

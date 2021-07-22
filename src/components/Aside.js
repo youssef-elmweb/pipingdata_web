@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Aside = (props) => {
     const thisId = props.id;
     const thisClass = props.class;

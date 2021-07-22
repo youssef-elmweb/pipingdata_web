@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Path = (props) => {
     var thisId = props.id;
     var thisClass = props.className;

@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Form = (props) => {
     const thisId = props.id;
     const thisClass = props.className;

@@ -19,8 +19,9 @@ button {
   border: none;
   border-radius: 50%; 
   background: none;
+  z-index: 999;
 }
-button:active:not(.Button_setting, .Setting_smart, .Utility_smart, .Turn) {
+button:active:not(.Button_setting, .Setting_smart, .Utility_smart, .Turn, .Iso_Ansi) {
   outline-style: none;
   box-shadow: 0 0 5px 0 white;
 }
@@ -189,29 +190,30 @@ aside:nth-child(3) {
 .Elbow, .Elbow_double, .Elbow_double_section, .Elbow_double_oriented, .Elbow_slice {
   width: 2.5vw;
   height: 2.5vw;
-  border-radius: 50%; 
-  background-color: #e74c3c; 
+  border-radius: 50%;  
+}
+.Elbow_double, .Elbow_double_section, .Elbow_double_oriented, .Elbow_slice {
+  background-color: #e74c3c;
 }
 
-.Turn {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 1.25vw;
-  height: 1.25w;
-  font-size: 1.75vw;
-  font-weight: bold;
-  color: snow;
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+   opacity: 1;
+   height: 2.5vw;
+   padding: 0 1.37vw 0 0;
 }
 
-.Turn_action {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 3vw;
-  height: 1vw;
-  font-weight: bold;
-  padding: 0;
+.Button_turn {
+  appearance: none;
+  border-radius: 25px;
+  width: 1.1vw;
+  height: 2.5vw;
+  margin: 0;
+  padding: 0 1.42vw 0 0;
+}
+
+.Test {
+  margin-left: 2vw;
 }
 
 .Zoning_move_left, .Zoning_move_right {
@@ -227,8 +229,9 @@ aside:nth-child(3) {
   justify-content: center;
   width: 16vw;
   height: 16vw;
-  margin: 0 auto 1vw; /* svg prend la moitié de la hauteur 40 vw regler hauteur du reste des éléments */
-  /*border: 2px solid rgb(129, 123, 123); /*a retirer*/
+  margin: 0 auto; /* svg prend la moitié de la hauteur 40 vw regler hauteur du reste des éléments */
+  /*border: 1px dashed rgb(129, 123, 123); /*a retirer*/
+  z-index: 99;
   /*transform: rotate(40deg);*/
 }
 
@@ -236,14 +239,24 @@ aside:nth-child(3) {
   stroke-width: 0.2px;
 }
 
-.Elbow_svg {  /*  ici voir  */
+.Elbow_svg { 
+  position: relative;
   color: aqua;
   font-size: 11px;
   font-weight: bold;
   width: 17vw;
-  height: max-content;
-  margin: 0 auto;
-  /*border: 2px solid black;*/
+  height: 16vw;
+  margin: 0 auto 2.75vw;
+  /*border: 1px solid black;*/
+}
+
+.Reset_orientation_screen {
+  position: relative;
+  top: 1.5%;
+  left: 59%;
+  font-size: 1.75vw;
+  color: white;
+  font-weight: bold;
 }
 
 .Angle {
@@ -267,7 +280,7 @@ p {color: white; z-index: 1999;}
 .App-range {
   justify-content: center;
   margin: 1.5vw 0 0;
-  padding: 0 9%; 
+  padding: 0 10%; 
 }
 .range {
   display: flex;
@@ -404,7 +417,7 @@ textarea {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 2.2vw;
+  width: 2.2vw; 
   height: 1.5vw;
   left: 0%;
   border: 0.5px solid black;
@@ -449,7 +462,7 @@ textarea {
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  margin: 0.5vw 0 0.25vw;
+  margin: 0.25vw 0 0.25vw;
   padding: 0 2.75vw;
   /*border: 1px solid white;*/
 }
@@ -461,6 +474,10 @@ textarea {
   align-items: center;
   margin-right: 2vw;
   padding: 0;
+}
+
+.Format:nth-child(2) {
+  background-color: forestgreen;
 }
 
 .Format {
@@ -477,12 +494,6 @@ textarea {
   font-weight: 400;
   background-color: #525252;
   color: white;
-}
-.Format:hover {
-  background-color: rgb(49, 82, 49);
-  transition-property: "background-color";
-  transition-duration: 350ms;
-  transition-delay: 200ms;
 }
 
 
@@ -504,31 +515,24 @@ textarea {
 }
 
 .Iso_Ansi {
+  appearance: none;
   position: absolute;
   left: 2.5vw;
   display: flex;
+  justify-content: center;
   align-items: center;
-  outline: 0;
-  width: 2.5vw;
-  text-align: center;
-  margin: 0;
-  appearance: none;
-  transition: 0.15s left linear;
-}
-
-.Iso_Ansi::after {
-  display: block;
-  width: 2.5vw;
-  content: "ansi";
+  width: 50%;
+  height: 100%;
+  border-radius: 20%;
   margin: 0 auto;
-  border-radius: 15%;
+  outline: 0;
+  line-height: 1vw;
   text-align: center;
   font-size: 1vw;
-  line-height: 1vw;
   color: white;
-  background-color: rgb(49, 82, 49);
-  padding: 15% 0;
   font-weight: bold;
+  transition: 0.15s left linear;
+  background-color: forestgreen;
 }
 
 .Iso, .Ansi {

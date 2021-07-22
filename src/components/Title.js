@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Title = (props) => {
     const thisId = props.classId;
     const thisClass = props.className;

@@ -30,7 +30,7 @@ const Sectionsmart = (props) => {
     const [currentNormeButton, setNormeButtonState] = useState(0);
 
     var datasPipe = [ // std->sh->lg
-        [15, 0.5, 21.3, 38, 0, 45],
+        [15, 0.5, 21.3, 38, 28, 45],
         [20, 0.75, 27, 38, 0, 57.5],
         [25, 1, 33.5, 38, 25, 72.5],
         [32, 1.15, 42.3, 47.6, 32, 92.5],

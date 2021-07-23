@@ -187,11 +187,11 @@ const Sectionsmart = (props) => {
 
 
         for (var i = 0; i < 90; i++) { 
-            cosIntrado = Math.cos(unDegre*i) * 1.25; // for pseudo padding. 5 is reel proportion from svg elbow
-            sinIntrado = Math.sin(unDegre*i) * 1.25; // for pseudo padding. 5 is reel proportion from svg elbow
+            cosIntrado = Math.cos(unDegre*i) * 2; // for pseudo padding. 5 is reel proportion from svg elbow
+            sinIntrado = Math.sin(unDegre*i) * 2; // for pseudo padding. 5 is reel proportion from svg elbow
         
-            cosExtrado = Math.cos(unDegre*i) * 7.75; // for pseudo padding. 15 is reel proportion from svg elbow
-            sinExtrado = Math.sin(unDegre*i) * 7.75; // for pseudo padding. 15 is reel proportion from svg elbow
+            cosExtrado = Math.cos(unDegre*i) * 7; // for pseudo padding. 15 is reel proportion from svg elbow
+            sinExtrado = Math.sin(unDegre*i) * 7; // for pseudo padding. 15 is reel proportion from svg elbow
 
             tabAnglesADoubleElbow[i] = <path 
             key={(currentButtonLayerState === "elbow-double" ? "angle-"+(90-i)+"-a" : "angle-"+(90-i)+"-ao")}
@@ -215,11 +215,11 @@ const Sectionsmart = (props) => {
 
 
         for (let i = 0; i < 90; i++) {
-            cosIntrado = Math.cos(unDegre*i) * -1.25; // for pseudo padding. 5 is reel proportion from svg elbow
-            sinIntrado = Math.sin(unDegre*i) * -1.25; // for pseudo padding. 5 is reel proportion from svg elbow
+            cosIntrado = Math.cos(unDegre*i) * -2; // for pseudo padding. 5 is reel proportion from svg elbow
+            sinIntrado = Math.sin(unDegre*i) * -2; // for pseudo padding. 5 is reel proportion from svg elbow
         
-            cosExtrado = Math.cos(unDegre*i) * -7.75; // for pseudo padding. 15 is reel proportion from svg elbow
-            sinExtrado = Math.sin(unDegre*i) * -7.75; // for pseudo padding. 15 is reel proportion from svg elbow
+            cosExtrado = Math.cos(unDegre*i) * -7; // for pseudo padding. 15 is reel proportion from svg elbow
+            sinExtrado = Math.sin(unDegre*i) * -7; // for pseudo padding. 15 is reel proportion from svg elbow
 
             tabAnglesBDoubleElbow[i] = <path 
             key={`angle-${90-i}-b`}
@@ -241,7 +241,7 @@ const Sectionsmart = (props) => {
 
 
 
-        for (let i = 0; i < 91; i++) {
+        for (let i = 0; i < 90; i++) {
             let halfDiameter = 3.5;
             let angle = 4.5/90;
 
@@ -256,8 +256,8 @@ const Sectionsmart = (props) => {
                 onMouseLeave={displayAngleFinal}
                 onMouseOut={hiddenAngle}
                 d={`
-                    M${halfDiameter+(i*angle)} ${11.25}   
-                    L${halfDiameter+(i*angle)} ${4.75}                       
+                    M${halfDiameter+(i*angle)} ${10.5}   
+                    L${halfDiameter+(i*angle)} ${5.5}                       
                 `} 
                 strokeLinecap={"strokeLinecap"}
             />
@@ -278,20 +278,20 @@ const Sectionsmart = (props) => {
                      />] 
 
     var doubleElbowLayer = [<Path
-                                key={"double-elbow-layer"}
+                                key={"double-elbow-layer" /*0.75*/}
                                     id="double-elbow-layer"
                                     className="Double_elbow_layer"
                                     strokeLinecap="square"
                                     stroke="#8e8e8e"                        
-                                    d={`M 9.25 12.5 15.75 12.5 Z
-                                        M 9.25 12.5 A 1.25 1.25, 0, 0, 0, 8 11.25
-                                        M 15.75 12.5 A 7.75 7.75, 0, 0, 0, 8 4.75 
+                                    d={`M 10 12.5 15 12.5 Z 
+                                        M 10 12.5 A 2 2, 0, 0, 0, 8 10.5
+                                        M 15 12.5 A 7 7, 0, 0, 0, 8 5.5 
 
-                                        M 8 11.25 8 4.75 
+                                        M 8 10.5 8 5.5 
 
-                                        M 6.75 3.5 A 1.25 1.25, 0, 0, 0, 8 4.75
-                                        M 0.25 3.5 A 7.75 7.75, 0, 0, 0, 8 11.25 
-                                        M 0.25 3.5 6.75 3.5 Z`}
+                                        M 6 3.5 A 2 2, 0, 0, 0, 8 5.5
+                                        M 1 3.5 A 7 7, 0, 0, 0, 8 10.5 
+                                        M 1 3.5 6 3.5 Z`}
                             />] 
                             
     var doubleOrientedElbowLayer = [<Path
@@ -300,14 +300,14 @@ const Sectionsmart = (props) => {
                                             className="Double_elbow_oriented_layer"
                                             strokeLinecap="square"
                                             stroke="#8e8e8e"                      
-                                            d={`M 9.25 12.5 15.75 12.5 Z
-                                                M 9.25 12.5 A 1.25 1.25, 0, 0, 0, 8 11.25
-                                                M 15.75 12.5 A 7.75 7.75, 0, 0, 0, 8 4.75 
-                                                M 8 11.25 8 4.75 Z
+                                            d={`M 10 12.5 15 12.5 Z 
+                                                M 10 12.5 A 2 2, 0, 0, 0, 8 10.5
+                                                M 15 12.5 A 7 7, 0, 0, 0, 8 5.5 
+                                                M 8 10.5 8 5.5 Z
 
-                                                M 3.5 11.25 8 11.25
-                                                M 3.5 4.75 8 4.75 Z
-                                                M 3.5 11.25 A 3.25 3.25, 0, 0, 1, 3.5 4.75`}
+                                                M 3.5 10.5 8 10.5
+                                                M 3.5 5.5 8 5.5 Z
+                                                M 3.5 10.5 A 2.5 2.5, 0, 0, 1, 3.5 5.5`}
                                     />]   
 
     var elbowSliceLayer = [<Path

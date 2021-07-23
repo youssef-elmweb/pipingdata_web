@@ -100,7 +100,7 @@ const Svgelbows = (props) => {
                                 className="Double_elbow_oriented_layer_dashed"
                                 strokeLinecap="square"
                                 stroke="#8e8e8e"                      
-                                d={`M 3.5 11.25 A 3.25 3.25, 0, 0, 0, 3.5 4.75`}
+                                d={`M 3.5 10.5 A 2.5 2.5, 0, 0, 0, 3.5 5.5`}
                         />,
                         <Path
                             key={"double-elbow-oriented-layer-axe"}

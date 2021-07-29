@@ -10,28 +10,9 @@ import React, { useState }  from 'react';
 
 const Sectionsmart = (props) => {
 
-    const thisId = props.id;
-    const thisClass = props.className;
-
-    const [currentAngle, setCurrentAngleState] = useState(90);
-
-    const [currentAngleADoubleElbow, setCurrentAngleAState] = useState(90);
-    const [currentAngleBDoubleElbow, setCurrentAngleBState] = useState(90);
-
-    const [currentAngleADoubleElbowOriented, setCurrentAngleAOrientedState] = useState(90);
-    const [currentAngleBDoubleElbowOriented, setCurrentAngleBOrientedState] = useState(90);
-
-    const [currentButtonLayerState, setCurrentButtonLayerState] = useState(props.values[0]);
-
-    const [currentAngleScreen, setAngleScreenText] = useState(0);
-    const [currentAngleScreenReal, setAngleScreenState] = useState(0); 
-
-    const [currentFormatButton, setFormatButtonState] = useState(1);
-    const [currentNormeButton, setNormeButtonState] = useState(0);
-
-    var datasPipe = [ // std->sh->lg
+    const datasPipe = [ // std->sh->lg
         [15, 0.5, 21.3, 38, 28, 45],
-        [20, 0.75, 27, 38, 0, 57.5],
+        [20, 0.75, 27, 38, 38, 57.5],
         [25, 1, 33.5, 38, 25, 72.5],
         [32, 1.15, 42.3, 47.6, 32, 92.5],
         [40, 1.5, 48.3, 57.2, 38, 109],
@@ -64,17 +45,51 @@ const Sectionsmart = (props) => {
         [1200, 48, 1219, 1829, 1219, 0]
     ];
 
-    const [currentDiameter, setDiameter] = useState(datasPipe[0]);
-    const [currentFormatElbow, setFormatElbowState] = useState(3);
-    const [currentNorme, setNormeState] = useState(2);
-
+    var PiSurDeux = Math.PI / 2;
     var tabAngles = [];
     var tabAnglesADoubleElbow = [];
     var tabAnglesBDoubleElbow = [];
     var tabAnglesBDoubleElbowOriented = [];
     var unDegre = (Math.PI / 180); 
     var ii = 0;
-    var style = {backgroundColor: "forestgreen"};
+
+    var styleButtonElbow = {backgroundColor: "forestgreen"};
+
+    const thisId = props.id;
+    const thisClass = props.className;
+
+    const [currentAngle, setCurrentAngleState] = useState(90);
+
+    const [currentAngleADoubleElbow, setCurrentAngleAState] = useState(90);
+    const [currentAngleBDoubleElbow, setCurrentAngleBState] = useState(90);
+
+    const [currentAngleADoubleElbowOriented, setCurrentAngleAOrientedState] = useState(90);
+    const [currentAngleBDoubleElbowOriented, setCurrentAngleBOrientedState] = useState(90);
+
+    const [currentButtonLayerState, setCurrentButtonLayerState] = useState(props.values[0]);
+
+    const [currentAngleScreen, setAngleScreenText] = useState(0);
+    const [currentAngleScreenReal, setAngleScreenState] = useState(0); 
+
+    const [currentFormatButton, setFormatButtonState] = useState(1);
+    const [currentNormeButton, setNormeButtonState] = useState(0);
+
+    const [currentDiameter, setDiameter] = useState(datasPipe[0]);
+    const [currentFormatElbow, setFormatElbowState] = useState(3);
+    const [currentNorme, setNormeState] = useState(2);
+
+    const [currentIntra, setCurrentIntraState] = useState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngle);
+    const [currentExtra, setCurrentExtraState] = useState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngle);
+
+    const [currentIntraA, setCurrentIntraAState] = useState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleADoubleElbow);
+    const [currentIntraB, setCurrentIntraBState] = useState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleBDoubleElbow);
+    const [currentIntraAOriented, setCurrentIntraAOrientedState] = useState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleADoubleElbowOriented);
+    const [currentIntraBOriented, setCurrentIntraBOrientedState] = useState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleBDoubleElbowOriented);
+
+    const [currentExtraA, setCurrentExtraAState] = useState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleADoubleElbow);
+    const [currentExtraB, setCurrentExtraBState] = useState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleBDoubleElbow);
+    const [currentExtraAOriented, setCurrentExtraAOrientedState] = useState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleADoubleElbowOriented);
+    const [currentExtraBOriented, setCurrentExtraBOrientedState] = useState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleBDoubleElbowOriented);
 
         const displayAngle = (e) => {
             e.stopPropagation();
@@ -87,10 +102,10 @@ const Sectionsmart = (props) => {
             let angleBDoubleElbowOriented = 0;
 
             if (currentButtonLayerState === "elbow") {
-                    e.target.parentElement.children[currentAngle].attributes.opacity.nodeValue = "0";
-                    e.target.parentElement.children[90].attributes.opacity.nodeValue = "0";
-                    angle = Number(e.currentTarget.attributes.value.value);
-                    setCurrentAngleState(angle);
+                e.target.parentElement.children[currentAngle].attributes.opacity.nodeValue = "0";
+                e.target.parentElement.children[90].attributes.opacity.nodeValue = "0";
+                angle = Number(e.currentTarget.attributes.value.value);
+                setCurrentAngleState(angle);
             } 
 
             if (currentButtonLayerState === "elbow-double") {
@@ -135,16 +150,16 @@ const Sectionsmart = (props) => {
 
         const displayAngleFinal = (e) => {
             if (currentButtonLayerState === "elbow") {
-                    e.target.parentElement.children["angle-"+currentAngle].attributes.opacity.nodeValue = "1";
+                e.target.parentElement.children["angle-"+currentAngle].attributes.opacity.nodeValue = "1";
             }
 
 
             if (currentButtonLayerState === "elbow-double") {
-                    if (e.target.id.substr(e.target.id.length-1, e.target.id.length) === "a") {
-                        e.target.parentElement.children["angle-"+currentAngleADoubleElbow+"-a"].attributes.opacity.nodeValue = "1";
-                    } else if (e.target.id.substr(e.target.id.length-1, e.target.id.length) === "b") {
-                        e.target.parentElement.children["angle-"+currentAngleBDoubleElbow+"-b"].attributes.opacity.nodeValue = "1";
-                      }
+                if (e.target.id.substr(e.target.id.length-1, e.target.id.length) === "a") {
+                    e.target.parentElement.children["angle-"+currentAngleADoubleElbow+"-a"].attributes.opacity.nodeValue = "1";
+                } else if (e.target.id.substr(e.target.id.length-1, e.target.id.length) === "b") {
+                    e.target.parentElement.children["angle-"+currentAngleBDoubleElbow+"-b"].attributes.opacity.nodeValue = "1";
+                  }
             }
 
             if (currentButtonLayerState === "elbow-double-oriented") {
@@ -159,7 +174,8 @@ const Sectionsmart = (props) => {
         }
 
 
-        for (let i = 1; i < 91; i++) {
+
+        for (var i = 1; i < 91; i++) {
             var cosIntrado = Math.cos(unDegre*i) * 5.1; // for pseudo padding. 5 is reel proportion from svg elbow
             var sinIntrado = Math.sin(unDegre*i) * 5.1; // for pseudo padding. 5 is reel proportion from svg elbow
         
@@ -182,8 +198,11 @@ const Sectionsmart = (props) => {
                 `} 
                 strokeLinecap={"strokeLinecap"}
             />
-        } 
+        }
 
+        var courbeExtra = [<Path key={"courbe-zero"} id={"courbe-zero"} className={"Courbe_zero"} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 5.5 15.5 15.5 15.5`} />, <Path key={"courbe-ext-"+currentAngle} id={"courbe-ext-"+currentAngle} className={"Courbe_ext_"+currentAngle} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 15.5 15.5 A 15 15, 0, 0, 0, ${0.5+Math.cos(unDegre*currentAngle) * 15} ${15.5-Math.sin(unDegre*currentAngle) * 15}`} />]
+        var courbeIntra = <Path key={"courbe-ext-"+currentAngle} id={"courbe-ext-"+currentAngle} className={"Courbe_ext_"+currentAngle} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 5.5 15.5 A 5 5, 0, 0, 0, ${0.5+Math.cos(unDegre*currentAngle) * 5} ${15.5-Math.sin(unDegre*currentAngle) * 5}`} />
+        tabAngles.push(courbeExtra, courbeIntra);
 
 
         for (var i = 0; i < 90; i++) { 
@@ -212,9 +231,7 @@ const Sectionsmart = (props) => {
         } 
 
 
-
-
-        for (let i = 0; i < 90; i++) {
+        for (var i = 0; i < 90; i++) {
             cosIntrado = Math.cos(unDegre*i) * -2; // for pseudo padding. 5 is reel proportion from svg elbow
             sinIntrado = Math.sin(unDegre*i) * -2; // for pseudo padding. 5 is reel proportion from svg elbow
         
@@ -239,9 +256,12 @@ const Sectionsmart = (props) => {
             />
         } 
 
+        var courbeExtraElbowB = <Path key={"courbe-ext-b"+currentAngleBDoubleElbow} id={"courbe-ext-b"+currentAngleBDoubleElbow} className={"Courbe_ext_b"+currentAngleBDoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 5.5 A 2 2, 0, 0, 1, ${(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -2)} ${3.5-(Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * -2)}`} />
+        var courbeIntraElbowB = <Path key={"courbe-int-b"+currentAngleBDoubleElbow} id={"courbe-int-b"+currentAngleBDoubleElbow} className={"Courbe_int_b"+currentAngleBDoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 10.5 A 7 7, 0, 0, 1, ${8+Math.cos(unDegre*(90-currentAngleBDoubleElbow)) * -7} ${3.5-Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * -7}`} />
+        tabAnglesBDoubleElbow.push(courbeExtraElbowB, courbeIntraElbowB);
 
 
-        for (let i = 0; i < 90; i++) {
+        for (var i = 0; i < 90; i++) {
             let halfDiameter = 3.5;
             let angle = 4.5/90;
 
@@ -256,12 +276,17 @@ const Sectionsmart = (props) => {
                 onMouseLeave={displayAngleFinal}
                 onMouseOut={hiddenAngle}
                 d={`
-                    M${halfDiameter+(i*angle)} ${10.5}   
-                    L${halfDiameter+(i*angle)} ${5.5}                       
+                    M ${halfDiameter+(i*angle)} ${10.5}   
+                    L ${halfDiameter+(i*angle)} ${5.5} 
+                    M 8 5.5
+                    L ${halfDiameter+(i*angle)} ${5.5} 
+                    M 8 10.5
+                    L ${halfDiameter+(i*angle)} ${10.5} Z
                 `} 
-                strokeLinecap={"strokeLinecap"}
+                strokeLinecap={"square"}
             />
         }
+
 
 
     var elbowLayer = [<Path
@@ -269,12 +294,11 @@ const Sectionsmart = (props) => {
                             id="elbow-layer"
                             className="Elbow_layer"
                             strokeLinecap="square"
-                            stroke="#8e8e8e"             
-                            d={`M 5.5 15.5 15.5 15.5 Z
+                            stroke="#454545"             
+                            d={`M 5.5 15.5 15.5 15.5 
                                 M 5.5 15.5 A 5 5, 0, 0, 0, 0.5 10.5
                                 M 15.5 15.5 A 15 15, 0, 0, 0, 0.5 0.5 
-                                M 0.5 10.5 0.5 0.5 
-                                M 5.5 15.5 15.5 15.5 Z`}
+                                M 0.5 10.5 0.5 0.5 Z`}
                      />] 
 
     var doubleElbowLayer = [<Path
@@ -282,40 +306,55 @@ const Sectionsmart = (props) => {
                                     id="double-elbow-layer"
                                     className="Double_elbow_layer"
                                     strokeLinecap="square"
-                                    stroke="#8e8e8e"                        
+                                    stroke="#454545"                        
                                     d={`M 10 12.5 15 12.5 Z 
                                         M 10 12.5 A 2 2, 0, 0, 0, 8 10.5
                                         M 15 12.5 A 7 7, 0, 0, 0, 8 5.5 
 
-                                        M 8 10.5 8 5.5 
-
                                         M 6 3.5 A 2 2, 0, 0, 0, 8 5.5
                                         M 1 3.5 A 7 7, 0, 0, 0, 8 10.5 
                                         M 1 3.5 6 3.5 Z`}
-                            />] 
+                            />,
+                            <Path
+                                key={"double-elbow-layer-join" /*0.75*/}
+                                    id="double-elbow-layer-join"
+                                    className="Double_elbow_layer_join"
+                                    strokeLinecap="square"
+                                    stroke="white"   
+                                    strokeWidth="0.1"                     
+                                    d={`M 8 10.5 8 5.5 Z`}
+                        />] 
                             
     var doubleOrientedElbowLayer = [<Path
                                         key={"double-elbow-oriented-layer"}
                                             id="double-elbow-oriented-layer"
                                             className="Double_elbow_oriented_layer"
                                             strokeLinecap="square"
-                                            stroke="#8e8e8e"                      
+                                            stroke="#454545"                      
                                             d={`M 10 12.5 15 12.5 Z 
                                                 M 10 12.5 A 2 2, 0, 0, 0, 8 10.5
                                                 M 15 12.5 A 7 7, 0, 0, 0, 8 5.5 
-                                                M 8 10.5 8 5.5 Z
-
+                                                
                                                 M 3.5 10.5 8 10.5
                                                 M 3.5 5.5 8 5.5 Z
                                                 M 3.5 10.5 A 2.5 2.5, 0, 0, 1, 3.5 5.5`}
-                                    />]   
+                                    />,
+                                    <Path
+                                        key={"double-elbow-layer-join" /*0.75*/}
+                                            id="double-elbow-layer-join"
+                                            className="Double_elbow_layer_join"
+                                            strokeLinecap="square"
+                                            stroke="white"   
+                                            strokeWidth="0.1"                     
+                                            d={`M 8 10.5 8 5.5 Z`}
+                                />]   
 
     var elbowSliceLayer = [<Path
                                 key={"elbow-slice-layer"}
                                 id="elbow-slice-layer"
                                 className="Elbow_slice_layer"
                                 strokeLinecap="round"
-                                stroke="#8e8e8e"                      
+                                stroke="#454545"                      
                                 d={`M 5.5 15.5 15.5 15.5 Z
 
                                     M 5.5 15.5 5.5 ${15.5-Math.sin(unDegre*15) * 5}                 
@@ -407,7 +446,7 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                 setAngleScreenState(currentAngleScreenReal);
 
                 e.target.style.backgroundColor = "forestgreen";
-                e.currentTarget.parentElement.children[currentButtonLayerState].children[0].style.backgroundColor = "tomato";
+                e.currentTarget.parentElement.children[currentButtonLayerState].children[0].style.backgroundColor = "#e74c3c";
             }
 
     } 
@@ -464,6 +503,64 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
         e.currentTarget.parentElement.parentElement.children[1].style.transform = "rotate(0deg)";
     }
 
+    const makeRadiusElbow = (angleCurrent, callback, angleBCurrent) => {
+        let radius = Math.tan((Math.PI/180)*angleCurrent/2)*currentDiameter[currentFormatElbow];
+        let radiusB = Math.tan((Math.PI/180)*angleBCurrent/2)*currentDiameter[currentFormatElbow];
+
+            if (angleBCurrent !== undefined && angleBCurrent !== null) {
+                if (currentIntraA !== (((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleADoubleElbow) {
+                    setCurrentIntraAState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleADoubleElbow);
+                }
+                if (currentIntraB !== (((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleBDoubleElbow) {
+                    setCurrentIntraBState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleBDoubleElbow);
+                }
+                if (currentIntraAOriented !== (((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleADoubleElbowOriented) {
+                    setCurrentIntraAOrientedState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleADoubleElbowOriented);
+                }
+                if (currentIntraBOriented !== (((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleBDoubleElbowOriented) {
+                    setCurrentIntraBOrientedState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngleBDoubleElbowOriented);
+                }
+
+                if (currentExtraA !== ((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleADoubleElbow) {
+                    setCurrentExtraAState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleADoubleElbow);
+                }
+                if (currentExtraB !== ((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleBDoubleElbow) {
+                    setCurrentExtraBState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleBDoubleElbow);
+                }
+                if (currentExtraAOriented !== ((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleADoubleElbowOriented) {
+                    setCurrentExtraAOrientedState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleADoubleElbowOriented);
+                }
+                if (currentExtraBOriented !== ((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleBDoubleElbowOriented) {
+                    setCurrentExtraBOrientedState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngleBDoubleElbowOriented);
+                }
+
+                return Number.parseFloat(radius+radiusB).toFixed(1) + " mm";
+            }
+                //callback(radius.toFixed(1));
+                
+                if (currentIntra !== (((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngle) {
+                    setCurrentIntraState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngle);
+                }
+                if (currentExtra !== ((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngle) {
+                    setCurrentExtraState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngle);
+                }
+                return radius.toFixed(1) + " mm";
+    }
+
+    //var extra = ((((diamExt / 2) + rayon) * Math.PI / 2) / 90) * parseInt(angle);
+    //var intra = (((rayon - (diamExt / 2)) * Math.PI / 2) / 90) * parseInt(angle);
+
+    const makeIntraElbow = () => {
+        let PiSurDeux = Math.PI / 2;
+        //setCurrentIntraState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngle);
+            console.log(currentIntra);
+            //return currentIntra;
+    }
+
+    /*const makeExtraElbow = (rayon) => {
+        return ((((diamExt / 2) + rayon) * Math.PI / 2) / 90) * parseInt(angle);
+    }*/
+
 
     return (
         <div values={props.values} id={thisId} className={thisClass}>
@@ -478,6 +575,8 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                         />
                     }
                 />
+
+                <Span className="Unity" container="Unité: mm" />
 
                 <Button key={"setting"} id="setting-smart" className="Setting_smart" type="button" value="setting" 
                     children={
@@ -496,7 +595,7 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                     children={
                         <Img 
                             className="Elbow"
-                            style={style}
+                            style={styleButtonElbow}
                             value={props.values.elbow}
                             src="assets/elbow.png"  
                             alt="elbow-steel" 
@@ -540,13 +639,22 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                 <Section id="diameters" className="Diameters">
                     <Span className="Title_diameters" container="Ø" />
                     <Span container={currentDiameter[currentNorme] + " mm"} />
-                    <Span container={currentDiameter[1] + " pouces"} />
+                    <Span container={`DN ${currentDiameter[0]}`} />
                 </Section>
 
                 <Section id="values-elbow" className="Values_elbow">
-                    <Span className="Title_values_elbow" container="Extra/Intra" />
-                    <Span container="127 mm" />
-                    <Span container="61 mm" />
+                    <Span className = "Title_values_elbow" container="Extra/Intra (mm)" />
+                    {
+                        (currentButtonLayerState === "elbow-double" ?
+                            [<Span container = {`A ${parseFloat(currentExtraA).toFixed(2)} - ${parseFloat(currentIntraA).toFixed(2)}`} />,
+                             <Span container = {`B ${parseFloat(currentExtraB).toFixed(2)} - ${parseFloat(currentIntraB).toFixed(2)}`} />]
+                        :
+                        (currentButtonLayerState === "elbow-double-oriented" ?
+                            [<Span container = {`A ${parseFloat(currentExtraAOriented).toFixed(2)} - ${parseFloat(currentIntraAOriented).toFixed(2)}`} />,
+                             <Span container = {`B ${parseFloat(currentExtraBOriented).toFixed(2)} - ${parseFloat(currentIntraBOriented).toFixed(2)}`} />]
+                        :
+                        [<Span container = {`${parseFloat(currentExtra).toFixed(1)} mm`} />,<Span container = {`${parseFloat(currentIntra).toFixed(1)} mm`} />]))
+                    }
                 </Section>
 
                 <Section id="values-principal" className="Values_principal">
@@ -564,7 +672,18 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                         }
                     />
 
-                    <Span container={currentDiameter[currentFormatElbow] + " mm"} />
+                    <Span
+                        container = 
+                        {
+                            (currentButtonLayerState !== "elbow-double-oriented" ?
+                            (currentButtonLayerState !== "elbow-slice" ? 
+                            (currentButtonLayerState !== "elbow-double" ? makeRadiusElbow(currentAngle, makeIntraElbow) 
+                            : makeRadiusElbow(currentAngleADoubleElbow, makeIntraElbow, currentAngleBDoubleElbow)) 
+                            : "rayon")
+                            : makeRadiusElbow(currentAngleADoubleElbowOriented, makeIntraElbow, currentAngleBDoubleElbowOriented))
+                        }
+                    />
+                    
                 </Section>
             </Section>
 
@@ -575,10 +694,32 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                         {
                             (currentButtonLayerState !== "elbow-double-oriented" ?
                             (currentButtonLayerState !== "elbow-slice" ? 
-                            (currentButtonLayerState !== "elbow-double" ? [tabAngles.map(angle => angle)]
-                            : [tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbow.map(angle => angle)])  
+                            (currentButtonLayerState !== "elbow-double" ? 
+
+                                [tabAngles.map(angle => angle), 
+                                <line x1="10.5" y1="15.5" x2="10.5" y2={15.5-Math.tan((currentAngle/2)*unDegre)*10} strokeWidth="0.1" stroke="forestgreen" />, 
+                                <line x1="10.5" y1={15.5-Math.tan((currentAngle/2)*unDegre)*10} x2={0.5+Math.cos(unDegre*currentAngle) * 10} y2={15.5-Math.sin(unDegre*currentAngle) * 10}  strokeWidth="0.1" stroke="forestgreen" />, 
+                                <circle cx="10.5" cy={15.5-Math.tan((currentAngle/2)*unDegre)*10} r="0.2"  fill="forestgreen" />]
+
+                            :   [tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbow.map(angle => angle), 
+                                <Path key={"courbe-ext-a"+currentAngleADoubleElbow} id={"courbe-ext-a"+currentAngleADoubleElbow} className={"Courbe_ext_a"+currentAngleADoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 5.5 A 7 7, 0, 0, 1, ${(8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 7)} ${12.5-(Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 7)}`} />, 
+                                <Path key={"courbe-int-a"+currentAngleADoubleElbow} id={"courbe-int-a"+currentAngleADoubleElbow} className={"Courbe_int_a"+currentAngleADoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 10.5 A 2 2, 0, 0, 1, ${8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 2} ${12.5-Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 2}`} />,
+                                <line x1="8" y1="8" x2={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y2="8" strokeWidth="0.1" stroke="forestgreen" />, 
+                                <line x1={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y1="8" x2={8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 4.5} y2={12.5-Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 4.5} strokeWidth="0.1" stroke="gray" />, 
+                                <circle cx="10.5" cx={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} cy="8" r="0.15"  fill="forestgreen" />,
+                                <line x1="8" y1="8" x2={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y2="8" strokeWidth="0.1" stroke="forestgreen" />, 
+                                <line x1={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y1="8" x2={8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -4.5} y2={3.5-Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * -4.5} strokeWidth="0.1" stroke="gray" />, 
+                                <circle cx="10.5" cx={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} cy="8" r="0.15"  fill="forestgreen" />])  
+                                                                                                                                                                                                                                                                                                      
                             : false)
-                            : [tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbowOriented.map(angle => angle)])
+
+                            :   [tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbowOriented.map(angle => angle), 
+                                <Path key={"courbe-ext-a"+currentAngleADoubleElbowOriented} id={"courbe-ext-a"+currentAngleADoubleElbowOriented} className={"Courbe_ext_a"+currentAngleADoubleElbowOriented} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 5.5 A 7 7, 0, 0, 1, ${(8+Math.cos(unDegre*(90-currentAngleADoubleElbowOriented)) * 7)} ${12.5-(Math.sin(unDegre*(90-currentAngleADoubleElbowOriented)) * 7)}`} />, 
+                                <Path key={"courbe-int-a"+currentAngleADoubleElbowOriented} id={"courbe-int-a"+currentAngleADoubleElbowOriented} className={"Courbe_int_a"+currentAngleADoubleElbowOriented} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 10.5 A 2 2, 0, 0, 1, ${8+Math.cos(unDegre*(90-currentAngleADoubleElbowOriented)) * 2} ${12.5-Math.sin(unDegre*(90-currentAngleADoubleElbowOriented)) * 2}`} />,
+                                <line x1="8" y1="8" x2={8+Math.tan(((currentAngleADoubleElbowOriented)/2)*unDegre)*4.5} y2="8" strokeWidth="0.1" stroke="forestgreen" />, 
+                                <line x1={8+Math.tan(((currentAngleADoubleElbowOriented)/2)*unDegre)*4.5} y1="8" x2={8+Math.cos(unDegre*(90-currentAngleADoubleElbowOriented)) * 4.5} y2={12.5-Math.sin(unDegre*(90-currentAngleADoubleElbowOriented)) * 4.5} strokeWidth="0.1" stroke="gray" />, 
+                                <circle cx="10.5" cx={8+Math.tan(((currentAngleADoubleElbowOriented)/2)*unDegre)*4.5} cy="8" r="0.15"  fill="forestgreen" />,
+                                <line x1="8" y1="8" x2={3.5+((4.5/90)*(90-currentAngleBDoubleElbowOriented))} y2={8} strokeWidth="0.1" stroke="forestgreen" />])
                         }
                     </Svgelbows>
             </Section>
@@ -593,13 +734,19 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
 
                 <Section className="Normes">
                     <span className="Iso">ansi</span>
-                        {(currentDiameter[currentNorme] === 76.1 || currentDiameter[currentNorme] === 139.7 || currentDiameter[currentNorme] === 73 || currentDiameter[currentNorme] === 141 ? <Button name="iso-ansi" id="iso-ansi" className="Iso_Ansi" type="radio" value="iso-ansi" display={getNorme}>iso</Button> : false)}
+                        {(currentDiameter[currentNorme] === 76.1 || currentDiameter[currentNorme] === 139.7 || currentDiameter[currentNorme] === 73 || currentDiameter[currentNorme] === 141 ? 
+                            <Button name="iso-ansi" id="iso-ansi" className="Iso_Ansi" type="radio" value="iso-ansi" display={getNorme}>iso</Button> 
+                        : false)}
                     <span className="Ansi">iso</span>
                 </Section>
             </Section>
 
             <Section id="app-range" className="App-range">
-                <Input className="range" type="range" min={0} max={datasPipe.length-1} step={1} displayChange={(e) => {(datasPipe[e.target.value] !== 73 || datasPipe[e.target.value] !== 141 ? setNormeState(2) : false); setNormeButtonState(0); setDiameter(datasPipe[e.target.value])}} defaultValue={0} />
+                <Input className="range" type="range" min={0} max={datasPipe.length-1} step={1} 
+                       displayChange={(e) => {(datasPipe[e.target.value] !== 73 || datasPipe[e.target.value] !== 141 ? 
+                            setNormeState(2) 
+                       : false)
+                       setNormeButtonState(0); setDiameter(datasPipe[e.target.value])}} defaultValue={0} />
             </Section>
 
         </div>        

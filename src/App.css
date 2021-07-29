@@ -178,6 +178,18 @@ aside:nth-child(3) {
   /*border: 1px solid green; /*a retirer*/
 }
 
+.Unity {
+  display: flex;
+  align-items: center;
+  color: aquamarine;
+  text-align: center;
+  border-radius: 10px;
+  margin-block-start: 1.25vw;
+  font-size: 0.6vw;
+  font-weight: bold;
+  padding: 0 0.5vw;
+}
+
 .App_buttons_smart {
   height: max-content;
   margin: 1% 0 3.5%;
@@ -191,16 +203,14 @@ aside:nth-child(3) {
   width: 2.5vw;
   height: 2.5vw;
   border-radius: 50%;  
-}
-.Elbow_double, .Elbow_double_section, .Elbow_double_oriented, .Elbow_slice {
   background-color: #e74c3c;
 }
 
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button {  
-   opacity: 1;
-   height: 2.5vw;
-   padding: 0 1.37vw 0 0;
+  opacity: 1;
+  height: 2.5vw;
+  padding: 0 1.37vw 0 0;
 }
 
 .Button_turn {
@@ -260,7 +270,7 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .Angle {
-  stroke-width: 0.15px;
+  stroke-width: 0.2px;
 }
 
 .Double_elbow_oriented_layer_dashed, .Elbow_slice_half_dashed {
@@ -346,6 +356,7 @@ p {color: white; z-index: 1999;}
 #form_comment {
   flex-direction: column;
   width: 85%;
+  padding: 0.5vw;
   border: 1px solid #282c34;
   border-radius: 10px;
   text-align: center;
@@ -508,7 +519,7 @@ textarea {
   padding: 0.3vw 0;
   height: max-content;
   border-radius: 5px;
-  background-color: #525252;
+  background-color: transparent /*#525252*/;
   transition-property: "justify-content";
   transition-duration: 2s;
   transition-delay: 2s;
@@ -545,7 +556,7 @@ textarea {
   font-size: 1vw;
   line-height: 1vw;
   font-weight: bold;
-  color: rgb(138, 136, 136);
+  color: white;
 }
 
 /*************************************************************/
@@ -583,7 +594,7 @@ textarea {
   width: max-content;
   flex-direction: column;
   justify-content: center;
-  font-size: 0.75vw;
+  font-size: 0.7vw;
   color: white;
   line-height: 160%;
 }
@@ -592,20 +603,21 @@ textarea {
 }
 .Values_elbow {
   align-items: left;
+  color: aquamarine;
 }
 .Values_principal {
   align-items: center;
   color: rgb(47, 255, 40);
 }
 
-
 /***********************/
 
 .App_setting_smart {
   display: flex;
-  align-items: center;
-  margin: 2.5vw 0.2vw 1.25vw;
+  margin: 2.25vw 0.2vw 0.75vw;
   padding: 0 2.5vw;
+  height: 2.25vw;
+  /*border: 1px solid red;*/
 }
 
 .Setting_smart, .Utility_smart {

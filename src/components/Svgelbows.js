@@ -74,7 +74,7 @@ const Svgelbows = (props) => {
                         key={"elbow-layer-axe"}
                             id="elbow-layer-axe"
                                 className="Elbow_layer_axe"
-                                strokeWidth="0.075"
+                                strokeWidth="0.05"
                                 strokeLinecap="square"
                                 stroke="red"     
                                 strokeDasharray="1.5px, 0.3px, 0.35px, 0.3px"     
@@ -84,7 +84,7 @@ const Svgelbows = (props) => {
                             key={"elbow-double-layer-axe"}
                                 id="elbow-double-layer-axe"
                                     className="Elbow_double_layer_axe"
-                                    strokeWidth="0.075"
+                                    strokeWidth="0.05"
                                     strokeLinecap="square"
                                     stroke="red"     
                                     strokeDasharray="1.5px, 0.3px, 0.35px, 0.3px"     
@@ -106,7 +106,7 @@ const Svgelbows = (props) => {
                             key={"double-elbow-oriented-layer-axe"}
                                 id="double-elbow-oriented-layer-axe"
                                     className="Double_elbow_oriented_layer_axe"
-                                    strokeWidth="0.075"
+                                    strokeWidth="0.05"
                                     strokeLinecap="square"
                                     stroke="red"     
                                     strokeDasharray="1.5px, 0.3px, 0.35px, 0.3px"     

@@ -209,21 +209,26 @@ aside:nth-child(3) {
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button {  
   opacity: 1;
+  width: 3vw;
   height: 2.5vw;
-  padding: 0 1.37vw 0 0;
+  padding: 0 1.35vw 0 0;
 }
 
 .Button_turn {
   appearance: none;
   border-radius: 25px;
-  width: 1.1vw;
+  width: 1.15vw;
   height: 2.5vw;
   margin: 0;
-  padding: 0 1.42vw 0 0;
+  padding: 0 1.3vw 0 0;
 }
 
-.Test {
+.Test, .TestB {
   margin-left: 2vw;
+}
+
+.TestB {
+color: #48dbfb;
 }
 
 .Zoning_move_left, .Zoning_move_right {
@@ -251,7 +256,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .Elbow_svg { 
   position: relative;
-  color: aqua;
+  color: #fdff83;
   font-size: 11px;
   font-weight: bold;
   width: 17vw;
@@ -267,6 +272,9 @@ input[type=number]::-webkit-outer-spin-button {
   font-size: 1.75vw;
   color: white;
   font-weight: bold;
+}
+.Reset_orientation_screen:hover {
+  color: rgb(47, 255, 40);
 }
 
 .Angle {

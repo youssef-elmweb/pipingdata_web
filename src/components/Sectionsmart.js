@@ -61,6 +61,7 @@ const Sectionsmart = (props) => {
     const [currentAngle, setCurrentAngleState] = useState(90);
 
     const [currentAngleADoubleElbow, setCurrentAngleAState] = useState(90);
+    const [currentAngleALDoubleElbow, setCurrentAngleALState] = useState(90);
     const [currentAngleBDoubleElbow, setCurrentAngleBState] = useState(90);
 
     const [currentAngleADoubleElbowOriented, setCurrentAngleAOrientedState] = useState(90);
@@ -122,6 +123,7 @@ const Sectionsmart = (props) => {
                     angleBDoubleElbow = Number(e.currentTarget.attributes.value.value);
                     setCurrentAngleBState(angleBDoubleElbow);
                 } 
+                //setCurrentAngleALState(currentAngleBDoubleElbow); // (voir ici le souci pour dissocier les 2 états concernés)
             }
 
             if (currentButtonLayerState === "elbow-double-oriented") {
@@ -140,7 +142,7 @@ const Sectionsmart = (props) => {
                 }
             }
 
-                    e.target.attributes.opacity.value = "1";    
+                e.target.attributes.opacity.value = "1";    
         }
 
         const hiddenAngle = (e) => {
@@ -266,24 +268,24 @@ const Sectionsmart = (props) => {
             let angle = 4.5/90;
 
             tabAnglesBDoubleElbowOriented[i] = <path 
-            key={`angle-${90-i}-bi`}
-                id = {`angle-${90-i}-bi`}
-                className = {`Angle`}
-                stroke = {"white"}
-                opacity = {( i === 0 ? (i % 90 ? "0" : "1") : "0")} 
-                value = {90-i} 
-                onMouseMove={displayAngle}
-                onMouseLeave={displayAngleFinal}
-                onMouseOut={hiddenAngle}
-                d={`
-                    M ${halfDiameter+(i*angle)} ${10.5}   
-                    L ${halfDiameter+(i*angle)} ${5.5} 
-                    M 8 5.5
-                    L ${halfDiameter+(i*angle)} ${5.5} 
-                    M 8 10.5
-                    L ${halfDiameter+(i*angle)} ${10.5} Z
-                `} 
-                strokeLinecap={"square"}
+                key={`angle-${90-i}-bi`}
+                    id = {`angle-${90-i}-bi`}
+                    className = {`Angle`}
+                    stroke = {"white"}
+                    opacity = {( i === 0 ? (i % 90 ? "0" : "1") : "0")} 
+                    value = {90-i} 
+                    onMouseMove={displayAngle}
+                    onMouseLeave={displayAngleFinal}
+                    onMouseOut={hiddenAngle}
+                    d={`
+                        M ${halfDiameter+(i*angle)} ${10.5}   
+                        L ${halfDiameter+(i*angle)} ${5.5} 
+                        M 8 5.5
+                        L ${halfDiameter+(i*angle)} ${5.5} 
+                        M 8 10.5
+                        L ${halfDiameter+(i*angle)} ${10.5} Z
+                    `} 
+                    strokeLinecap={"square"}
             />
         }
 
@@ -493,7 +495,6 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
             setNormeButtonState(0);
             (currentNorme !== 2 ? setNormeState(2) : false);
         }
-        
     }
 
     const resetOrientationScreen = (e) => {
@@ -547,19 +548,45 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                 return radius.toFixed(1) + " mm";
     }
 
-    //var extra = ((((diamExt / 2) + rayon) * Math.PI / 2) / 90) * parseInt(angle);
-    //var intra = (((rayon - (diamExt / 2)) * Math.PI / 2) / 90) * parseInt(angle);
-
     const makeIntraElbow = () => {
         let PiSurDeux = Math.PI / 2;
         //setCurrentIntraState((((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngle);
-            console.log(currentIntra);
+            //console.log(currentIntra);
             //return currentIntra;
     }
 
-    /*const makeExtraElbow = (rayon) => {
-        return ((((diamExt / 2) + rayon) * Math.PI / 2) / 90) * parseInt(angle);
-    }*/
+
+
+    var testA = Math.tan(((currentAngleADoubleElbow)/2) * unDegre) * 4.5;
+    var testB = Math.tan(((currentAngleBDoubleElbow)/2) * unDegre) * 4.5;
+
+    var portion = (testA+testB);
+    var portionBis = (2*testB);
+
+    var coteOp = portion * Math.sin((90-currentAngleBDoubleElbow) * unDegre);
+    var coteAd = portionBis * Math.cos((90-currentAngleBDoubleElbow) * unDegre);
+
+    var result = coteAd-4.5; //console.log(result + " init");
+    var result = 4.5-result; //console.log(result + " apres");
+
+    //console.log("jaune Op " + coteOp, " rouge Ad " + coteAd, " vert Hy" + portion);
+
+    //console.log(Math.sqrt((9 * 9) - (result * result)), 9);
+    //console.log(Number.parseFloat((Math.sqrt((9 * 9) - (result * result)))));
+
+    var adj = Number.parseFloat((Math.sqrt((9 * 9) - (result * result))));
+    var hyp = adj / Math.sin(currentAngleBDoubleElbow * unDegre);
+
+    console.log(9 - (Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 9));
+
+    console.log(9 - (Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 9) / Math.sin(90-currentAngleBDoubleElbow * unDegre));
+
+    var coteOpose = 9 - (Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 9) / Math.sin(90-currentAngleBDoubleElbow * unDegre);
+
+    //console.log(portion, currentAngleBDoubleElbow);
+    //console.log(portion * Math.cos((currentAngleBDoubleElbow)*unDegre), Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 4.5, portion, currentAngleBDoubleElbow);
+
+    //console.log(portion * Math.sin((currentAngleBDoubleElbow) * unDegre), portion * Math.cos((currentAngleBDoubleElbow) * unDegre), portion);
 
 
     return (
@@ -688,7 +715,7 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
             </Section>
 
             <Section className="Elbow_svg">              
-                <Aside children={(currentButtonLayerState === "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? [<Span key={"turn"} id="turn" className="Turn" container={"test"}></Span>, <Span key={"test"} id="turn" className="Test" container={"angle"}></Span>, <Span key={"reset-orientation-screen"} className="Reset_orientation_screen" container="↺" display={resetOrientationScreen}></Span>] : false)}></Aside>
+                <Aside children={(currentButtonLayerState === "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? [<Span key={"turn"} id="turn" className="Turn" container={"test"}></Span>, <Span key={"test"} id="turn" className="TestB" container={"angle"}></Span>, <Span key={"reset-orientation-screen"} className="Reset_orientation_screen" container="↺" display={resetOrientationScreen}></Span>] : false)}></Aside>
                     <Svgelbows id={"elbows-svg"} className={"Elbows_svg"} screensElbows={currentButtonLayerState} angleScreen={currentAngleScreen}>
                         {elbowsLayerState}
                         {
@@ -697,20 +724,98 @@ const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
                             (currentButtonLayerState !== "elbow-double" ? 
 
                                 [tabAngles.map(angle => angle), 
-                                <line x1="10.5" y1="15.5" x2="10.5" y2={15.5-Math.tan((currentAngle/2)*unDegre)*10} strokeWidth="0.1" stroke="forestgreen" />, 
-                                <line x1="10.5" y1={15.5-Math.tan((currentAngle/2)*unDegre)*10} x2={0.5+Math.cos(unDegre*currentAngle) * 10} y2={15.5-Math.sin(unDegre*currentAngle) * 10}  strokeWidth="0.1" stroke="forestgreen" />, 
-                                <circle cx="10.5" cy={15.5-Math.tan((currentAngle/2)*unDegre)*10} r="0.2"  fill="forestgreen" />]
+                                <line x1 = "10.5" y1="15.5" x2="10.5" y2={15.5-Math.tan((currentAngle/2)*unDegre)*10} strokeWidth="0.1" stroke="forestgreen" />, 
+                                <line x1 = "10.5" y1={15.5-Math.tan((currentAngle/2)*unDegre)*10} x2={0.5+Math.cos(unDegre*currentAngle) * 10} y2={15.5-Math.sin(unDegre*currentAngle) * 10}  strokeWidth="0.1" stroke="forestgreen" />, 
+                                <circle cx = "10.5" cy={15.5-Math.tan((currentAngle/2)*unDegre)*10} r="0.2"  fill="forestgreen" />]
 
-                            :   [tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbow.map(angle => angle), 
-                                <Path key={"courbe-ext-a"+currentAngleADoubleElbow} id={"courbe-ext-a"+currentAngleADoubleElbow} className={"Courbe_ext_a"+currentAngleADoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 5.5 A 7 7, 0, 0, 1, ${(8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 7)} ${12.5-(Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 7)}`} />, 
-                                <Path key={"courbe-int-a"+currentAngleADoubleElbow} id={"courbe-int-a"+currentAngleADoubleElbow} className={"Courbe_int_a"+currentAngleADoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 10.5 A 2 2, 0, 0, 1, ${8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 2} ${12.5-Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 2}`} />,
-                                <line x1="8" y1="8" x2={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y2="8" strokeWidth="0.1" stroke="forestgreen" />, 
-                                <line x1={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y1="8" x2={8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 4.5} y2={12.5-Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 4.5} strokeWidth="0.1" stroke="gray" />, 
-                                <circle cx="10.5" cx={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} cy="8" r="0.15"  fill="forestgreen" />,
-                                <line x1="8" y1="8" x2={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y2="8" strokeWidth="0.1" stroke="forestgreen" />, 
-                                <line x1={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y1="8" x2={8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -4.5} y2={3.5-Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * -4.5} strokeWidth="0.1" stroke="gray" />, 
-                                <circle cx="10.5" cx={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} cy="8" r="0.15"  fill="forestgreen" />])  
-                                                                                                                                                                                                                                                                                                      
+                            :   [
+                                <line x1 = {8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y1="8" x2={8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 4.5} y2={12.5-Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 4.5} strokeWidth="0.1" stroke="gray" />,
+                                <line x1 = {8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y1="8" x2={8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -4.5} y2={3.5-Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * -4.5} strokeWidth="0.1" stroke="gray" />,
+                                
+                                tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbow.map(angle => angle), 
+                                
+                                <Path key = {"courbe-ext-a"+currentAngleADoubleElbow} id={"courbe-ext-a"+currentAngleADoubleElbow} className={"Courbe_ext_a"+currentAngleADoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 5.5 A 7 7, 0, 0, 1, ${(8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 7)} ${12.5-(Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 7)}`} />, 
+                                <Path key = {"courbe-int-a"+currentAngleADoubleElbow} id={"courbe-int-a"+currentAngleADoubleElbow} className={"Courbe_int_a"+currentAngleADoubleElbow} opacity="1" strokeWidth="0.2" stroke="white" strokeLinecap="square" d={`M 8 10.5 A 2 2, 0, 0, 1, ${8+Math.cos(unDegre*(90-currentAngleADoubleElbow)) * 2} ${12.5-Math.sin(unDegre*(90-currentAngleADoubleElbow)) * 2}`} />,
+
+                                <line
+                                    x1 = {(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -7)} y1 = {3.5+(Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 7)}
+                                    x2 = {(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -7)} y2 = {3.5+(Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 7) + Number.parseFloat((Math.sqrt((9 * 9) - (result * result)) /* * Math.cos((90-currentAngleBDoubleElbow) * unDegre) */ ))}                                    
+                                    stroke = "#48dbfb" // longueur
+                                    strokeWidth = {0.1}
+                                    strokeLinecap = "square" 
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -7)}, ${3.5 + (Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 7)})`}
+                                />,
+
+                                <line
+                                    x1 = {8+Math.cos(unDegre*(90-currentAngleALDoubleElbow)) * 7} y1 = {12.5-Math.sin(unDegre*(90-currentAngleALDoubleElbow)) * 7} 
+                                    x2 = {/*15 + -coteOpose*/ 15+ -14} y2 = {12.5}
+                                    stroke = "white" 
+                                    strokeWidth = {0.1} 
+                                    strokeLinecap = "square"
+                                    //strokeDasharray = "0.35px, 0.2px, 0.15px, 0.2px"
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${8+Math.tan(unDegre*(90-currentAngleALDoubleElbow)/2) * 2}, ${12.5-Math.sin(unDegre*(90-currentAngleALDoubleElbow)) * 2})`}
+                                />,
+
+                                <line
+                                    x1 = {8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y1={8} 
+                                    x2 = {(8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5)-(portion * Math.sin((currentAngleBDoubleElbow) * unDegre))} y2 = {8}
+                                    stroke = "#fdff83" // entraxe jaune
+                                    strokeWidth = {0.1}
+                                    strokeLinecap = "square"   
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5}, ${8})`}
+                                />,
+                                
+                                <line x1="8" y1="8" x2={8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} y2="8" strokeWidth="0.1" stroke="rgb(47, 255, 40)" />,  
+                                <line x1 = "8" y1="8" x2={8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y2="8" strokeWidth="0.1" stroke="rgb(47, 255, 40)" />, 
+
+                                <line
+                                    x1 = {8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y1 = {8} 
+                                    x2 = {8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} y2 = {8+(portion * Math.cos((currentAngleBDoubleElbow) * unDegre))}
+                                    stroke = "red" 
+                                    strokeWidth = {0.075}
+                                    strokeLinecap = "square"
+                                    strokeDasharray="0.35px, 0.2px, 0.15px, 0.2px"
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5}, ${8})`}
+                                />,
+
+                                <circle cx = {(8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5)-(portion * Math.sin((currentAngleBDoubleElbow) * unDegre))} 
+                                    cy={8} 
+                                    r="0.15"  
+                                    fill="forestgreen"
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5}, ${8})`}
+                                />, // intersection entraxe (jaune) et flèche
+
+                                <circle cx = {(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -7)} cy={3.5+(Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 7) + Number.parseFloat((Math.sqrt((9 * 9) - (result * result))))} 
+                                    r="0.25"  
+                                    fill="forestgreen"
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -7)}, ${3.5 + (Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * 7)})`}
+                                />, // intersection Longueur (bleu) et flèche
+
+                                <circle cx = {8+Math.tan(((currentAngleADoubleElbow)/2)*unDegre)*4.5} 
+                                    cy="8" 
+                                    r="0.15"  
+                                    fill="forestgreen" 
+                                />, // intersection entraxe (jaune) rayon (vert)
+                                
+                                <circle cx = {8+Math.tan(((currentAngleBDoubleElbow)/2)*unDegre)*-4.5} 
+                                    cy="8" 
+                                    r="0.15"  
+                                    fill="forestgreen" 
+                                />, // intersection flèche rayon (vert)
+
+                                <circle cx = {(8+Math.cos(unDegre*(90-(currentAngleBDoubleElbow))) * -7)} cy = {3.5-(Math.sin(unDegre*(90-currentAngleBDoubleElbow)) * -7)} 
+                                    r="0.25"  
+                                    fill="forestgreen" 
+                                />, // intersection longueur (bleu) angle B
+                                
+                                <circle cx = {8+Math.cos(unDegre*(90-currentAngleALDoubleElbow)) * 7} cy = {12.5-Math.sin(unDegre*(90-currentAngleALDoubleElbow)) * 7} 
+                                    r="0.25"  
+                                    fill="forestgreen" 
+                                    transform = {`rotate(${currentAngleBDoubleElbow-90}, ${8+Math.tan(unDegre*(90-currentAngleALDoubleElbow)/2) * 2}, ${12.5-Math.sin(unDegre*(90-currentAngleALDoubleElbow)) * 2})`}
+                                /> // intersection flèche Longueur angle A extrado
+
+                            ])                             
+
                             : false)
 
                             :   [tabAnglesADoubleElbow.map(angle => angle), tabAnglesBDoubleElbowOriented.map(angle => angle), 

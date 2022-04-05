@@ -13,12 +13,13 @@ const Text = (props) => {
     var thisFontWeight = props.fontWeight;
     var thisTextAnchor = props.textAnchor;
     var thisContainer = props.container;
+    var thisZIndex = props.zindex;
 
     var thisDisplay = props.display;
     var thisDisplayDown = props.displayDown;
   
       return (
-        <text id={thisId} className={thisClass} x={thisX} y={thisY} stroke={thisStroke} fill={thisFill} fontSize={thisFontSize} opacity={thisOpacity} value={thisValue} fontWeight={thisFontWeight} textAnchor={thisTextAnchor} onClick={thisDisplay} onMouseDown={thisDisplayDown}>
+        <text id={thisId} className={thisClass} zindex={thisZIndex} x={thisX} y={thisY} stroke={thisStroke} fill={thisFill} fontSize={thisFontSize} opacity={thisOpacity} value={thisValue} fontWeight={thisFontWeight} textAnchor={thisTextAnchor} onClick={thisDisplay} onMouseDown={thisDisplayDown}>
             {thisContainer}
         </text>
       );

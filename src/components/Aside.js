@@ -7,7 +7,7 @@ const Aside = (props) => {
 
     return (
 
-        <aside id={thisId} className={thisClass}>
+        <aside style={props.style} id={thisId} className={thisClass}>
             {thisChilds} 
         </aside>
 

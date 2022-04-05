@@ -1,4 +1,5 @@
 import React from 'react';
+import Section from '.././components/Section';
 import Path from '.././components/Path';
 import Text from '.././components/Text';
 
@@ -9,6 +10,17 @@ const Svgelbows = (props) => {
     var unDegre = Math.PI/180;
     var cosExtrado = 0; 
     var sinExtrado = 0;
+
+    const sectionStyle = {
+        position: "absolute",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "between",
+        alignItems: "center",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "transparent"
+    };
 
     for (var i = 0; i < 361; i++) {
         cosExtrado = 8 + Math.cos(unDegre*i) * 6.75; 
@@ -24,9 +36,6 @@ const Svgelbows = (props) => {
             textAnchor = {"middle"}
             container={(i !== 90 ? "" : props.angleScreen+ "°")}
             value={i}
-            /*onMouseMove={displayAngle}
-            onMouseLeave={displayAngleFinal}
-            onMouseOut={hiddenAngle}*/
             x = {cosExtrado}
             y = {sinExtrado}
         />
@@ -40,14 +49,13 @@ const Svgelbows = (props) => {
             fontWeight = {(i !== 90 ? "normal" : "bold")}
             textAnchor = {"middle"}
             container = {(i !== 90 ? "." : "|")}
-            /*onMouseMove={displayAngle}
-            onMouseLeave={displayAngleFinal}
-            onMouseOut={hiddenAngle}*/
             x = {8 + Math.cos(unDegre*i) * 7.75}
             y = {8 - Math.sin(unDegre*i) * 7.75}
         />
         
     }
+
+    if (props.generatrices === false || props.currentElbowLayer !== "elbow-slice") {
 
     return (
 
@@ -58,8 +66,8 @@ const Svgelbows = (props) => {
                 <g>
                     {
                         [
-                        indicesAnglesScreen,
-                        anglesScreen
+                            indicesAnglesScreen,
+                            anglesScreen
                         ]
                     }
                 </g>
@@ -70,15 +78,16 @@ const Svgelbows = (props) => {
                 {
                     (props.children[0][0].props.id !== "double-elbow-oriented-layer" ? 
                     (props.children[0][0].props.id !== "elbow-slice-layer" ? 
-                    (props.children[0][0].props.id !== "double-elbow-layer" ? <Path
-                        key={"elbow-layer-axe"}
-                            id="elbow-layer-axe"
-                                className="Elbow_layer_axe"
-                                strokeWidth="0.05"
-                                strokeLinecap="square"
-                                stroke="red"     
-                                strokeDasharray="1.5px, 0.3px, 0.35px, 0.3px"     
-                                d={`M 10.5 15.5 A 10 10, 0, 0, 0, 0.5 5.5`}
+                    (props.children[0][0].props.id !== "double-elbow-layer" ? 
+                        <Path
+                            key={"elbow-layer-axe"}
+                                id="elbow-layer-axe"
+                                    className="Elbow_layer_axe"
+                                    strokeWidth="0.05"
+                                    strokeLinecap="square"
+                                    stroke="red"     
+                                    strokeDasharray="1.5px, 0.3px, 0.35px, 0.3px"     
+                                    d={`M 10.5 15.5 A 10 10, 0, 0, 0, 0.5 5.5`}
                         />
                     :   <Path
                             key={"elbow-double-layer-axe"}
@@ -92,7 +101,7 @@ const Svgelbows = (props) => {
                                         M 8 8 A 4.5 4.5, 0, 0, 1, 3.5 3.5`}
                         />) 
                         
-                    : false)
+                    : props.pathGeneratrices)
 
                     :   [<Path
                             key={"double-elbow-oriented-layer-dashed"}
@@ -113,8 +122,8 @@ const Svgelbows = (props) => {
                                     d={`M 12.5 12.5 A 4.5 4.5, 0, 0, 0, 8 8
                                         M 3.5 8 8 8`}
                         />])
-
                 }
+
                 <g>
                     {props.children}
                 </g> 
@@ -123,6 +132,20 @@ const Svgelbows = (props) => {
 
         </svg>
     );
+
+    }   else {
+
+            return (
+
+                        <Section style={sectionStyle}>
+
+                            {props.choiceGeneratrices}
+
+                        </Section>
+                    
+                    );
+
+        }
 
 }
   

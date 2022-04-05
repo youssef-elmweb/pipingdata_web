@@ -8,7 +8,6 @@
   background-repeat: repeat-x;
   background-position: center;
   background-size: contain;
-  /*background: linear-gradient(to right, rgb(192, 192, 192), transparent 50%, #eee 25%, rgb(255, 124, 238) 25%), url("./reffinery_3.png") left -70% bottom 0%, 0.05em;*/
   height: 100vh;
 }
 
@@ -169,13 +168,15 @@ aside:nth-child(3) {
 /***************************************** STYLES APPLI ***************************************/
 .Smart_vector {
   flex-direction: column;
+  width: 15vw;
+  flex: 1;
   min-height: 40vw;
   margin: 1.5vw auto 0;
   background-image: url("./smartphone.png");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  /*border: 1px solid green; /*a retirer*/
+  /*border: 1px solid green;*/
 }
 
 .Unity {
@@ -196,7 +197,7 @@ aside:nth-child(3) {
   padding: 0 5%;
   align-items: center;
   justify-content: space-evenly;
-  /*border: 1px solid red; /*a retirer*/
+  /* border: 1px solid red; */
 }
 
 .Elbow, .Elbow_double, .Elbow_double_section, .Elbow_double_oriented, .Elbow_slice {
@@ -223,11 +224,11 @@ input[type=number]::-webkit-outer-spin-button {
   padding: 0 1.3vw 0 0;
 }
 
-.Test, .TestB {
+.Test, .LengthEqualDoubleElbow {
   margin-left: 2vw;
 }
 
-.TestB {
+.LengthEqualDoubleElbow {
 color: #48dbfb;
 }
 
@@ -240,14 +241,14 @@ color: #48dbfb;
 }
 
 .Screen_svg {
+  position: absolute;
+  bottom: 0;
   display: flex;
   justify-content: center;
-  width: 16vw;
-  height: 16vw;
+  width: 19vw;
+  height: 17vw;
   margin: 0 auto; /* svg prend la moitié de la hauteur 40 vw regler hauteur du reste des éléments */
-  /*border: 1px dashed rgb(129, 123, 123); /*a retirer*/
-  z-index: 99;
-  /*transform: rotate(40deg);*/
+  /*border: 1px dashed rgb(129, 123, 123);*/
 }
 
 .Elbow_layer, .Double_elbow_layer, .Double_elbow_oriented_layer, .Elbow_slice_layer  {
@@ -259,17 +260,22 @@ color: #48dbfb;
   color: #fdff83;
   font-size: 11px;
   font-weight: bold;
-  width: 17vw;
-  height: 16vw;
-  margin: 0 auto 2.75vw;
-  /*border: 1px solid black;*/
+  width: 19vw;
+  height: 18.25vw;
+  margin: 0 auto;
+  /*border: 1px solid rgb(214, 206, 206);*/
 }
 
 .Reset_orientation_screen {
-  position: relative;
-  top: 1.5%;
-  left: 59%;
-  font-size: 1.75vw;
+  /*position: relative;
+  top: 0vw;
+  left: 50%;*/
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-inline-end: 0.75vw;
+  font-size: 1.2vw;
   color: white;
   font-weight: bold;
 }
@@ -292,13 +298,13 @@ color: #48dbfb;
   stroke-dashoffset: 3px;
 }
 
-p {color: white; z-index: 1999;}
-  /*stroke-dasharray: 2px; dashed pour axe en rouge */
+p {
+  color: white; z-index: 1999;
+}
 
 .App-range {
   justify-content: center;
-  margin: 1.5vw 0 0;
-  padding: 0 10%; 
+  padding: 0 10%;
 }
 .range {
   display: flex;
@@ -475,28 +481,53 @@ textarea {
 }
 /**************************************** STYLES ONECHECK *************************************/
 
-
+.App-format-norme, .Generatrices_values {
+  display: flex;
+  flex-direction: row;
+  height: max-content;
+  align-items: flex-start;
+  font-size: 0.9vw;
+  color: white;
+  /* border: 1px solid white; */
+}
 .App-format-norme {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
   justify-content: space-between;
-  margin: 0.25vw 0 0.25vw;
-  padding: 0 2.75vw;
-  /*border: 1px solid white;*/
+  margin: 1.1vw 0 2.32vw;
+  padding: 0 2.7vw;
+}
+.Generatrices_values {
+  justify-content: space-evenly;
+  margin: 0.2vw 0 0.8vw;
+  padding: 0 1.75vw;
+  min-height: 4vw;
+  height: max-content;
+  /*border: 1px solid springgreen;*/
 }
 
-.Formats {
+.Formats, .Block_generatrices_values {
   display: flex;
-  flex: 10vw;
+}
+.Formats {
   flex-direction: row;
-  align-items: center;
-  margin-right: 2vw;
-  padding: 0;
+}
+.Block_generatrices_values {
+  flex-direction: column;
+  align-self: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  /*border: 1px solid goldenrod;*/
+}
+.Block_generatrices_values:last-child {
+  margin-block-start: -0.9vw;
+  /*border: 1px solid plum;*/
 }
 
-.Format:nth-child(2) {
-  background-color: forestgreen;
+.Block_two_generatrices_values {
+  display: flex;
+  flex-direction: row;
+  justify-content: right;
+  flex-wrap: wrap;
+  /*border: 1px solid plum;*/
 }
 
 .Format {
@@ -508,43 +539,73 @@ textarea {
   padding-block-start: 0.25vw;
   padding-inline-end: 1.25vw;
   padding-inline-start: 1.25vw;
-  height: 100%;
-  font-size: 1vw;
+  height: max-content;
   font-weight: 400;
   background-color: #525252;
   color: white;
 }
 
+.Gene, .Two_gene {
+  display: inline-flex;
+  width: max-content;
+  color: white;
+}
+.Gene {
+  display: inline-flex;
+  width: max-content;
+  font-size: 0.68vw;
+  color: white;
+}
+.Two_gene {
+  display: flex;
+  align-items: center;
+  padding-inline-start: 0.3vw;
+  padding-inline-end: 1.5vw;
+  font-size: 0.7vw;
+  color: white;
+}
 
 /********************************************** NORME *************/
-
 
 .Normes {
   position: relative;
   display: flex;
-  align-items: center;
-  width: 5vw;
-  padding: 0.3vw 0;
-  height: max-content;
+  align-self: center;
+  max-width: 74.05px;
+  min-width: 74.05px;
+  height: 1.5vw;
   border-radius: 5px;
-  background-color: transparent /*#525252*/;
+  background-color: transparent;
   transition-property: "justify-content";
   transition-duration: 2s;
   transition-delay: 2s;
+  /* border: 1px solid pink; */
+}
+
+.Normes_in_elbow_slices {
+  position: relative;
+  display: flex;
+  flex: 4.5vw;
+  align-items: center;
+  margin: 0 2.4% 9% 2.5%;
+  border: 1px solid darkgray;
+  border-radius: 6px;
+  transition-property: "justify-content";
+  transition-duration: 2s;
+  transition-delay: 2s;
+  font-size: 1vw;
 }
 
 .Iso_Ansi {
   appearance: none;
   position: absolute;
-  left: 2.5vw;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 50%;
   height: 100%;
-  border-radius: 20%;
+  border-radius: 5px;
   margin: 0 auto;
-  outline: 0;
   line-height: 1vw;
   text-align: center;
   font-size: 1vw;
@@ -618,14 +679,48 @@ textarea {
   color: rgb(47, 255, 40);
 }
 
-/***********************/
+.Generatrices {
+  display: flex;
+  flex: auto;
+  justify-content: center;
+  align-items: center;
+  margin: 0 0 9% 2.5%;
+  border: 1px solid darkgray;
+  border-radius: 6px;
+  font-size: 1vw;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  background-color: forestgreen;
+}
+
+.Generatrices_nbr {
+  display: flex;
+  font-size: 1.25vw;
+  color: white;
+  font-weight: bold;
+}
+
+.Radius_elbow_slice {
+  display: flex;
+  flex: auto;
+  border: 1px solid darkgray;
+  margin: 0 0 9% 0;
+  padding: 0 0% 0 1%;
+  border-radius: 6px;
+  font-size: 1vw;
+  background-color: #262626;
+  color: white;
+}
+
+/********************************************************************************/
 
 .App_setting_smart {
   display: flex;
   margin: 2.25vw 0.2vw 0.75vw;
   padding: 0 2.5vw;
   height: 2.25vw;
-  /*border: 1px solid red;*/
+  /* border: 1px solid red; */
 }
 
 .Setting_smart, .Utility_smart {
@@ -646,6 +741,13 @@ textarea {
 .Setting_smart_img:hover, .Utility_smart_img:hover {
   opacity: 1;
 }
+
+.Two_label_gene, .All_label_gene {
+  display: flex;
+  alignment-baseline: middle;
+  text-anchor: end;
+}
+
 
 
 

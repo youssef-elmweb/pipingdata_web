@@ -3,6 +3,7 @@ import React from 'react';
 const Input = (props) => {
     const thisId = props.id;
     const thisClass = props.className; 
+    const thisName = props.name;
 
     var thisDisplayChange = props.displayChange;
 
@@ -12,9 +13,10 @@ const Input = (props) => {
     var thisValue = props.value;
     var thisDefaultValue = props.defaultValue;
     var thisStep = props.step;
+    var thisChecked = props.checked;
 
     return (
-      <input id={thisId} className={thisClass} type={thisType} min={thisMin} max={thisMax} value={thisValue} step={thisStep} onChange={thisDisplayChange} defaultValue={thisDefaultValue} />
+      <input style={props.style} id={thisId} className={thisClass} type={thisType} name={thisName} min={thisMin} max={thisMax} value={thisValue} step={thisStep} checked={thisChecked} onChange={thisDisplayChange} defaultValue={thisDefaultValue} />
     );
 
 }

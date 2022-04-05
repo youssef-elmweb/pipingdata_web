@@ -6,9 +6,14 @@ const Span = (props) => {
     var thisContainer = props.container;
     var thisDisplay = props.display;
 
+    const makeValue = () => {
+        return props.value;
+    }
+
     return (
-        <span id={thisId} className={thisClass} onClick={thisDisplay}>{thisContainer}</span>  
+        <span style={props.style} value={props.value} id={thisId} className={thisClass} onClick={thisDisplay}>{makeValue() || thisContainer || props.children}</span>  
     );
+
 }
 
 export default Span;

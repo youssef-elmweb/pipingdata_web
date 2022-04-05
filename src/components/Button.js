@@ -7,7 +7,17 @@ const Button = (props) => {
     const thisContent = props.children;
     const thisValue = props.value;
     const thisDisplay = props.display;
-    //const thisDisplayLoad = props.displayLoad;
+    const thisTest = props.test;
+
+    const buttonStyle = {
+      left: props.thisLeft,
+      border: props.thisBorderButton,
+      backgroundColor: props.thisColorButton,
+      width: props.thisWidth,
+      margin: props.thisMargin,
+      padding: props.thisPadding,
+      fontSize: props.thisFontSize
+    }; 
 
       const dispatchFunctions = (e) => {
           e.stopPropagation();
@@ -23,7 +33,7 @@ const Button = (props) => {
       } 
 
     return (
-        <button id={thisId} className={thisClass} type={thisType} value={thisValue} onClick={thisDisplay || dispatchFunctions} /*onLoad={thisDisplayLoad}*/>{thisContent}</button>
+        <button style={buttonStyle} test={thisTest} id={thisId} className={thisClass} type={thisType} value={thisValue} onClick={thisDisplay || dispatchFunctions}>{thisContent}</button>
     );
 
 }

@@ -535,7 +535,7 @@ const Sectionsmart = (props) => {
                                     />,
 
                                     ////////////// SECTION AXIAL //////////////////////////////////
-                                    ///////////////////////////////////////////////////////////////
+                                    /////////////////////////////////////////////////////////////// 0.5 is depart of svg and path 
                                     <line
                                         key={"elbow-slice-axe"}
                                             x1 = {0.5+Math.tan(unDegre*15) * 5} y1 = {10.5}
@@ -562,8 +562,7 @@ const Sectionsmart = (props) => {
                                             className="Elbow_slice_layer"
                                             strokeLinecap="round"
                                             stroke="#454545"                      
-                                            d={`M ${5.5} ${15.5} ${15.5} ${15.5 /*a enlever*/} 
-                                                M ${15.5} ${15.5 - Math.tan(unDegre * 15) * 15} ${5.5} ${15.5 - Math.tan(unDegre * 15) * 5}Z`} 
+                                            d={`M ${15.5} ${15.5 - Math.tan(unDegre * 15) * 15} ${5.5} ${15.5 - Math.tan(unDegre * 15) * 5}Z`} 
                                     />,
                                     //////// line base horizontal on 15.5 15.5
 
@@ -1105,26 +1104,71 @@ const Sectionsmart = (props) => {
     return (
         <div values={props.values} id={thisId} className={thisClass}>
 
-            <Section id="app-setting-smart" value="app-setting-smart" className="App_setting_smart">
-                <Button key={"utility"} id="utility-smart" className="Utility_smart" type="button" value="utility"
+            <Section style={{ display: "flex", height: "5%", marginTop: "6vh", padding: "0 1.5vw", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }} id="app-setting-smart" value="app-setting-smart">
+                <Section style={{ flex: "7.5%", justifyContent: "center", alignItems: "center" }} key={"utility"} id="utility-smart" type="button" value="utility"
                     children={
-                        <Img 
-                            className="Utility_smart_img"
-                            src="assets/utility.png"  
-                            alt="utility" 
-                        />
+                        <Section style={{ flex: "50%", position: "relative", justifyContent: "center", alignItems: "center", alignSelf: "center" }}>
+                            <Img    style={{ position: "absolute", zIndex: 100, height: "60%", right: "-15%", top: "-15%" }} 
+                                    className="Padlock-close"
+                                    src="assets/padlock-close.png"  
+                                    alt="setting" 
+                            />                         
+                            <Img 
+                                style={{ zIndex: 10, width: "90%", height: "90%", alignSelf: "center" }}
+                                src="assets/utility.png"  
+                                alt="utility" 
+                            />
+                        </Section>
                     }
                 />
 
-                <Span className="Unity" container="Unité: mm" />
+                <Section style={{ flex: "25%", display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
+                    <Section style={{ width: "27.5%", textAlign: "center", justifyContent: "center", alignItems: "center", backgroundColor: "#555555", borderRadius: "15% 0 0 15%" }} type="button"
+                        children={
+                            <Img 
+                                style={{ height: "1vw" }}
+                                src="assets/text-decrease.png"  
+                                alt="text-decrease" 
+                            />
+                        }
+                    />
 
-                <Button key={"setting"} id="setting-smart" className="Setting_smart" type="button" value="setting" 
+                    <Section style={{ width: "27.5%", textAlign: "center", justifyContent: "center", alignItems: "center", backgroundColor: "#555555", borderRadius: "0 15% 15% 0" }} type="button"
+                        children={
+                            <Img 
+                                style={{ height: "1vw" }}
+                                src="assets/text-increase.png"  
+                                alt="text-increase" 
+                            />
+                        }
+                    />
+                </Section>
+
+                <Section style={{ height: "2vw", width: "25%", fontSize: "10px", color: "white", fontSize: "9px", fontWeight: "700", textAlign: "left" }}><Span container="unité: mm" /></Section>
+
+                <Section style={{ height: "1.75vw", flex: "15%" }}>
+                    <Img 
+                        style={{maxHeight: "90%"}}
+                        src="assets/languages.png"  
+                        alt="
+                        languages" 
+                    />
+                </Section>
+
+                <Section style={{ flex: "7.5%", justifyContent: "center", alignItems: "center" }} key={"utility"} id="utility-smart" type="button" value="utility"
                     children={
-                        <Img 
-                            className="Setting_smart_img"
-                            src="assets/setting_smart.png"  
-                            alt="setting" 
-                        />
+                        <Section style={{ flex: "100%", position: "relative", justifyContent: "center", alignItems: "center", alignSelf: "center" }}>
+                            <Img    style={{ position: "absolute", zIndex: 100, height: "60%", left: "-15%", top: "-15%" }} 
+                                    className="Padlock-close"
+                                    src="assets/padlock-close.png"  
+                                    alt="setting" 
+                            />                         
+                            <Img 
+                                style={{ zIndex: 10, width: "90%", height: "90%", alignSelf: "center" }}
+                                src="assets/setting.png"  
+                                alt="settings" 
+                            />
+                        </Section>
                     }
                 />
             </Section>
@@ -1178,8 +1222,8 @@ const Sectionsmart = (props) => {
             <Section id="app-values" className="App_values">
                 <Section id="diameters" className="Diameters">
                     <Span key="title-diameters" className="Title_diameters" container="Ø" />
-                    <Span key="diameter-mm" container={currentDiameter[currentNorme] + " mm"} />
-                    <Span key="diameter-dn-inch" container={`DN ${currentDiameter[0]}`} />
+                    <Span key="diameter-mm" className="Diameter" container={currentDiameter[currentNorme] + " mm"} />
+                    <Span key="diameter-dn-inch" className="Diameter" container={`DN ${currentDiameter[0]}`} />
                 </Section>
 
                 { 
@@ -1187,7 +1231,7 @@ const Sectionsmart = (props) => {
                         currentButtonLayerState !== "elbow-slice" ?
 
                             <Section id="values-elbow" className="Values_elbow">
-                                <Span className = "Title_values_elbow" container="Extra/Intra (mm)" />
+                                <Span className = "Title_values_elbow" container="Extrado/Intrado" />
                                     {
                                         (
                                             currentButtonLayerState === "elbow-double" ?

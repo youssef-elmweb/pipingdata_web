@@ -13,12 +13,12 @@ import './controller/display_icones.js';
 
 const languages = { // voir state de button langage et modifier dynamiquement à partir de l'indice basé sur id en/fr
                     // n'avoir qu'un objet dans l'objet languages.
-    'fr':   {'version': 'Version Premium 2,99€', 
+    'fr':   {'version': 'Version Premium 5,99€', 
              'comment': 'Publiez un Commentaire',
              'publish': 'Publiez'
             }, 
 
-    'en':   {'version': 'Premium Version 2, 99€', 
+    'en':   {'version': 'Premium Version 5,99€', 
              'comment': 'Publish one Comment',
              'publish': 'Publish'
             }
@@ -129,11 +129,11 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
             <header className="App_header">
 
                 <Section className="App_logo">
-                    <Link href="https://codewithmosh.com/" className="App_link_logo">
+                    <Link href="" className="App_link_logo">
                         <Img 
                             id="logo"                           
                             className="Logo"
-                            src="assets/logo.png"
+                            src="assets/logo-web.png"
                             alt="piping-datas"
                         />
                     </Link>
@@ -141,7 +141,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                         
                 <Title
                     className="Ext_app"
-                    container="Piping-Datas.app"
+                    container="PipingData.app"
                 /> 
 
                 <Section className="App_link">
@@ -225,7 +225,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                     />
 
                     <Section id="play_stores" className="play_stores">
-                        <Link href="https://codewithmosh.com/" className="App_link_google">
+                        <Link href="https://play.google.com/store/apps/details?id=com.production.pipingdata&hl=fr&gl=US" className="App_link_google">
                             <Img 
                                 id="google"  
                                 className="google"

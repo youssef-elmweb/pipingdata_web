@@ -20,7 +20,7 @@ button {
   background: none;
   z-index: 999;
 }
-button:active:not(.Button_setting, .Setting_smart, .Utility_smart, .Turn, .Iso_Ansi) {
+button:active:not(.Button_setting, .Turn, .Iso_Ansi) {
   outline-style: none;
   box-shadow: 0 0 5px 0 white;
 }
@@ -65,7 +65,7 @@ h1, button, aside, svg {
   justify-content: space-between;
   padding: 1% 1.5%;
   box-shadow: 0 4px 6px rgb(100, 100, 100);
-  background-color: #282c34;
+  background-color: #252525;
 }
 
 .App_logo {
@@ -177,18 +177,6 @@ aside:nth-child(3) {
   background-position: center;
   background-size: contain;
   /*border: 1px solid green;*/
-}
-
-.Unity {
-  display: flex;
-  align-items: center;
-  color: aquamarine;
-  text-align: center;
-  border-radius: 10px;
-  margin-block-start: 1.25vw;
-  font-size: 0.6vw;
-  font-weight: bold;
-  padding: 0 0.5vw;
 }
 
 .App_buttons_smart {
@@ -362,6 +350,10 @@ p {
   font-size: 26px;
   font-weight: bold;
   background-color: forestgreen;
+}
+
+.Diameter {
+  color: #54a3ff;
 }
 /****************************************** STYLES SPAN ***************************************/
 
@@ -714,33 +706,6 @@ textarea {
 }
 
 /********************************************************************************/
-
-.App_setting_smart {
-  display: flex;
-  margin: 2.25vw 0.2vw 0.75vw;
-  padding: 0 2.5vw;
-  height: 2.25vw;
-  /* border: 1px solid red; */
-}
-
-.Setting_smart, .Utility_smart {
-  display: flex;
-  flex: 1;
-  border-radius: 0;
-}
-.Setting_smart {
-  justify-content: flex-end;
-}
-
-.Setting_smart_img, .Utility_smart_img {
-  display: flex;
-  width: 1.5vw;
-  height: 1.41vw;
-  opacity: 0.75;
-}
-.Setting_smart_img:hover, .Utility_smart_img:hover {
-  opacity: 1;
-}
 
 .Two_label_gene, .All_label_gene {
   display: flex;

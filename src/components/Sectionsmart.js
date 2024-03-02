@@ -38,7 +38,7 @@ const Sectionsmart = (props) => {
     };
 
     const asideStyle = {
-        marginRight: "10px",
+        margin: "0 10px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -55,7 +55,7 @@ const Sectionsmart = (props) => {
         borderRadius: "10px",
         height: "max-content",
         padding: "0 7%",
-        fontSize: "1vw"
+        fontSize: "13px"
     }
     /////////////////////// CONST OBJECT STYLE /////////////////////////
     ////////////////////////////////////////////////////////////////////
@@ -124,8 +124,8 @@ const Sectionsmart = (props) => {
 
     const [radiusElbowSlice, setRadiusElbowSlice] = useState(100);
 
-    const [currentGeneratriceOne, setcurrentGeneratriceOne] = useState(Number(Math.tan(unDegre*15) * (100-(21.3/2))).toFixed(2));
-    const [currentGeneratriceLast, setcurrentGeneratriceLast] = useState(Number(Math.tan(unDegre*15) * (100+(21.3/2))).toFixed(2));
+    const [currentGeneratriceOne, setcurrentGeneratriceOne] = useState(Number(Math.tan(unDegre*15) * (100-(21.3/2))).toFixed(1));
+    const [currentGeneratriceLast, setcurrentGeneratriceLast] = useState(Number(Math.tan(unDegre*15) * (100+(21.3/2))).toFixed(1));
 
     const [currentDatasForDiamByNorme, setCurrentDatasForDiamByNorme] = useState([0]);
     /////////////////////////// USE STATE //////////////////////////////
@@ -135,7 +135,7 @@ const Sectionsmart = (props) => {
     /////////////////////////// COMPONENT //////////////////////////////
     ////////////////////////////////////////////////////////////////////
     var sectionAllGeneratrices =    <Section key="bloc-genez-4-8" style={{  }} id="block_generatrices_values" className="Block_generatrices_values">
-                                        <Span key={`gene-${2}`} id="gene" className="Gene" container={(`${2}/${2}: ${26.79}`)} />
+                                        <Span key={`gene-${2}`} id="gene" className="Gene" container={(`${2}/${2}: ${26.8}`)} />
                                     </Section>
 
     var sectionTwoG =   <Section  key="bloc-genes-one-last" id="block_two_generatrices_values" className="Block_two_generatrices_values">
@@ -413,18 +413,18 @@ const Sectionsmart = (props) => {
         var blocChoiceGeneratrices = [<Aside key={"title-genes"} style={spanStyle}>Génératrices</Aside>,
 
                                         <div key={"bloc-genes-a"} style={divStyle}>
-                                            <Button key={"gene-4"} id="quatre_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"1vw"} className="Format" thisColorButton={(currentNbrGeneratrices === 4 ? "forestgreen" : "transparent")} type="button" value="4" display={getNbrGeneratrices}>4</Button>
-                                            <Button key={"gene-8"} id="huit_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"1vw"} className="Format" thisColorButton={(currentNbrGeneratrices === 8 ? "forestgreen" : "transparent")} type="button" value="8" display={getNbrGeneratrices}>8</Button>
+                                            <Button key={"gene-4"} id="quatre_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"11px"} className="Format" thisColorButton={(currentNbrGeneratrices === 4 ? "forestgreen" : "transparent")} type="button" value="4" display={getNbrGeneratrices}>4</Button>
+                                            <Button key={"gene-8"} id="huit_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"11px"} className="Format" thisColorButton={(currentNbrGeneratrices === 8 ? "forestgreen" : "transparent")} type="button" value="8" display={getNbrGeneratrices}>8</Button>
                                         </div>,
 
                                         <div key={"bloc-genes-b"} style={divStyle}>
-                                            <Button key={"gene-12"} id="douze_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"1vw"} className="Format" thisColorButton={(currentNbrGeneratrices === 12 ? "forestgreen" : "transparent")} type="button" value="12" display={getNbrGeneratrices}>12</Button>
-                                            <Button key={"gene-16"} id="seize_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"1vw"} className="Format" thisColorButton={(currentNbrGeneratrices === 16 ? "forestgreen" : "transparent")} type="button" value="16" display={getNbrGeneratrices}>16</Button>
+                                            <Button key={"gene-12"} id="douze_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"11px"} className="Format" thisColorButton={(currentNbrGeneratrices === 12 ? "forestgreen" : "transparent")} type="button" value="12" display={getNbrGeneratrices}>12</Button>
+                                            <Button key={"gene-16"} id="seize_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"11px"} className="Format" thisColorButton={(currentNbrGeneratrices === 16 ? "forestgreen" : "transparent")} type="button" value="16" display={getNbrGeneratrices}>16</Button>
                                         </div>,
 
                                         <div key={"bloc-genes-cc"} style={divStyle}>
-                                            <Button key={"gene-24"} id="24_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"1vw"} className="Format" thisColorButton={(currentNbrGeneratrices === 24 ? "forestgreen" : "transparent")} type="button" value="24" display={getNbrGeneratrices}>24</Button>
-                                            <Button key={"gene-32"} id="32_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"1vw"} className="Format" thisColorButton={(currentNbrGeneratrices === 32 ? "forestgreen" : "transparent")} type="button" value="32" display={getNbrGeneratrices}>32</Button>
+                                            <Button key={"gene-24"} id="24_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"11px"} className="Format" thisColorButton={(currentNbrGeneratrices === 24 ? "forestgreen" : "transparent")} type="button" value="24" display={getNbrGeneratrices}>24</Button>
+                                            <Button key={"gene-32"} id="32_g" thisMargin={"2.5% 10%"} thisPadding={"3.5% 0"} thisWidth={"30%"} thisBorderButton={"1px solid darkgray"} thisFontSize={"11px"} className="Format" thisColorButton={(currentNbrGeneratrices === 32 ? "forestgreen" : "transparent")} type="button" value="32" display={getNbrGeneratrices}>32</Button>
                                         </div>]
 
         var elbowLayer = [<Path
@@ -848,8 +848,8 @@ const Sectionsmart = (props) => {
 
             resultsOfMakeGenes = makeGenesByNorme(6);
 
-            setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(currentDiameter[6]/2))).toFixed(2));
-            setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(currentDiameter[6]/2))).toFixed(2));
+            setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(currentDiameter[6]/2))).toFixed(1));
+            setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(currentDiameter[6]/2))).toFixed(1));
 
         } else {
             setCurrentPosState("50%");
@@ -863,8 +863,8 @@ const Sectionsmart = (props) => {
 
             resultsOfMakeGenes = makeGenesByNorme(2);
 
-            setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(currentDiameter[2]/2))).toFixed(2));
-            setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(currentDiameter[2]/2))).toFixed(2));
+            setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(currentDiameter[2]/2))).toFixed(1));
+            setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(currentDiameter[2]/2))).toFixed(1));
 
         }
 
@@ -918,7 +918,7 @@ const Sectionsmart = (props) => {
 
                 (currentButtonLayerState === "elbow-double-oriented" ? callbackTwo() : callbackOne(radius, radiusB));
 
-                return Number.parseFloat(radius+radiusB).toFixed(2) + " mm";
+                return Number.parseFloat(radius+radiusB).toFixed(1) + " mm";
             }
                 
                 if (currentIntra !== (((currentDiameter[currentFormatElbow] - (currentDiameter[currentNorme] / 2)) * PiSurDeux) / 90) * currentAngle) {
@@ -928,7 +928,7 @@ const Sectionsmart = (props) => {
                     setCurrentExtraState(((((currentDiameter[currentNorme] / 2) + currentDiameter[currentFormatElbow]) * PiSurDeux) / 90) * currentAngle);
                 }
                 
-                return radius.toFixed(2) + " mm";
+                return radius.toFixed(1) + " mm";
     }
 
     const makeEntraxeDoubleElbow = (radius, radiusB) => {
@@ -992,21 +992,21 @@ const Sectionsmart = (props) => {
                         count++;
 
                             let differenceLenghtGeneratrice = Number((currentDiameter[currentNorme]/(currentNbrGeneratrices/2))*count); 
-                            let gen = Number.parseFloat((radiusElbowSlice-(currentDiameter[currentNorme]/2)+differenceLenghtGeneratrice).toFixed(2));
+                            let gen = Number.parseFloat((radiusElbowSlice-(currentDiameter[currentNorme]/2)+differenceLenghtGeneratrice).toFixed(1));
 
                             if (l < generatriceAxial) {
 
-                                rowsSpan.push(<Span key={`gene-${l}`} id="gene" value={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(2)}`} className="Gene" />);
+                                rowsSpan.push(<Span key={`gene-${l}`} id="gene" value={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(1)}`} className="Gene" />);
                                 datasForGenesByNorme.push(Number(currentNbrGeneratrices/2));
 
                             } else if (l === generatriceAxial) {
 
-                                rowsSpan.push(<Span key={`gene-${l}`} id="gene" value={`${l}/${l}: ${Number(Math.tan(unDegre*15) * radiusElbowSlice).toFixed(2)}`} className="Gene" />);
+                                rowsSpan.push(<Span key={`gene-${l}`} id="gene" value={`${l}/${l}: ${Number(Math.tan(unDegre*15) * radiusElbowSlice).toFixed(1)}`} className="Gene" />);
                                 datasForGenesByNorme.push(Number(currentNbrGeneratrices/2));
 
                             } else {
 
-                                rowsSpan.push(<Span key={`gene-${l}`} id="gene" value={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(2)}`} className="Gene" />);
+                                rowsSpan.push(<Span key={`gene-${l}`} id="gene" value={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(1)}`} className="Gene" />);
                                 datasForGenesByNorme.push(Number(currentNbrGeneratrices/2));
 
                             }
@@ -1053,19 +1053,19 @@ const Sectionsmart = (props) => {
                     count++;
                     
                         let differenceLenghtGeneratrice = Number((diam/(currentNbrGeneratrices/2))*count); 
-                        let gen = Number.parseFloat((e.target.value-(diam/2)+differenceLenghtGeneratrice).toFixed(2));
+                        let gen = Number.parseFloat((e.target.value-(diam/2)+differenceLenghtGeneratrice).toFixed(1));
 
                         if (l < generatriceAxial) {
 
-                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(2)}`} />);
+                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(1)}`} />);
 
                         } else if (l === generatriceAxial) {
 
-                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number(Math.tan(unDegre*15) * e.target.value).toFixed(2)}`} />);
+                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number(Math.tan(unDegre*15) * e.target.value).toFixed(1)}`} />);
 
                         } else {
 
-                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(2)}`} />);
+                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(1)}`} />);
 
                         }
 
@@ -1089,21 +1089,21 @@ const Sectionsmart = (props) => {
                     count++;
                     
                         let differenceLenghtGeneratrice = Number((diam/(currentNbrGeneratrices/2))*count); 
-                        let gen = Number.parseFloat((radiusElbowSlice-(diam/2)+differenceLenghtGeneratrice).toFixed(2));
+                        let gen = Number.parseFloat((radiusElbowSlice-(diam/2)+differenceLenghtGeneratrice).toFixed(1));
 
                         if (l < generatriceAxial) {
 
-                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(2)}`} />);
+                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(1)}`} />);
                             datasForGenesByNorme.push(Number(currentNbrGeneratrices/2));
 
                         } else if (l === generatriceAxial) {
 
-                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number(Math.tan(unDegre*15) * radiusElbowSlice).toFixed(2)}`} />);
+                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number(Math.tan(unDegre*15) * radiusElbowSlice).toFixed(1)}`} />);
                             datasForGenesByNorme.push(Number(currentNbrGeneratrices/2));
 
                         } else {
 
-                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(2)}`} />);
+                            rowsSpan.push(<Span key={`gene-${l}`} id="gene" className="Gene" container={`${l}/${l}: ${Number((Math.tan(unDegre*15) * gen)).toFixed(1)}`} />);
                             datasForGenesByNorme.push(Number(currentNbrGeneratrices/2));
 
                         }
@@ -1381,8 +1381,8 @@ const Sectionsmart = (props) => {
                         ((currentButtonLayerState === "elbow-double" || currentButtonLayerState === "elbow-double-oriented") ?           
                             <Aside style={{ flexDirection: "row", width: "100%", marginTop: "5%" }} children={(currentButtonLayerState === "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? 
                                 [<Section style={{ display: "flex", width: "60%", flexDirection: "row", justifyContent: "flex-start" }}>
-                                    <Span key={"entraxe"} style={{ width: "50%" }} id="entraxe" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? currentEntraxe.toFixed(2) : currentEntraxeDoubleOriented.toFixed(2))}></Span>
-                                    <Span key={"lengthEqualDoubleElbow"} style={{ width: "50%", color: "#48dbfb" }} id="lengthEqualDoubleElbow" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? lengthEqualDoubleElbow.toFixed(2) : currentLengthAxeToBaseDoubleOriented.toFixed(2))}></Span>
+                                    <Span key={"entraxe"} style={{ width: "50%" }} id="entraxe" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? currentEntraxe.toFixed(1) : currentEntraxeDoubleOriented.toFixed(1))}></Span>
+                                    <Span key={"lengthEqualDoubleElbow"} style={{ width: "50%", color: "#48dbfb" }} id="lengthEqualDoubleElbow" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? lengthEqualDoubleElbow.toFixed(1) : currentLengthAxeToBaseDoubleOriented.toFixed(1))}></Span>
                                 </Section>,
 
                                 <Section key={"reset-orientation-screen"} style={{ flexDirection: "row", justifyContent: "row-reverse" }} className="Reset_orientation_screen"
@@ -1558,6 +1558,8 @@ const Sectionsmart = (props) => {
                     </Svgelbows>
             </Section>
 
+            <Section style={{ height: "125px" }}>
+
             { 
                 (
                     currentButtonLayerState !== "elbow-slice" ? 
@@ -1565,7 +1567,7 @@ const Sectionsmart = (props) => {
                         <Section key="section-formats-normes" id="app-format-norme" className="App-format-norme">
                             <Section key="section-formats" id="formats" className="Formats">
                                 <Button id="2D" className={"showModalTrialVersion"} display={ () => {makeModalTrialVersion(); setShowModal(() => true)} } key="button-2-d" thisColorButton={"#525252"} className="Format" type="button">2D</Button>
-                                <Button key="button-3-d" id="3d" thisColorButton={"forestgreen"} className="Format" type="button" value="3D" display={getFormat}>3D</Button>
+                                <Button id="3d" thisColorButton={"forestgreen"} className="Format" type="button" value="3D" display={getFormat}>3D</Button>
                                 <Button id="5D" className={"showModalTrialVersion"} display={ () => {makeModalTrialVersion(); setShowModal(() => true)} } key="button-5-d" thisColorButton={"#525252"} className="Format" type="button">5D</Button>
                             </Section>
 
@@ -1586,6 +1588,7 @@ const Sectionsmart = (props) => {
 
                 )
             }
+            </Section>
 
             <Section id="app-range" className="App-range">
                 <Input className="range" type="range" min={0} max={datasPipe.length-1} step={1} 
@@ -1601,8 +1604,8 @@ const Sectionsmart = (props) => {
 
                                                     makeGeneValueOnDiam(e, datasPipe[e.target.value][2], radiusElbowSlice);
 
-                                                    setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(datasPipe[e.target.value][2]/2))).toFixed(2));
-                                                    setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(datasPipe[e.target.value][2]/2))).toFixed(2));
+                                                    setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(datasPipe[e.target.value][2]/2))).toFixed(1));
+                                                    setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(datasPipe[e.target.value][2]/2))).toFixed(1));
                                                     
                                             
                                             } else {

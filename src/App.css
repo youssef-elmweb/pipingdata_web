@@ -247,6 +247,7 @@ aside:nth-child(3) {
 }
 
 .Elbow_svg { 
+  position: relative;
   color: #fdff83;
   font-size: 11px;
   font-weight: bold;
@@ -489,10 +490,11 @@ textarea {
   padding: 0 10%;
 }
 .Generatrices_values {
+  width: 85%;
   justify-content: space-evenly;
-  margin: 10% 0 5%;
-  padding: 0 1.75vw;
-  min-height: 4vw;
+  margin: 50px auto 30px;
+  padding: 0 6%;
+  min-height: 20px;
   height: max-content;
   /*border: 1px solid springgreen;*/
 }
@@ -505,18 +507,19 @@ textarea {
   margin-left: 5%;
 }
 .Block_generatrices_values {
+  margin-left: 0.5%;
+  margin-right: 0.5%;
   flex-direction: column;
-  align-self: center;
-  align-items: flex-start;
+  align-self: flex-start;
+  align-items: center;
   flex-wrap: wrap;
   /*border: 1px solid goldenrod;*/
 }
-.Block_generatrices_values:last-child {
-  /*margin-block-start: -0.9vw;*/
-  /*border: 1px solid plum;*/
-}
 
 .Block_two_generatrices_values {
+  position: absolute;
+  top: 10%;
+  right: 1px;
   display: flex;
   flex-direction: row;
   justify-content: right;
@@ -538,23 +541,21 @@ textarea {
 }
 
 .Gene, .Two_gene {
-  display: inline-flex;
-  width: max-content;
+  display: flex;
   color: white;
   font-size: 11px;
 }
 .Gene {
-  display: inline-flex;
-  width: max-content;
-  color: white;
+  display: inline-block;
+  width: 100%;
+  text-align: left;
   font-weight: bold;
+  /*background-color: red;*/
 }
 .Two_gene {
   display: flex;
   align-items: center;
-  padding-inline-start: 0.3vw;
-  padding-inline-end: 1.5vw;
-  color: white;
+  padding-inline-end: 0.5vw;
 }
 
 /********************************************** NORME *************/
@@ -621,6 +622,8 @@ textarea {
 /*************************************************************/
 
 .App_values {
+  min-height: 50px;
+  max-height: 50px;
   padding: 0 1.5%;
   display: flex;
   flex-direction: row;
@@ -633,7 +636,9 @@ textarea {
   display: flex;
   min-width: 90.5%;
   max-width: 90.5%;
-  margin-top: 5%;
+  min-height: 50px;
+  max-height: 50px;
+  margin-top: 4%;
   padding-left: 3.75%;
   flex-direction: row;
   justify-content: space-evenly;

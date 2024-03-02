@@ -12,14 +12,14 @@ const Svgelbows = (props) => {
     var sinExtrado = 0;
 
     const sectionStyle = {
-        position: "absolute",
+        marginTop: "50px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "between",
         alignItems: "center",
+        alignSelf: "center",
         width: "100%",
         height: "100%",
-        backgroundColor: "transparent"
     };
 
     for (var i = 0; i < 361; i++) {

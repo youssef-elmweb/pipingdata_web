@@ -5,11 +5,14 @@ import Span from '.././components/Span';
 import Button from '.././components/Button';
 import Input from '.././components/Input';
 import Img from '.././components/Img';
+
 import Svgelbows from '.././components/Svgelbows';
 import Path from '.././components/Path';
 import Line from '.././components/Line';
 import Text from '.././components/Text';
 import datasPipe from '../datasPipe';
+
+import image from './../chaufferie.png';
 
 const Sectionsmart = (props) => {
 
@@ -35,6 +38,7 @@ const Sectionsmart = (props) => {
     };
 
     const asideStyle = {
+        marginRight: "10px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -91,6 +95,7 @@ const Sectionsmart = (props) => {
     const [currentNormeButton, setNormeButtonState] = useState(0);
 
     const [currentDiameter, setDiameter] = useState(datasPipe[0]);
+    const [currentDiameterOnly, setDiameterOnly] = useState(datasPipe[0]);
     const [currentFormatElbow, setFormatElbowState] = useState(3);
     const [currentNorme, setNormeState] = useState(2);
     const [currentNormeLabel, setNormeLabelState] = useState("iso");
@@ -129,13 +134,13 @@ const Sectionsmart = (props) => {
 
     /////////////////////////// COMPONENT //////////////////////////////
     ////////////////////////////////////////////////////////////////////
-    var sectionAllGeneratrices =    <Section key="bloc-genez-4-8" id="block_generatrices_values" className="Block_generatrices_values">
+    var sectionAllGeneratrices =    <Section key="bloc-genez-4-8" style={{  }} id="block_generatrices_values" className="Block_generatrices_values">
                                         <Span key={`gene-${2}`} id="gene" className="Gene" container={(`${2}/${2}: ${26.79}`)} />
                                     </Section>
 
     var sectionTwoG =   <Section  key="bloc-genes-one-last" id="block_two_generatrices_values" className="Block_two_generatrices_values">
-                            <Aside key="gene-one" style={asideStyle}>1: <Span id="gene" className="Two_gene" container={currentGeneratriceOne} /></Aside>
-                            <Aside key="gene-last" style={asideStyle}>{(currentNbrGeneratrices/2)+1}: <Span id="gene" className="Two_gene" container={currentGeneratriceLast} /></Aside>
+                            <Aside key="gene-one" style={asideStyle}><Span style={{ marginRight: "3px", fontSize: "11px" }}>1: </Span><Span id="gene" className="Two_gene" container={currentGeneratriceOne} /></Aside>
+                            <Aside key="gene-last" style={asideStyle}><Span style={{ marginRight: "3px", fontSize: "11px" }}>{(currentNbrGeneratrices/2)+1}: </Span><Span id="gene" className="Two_gene" container={currentGeneratriceLast} /></Aside>
                         </Section>     
                         
     var allPathGeneratrices =   [
@@ -622,12 +627,28 @@ const Sectionsmart = (props) => {
     /////////////////////////// USE STATE //////////////////////////////
     ////////////////////////////////////////////////////////////////////
     const [elbowsLayerState, setStateElbows] = useState(elbowLayer);
+
+    const [showModal, setShowModal] = useState(false);
+    const [showModalDiameters, setShowModalDiameters] = useState(false);
     /////////////////////////// USE STATE //////////////////////////////
     ////////////////////////////////////////////////////////////////////
 
 
     ////////////////////////// FUNCTIONS ///////////////////////////////
     ////////////////////////////////////////////////////////////////////
+
+    const makeModalTrialVersion = () => {
+        document.addEventListener("click", (e) => {
+            if (e.target.className == "showModalTrialVersion" || e.target.className == "format") {
+                setShowModal(true);
+            } else if (e.target.className == "hideModalTrialVersion") {
+                setShowModal(false)
+            }
+            e.stopPropagation();
+        })
+    }
+
+
     const dispatchFunctions = (e) => {
         e.stopPropagation();
         let elements = e.currentTarget.parentElement.parentElement.children[3].children;
@@ -1102,85 +1123,106 @@ const Sectionsmart = (props) => {
 
 
     return (
-        <div values={props.values} id={thisId} className={thisClass}>
+        <Section style={{ position: "relative" }} values={props.values} id={thisId} className={thisClass}>
 
-            <Section style={{ display: "flex", height: "5%", marginTop: "6vh", padding: "0 1.5vw", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }} id="app-setting-smart" value="app-setting-smart">
+            {(showModal == true ?
+                <Section style={{ zIndex: 10000, position: "absolute", width: "86%", minHeight: "545px", maxHeight: "566px", left: "7%", marginTop: "15px", backgroundColor: "black", borderRadius: "35px", textAlign: "center", backgroundImage:`url(${image})`, backgroundRepeat:"no-repeat", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 1 }}>
+                    <p style={{ color: "white", fontWeight: "bold" }}>{"Version d'essai."}</p>
+                    <p style={{ color: "white", fontWeight: "bold", margin: "0 5px" }}>{"Voir les Screenshots pour cette section"}</p>
+                    <Section className="hideModalTrialVersion" style={{ margin: "20px", padding: "20px 10px", color: "white", fontWeight: "bold", borderRadius: "5px", backgroundColor: "#0000FF" }} display={() => {makeModalTrialVersion(); setShowModal(() => false)} }>Revenir</Section>
+                    <Img                            
+                        id={"padlock-close"} 
+                        style={{ zIndex: 10, height: "15%", marginTop: "15%", alignSelf: "center" }}
+                        src="assets/padlock-close.png"  
+                        alt="padlock-close" 
+                    />
+                </Section> : 
+            false)}
+
+
+            {(showModalDiameters == true ?
+                <Section style={{ zIndex: 5000, position: "absolute", width: "80%", left: "10%", bottom: "12.5%", backgroundColor: "white", borderRadius: "10px", fontSize: "11px", textAlign: "center" }}>
+                    <p style={{ color: "black", fontWeight: "600" }}>{"Version d'éssai"}<br/>{"(DN15, DN125, DN1200 disponible)"}</p>
+                    <p style={{ color: "black", fontWeight: "600" }}>{"L'application comprend 32 diamètres"}<br/>{`ISO/ANSI | DN${currentDiameterOnly[0]}`}</p>
+                </Section> : 
+            false)}
+
+
+
+
+            <Section style={{ display: "flex", marginTop: "12.5%", padding: "0 10%", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }} id="app-setting-smart" value="app-setting-smart">
                 <Section style={{ flex: "7.5%", justifyContent: "center", alignItems: "center" }} key={"utility"} id="utility-smart" type="button" value="utility"
                     children={
-                        <Section style={{ flex: "50%", position: "relative", justifyContent: "center", alignItems: "center", alignSelf: "center" }}>
-                            <Img    style={{ position: "absolute", zIndex: 100, height: "60%", right: "-15%", top: "-15%" }} 
-                                    className="Padlock-close"
-                                    src="assets/padlock-close.png"  
-                                    alt="setting" 
-                            />                         
-                            <Img 
-                                style={{ zIndex: 10, width: "90%", height: "90%", alignSelf: "center" }}
+                        <div onClick={ () => {makeModalTrialVersion(); setShowModal(() => true)} } style={{ flex: "50%", position: "relative", justifyContent: "center", alignItems: "center", alignSelf: "center" }}>
+                            <Img                            
+                                className={"showModalTrialVersion"} 
+                                style={{ zIndex: 10, width: "23px", height: "23px", alignSelf: "center" }}
                                 src="assets/utility.png"  
                                 alt="utility" 
                             />
-                        </Section>
+                        </div>
                     }
                 />
 
-                <Section style={{ flex: "25%", display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
-                    <Section style={{ width: "27.5%", textAlign: "center", justifyContent: "center", alignItems: "center", backgroundColor: "#555555", borderRadius: "15% 0 0 15%" }} type="button"
+                <Section style={{ position: "relative", flex: "25%", display: "flex", flexDirection: "row", justifyContent: "space-evenly" }}>
+                    <Section style={{ width: "25%", textAlign: "center", justifyContent: "center", alignItems: "center", backgroundColor: "#555555", borderRadius: "15% 0 0 15%" }} type="button"
                         children={
-                            <Img 
-                                style={{ height: "1vw" }}
-                                src="assets/text-decrease.png"  
-                                alt="text-decrease" 
-                            />
+                            <div onClick={ () => {makeModalTrialVersion(); setShowModal(() => true)} }>
+                                <Img 
+                                    className={"showModalTrialVersion"}
+                                    style={{ height: "0.75em" }}
+                                    src="assets/text-decrease.png"  
+                                    alt="text-decrease" 
+                                />
+                            </div>
                         }
                     />
 
-                    <Section style={{ width: "27.5%", textAlign: "center", justifyContent: "center", alignItems: "center", backgroundColor: "#555555", borderRadius: "0 15% 15% 0" }} type="button"
+                    <Section style={{ width: "25%", textAlign: "center", justifyContent: "center", alignItems: "center", backgroundColor: "#555555", borderRadius: "0 15% 15% 0" }} type="button"
                         children={
-                            <Img 
-                                style={{ height: "1vw" }}
-                                src="assets/text-increase.png"  
-                                alt="text-increase" 
-                            />
+                            <div onClick={ () => {makeModalTrialVersion(); setShowModal(() => true)} }>
+                                <Img 
+                                    className={"showModalTrialVersion"}
+                                    style={{ height: "0.75em" }}
+                                    src="assets/text-increase.png"  
+                                    alt="text-increase" 
+                                />
+                            </div>
                         }
                     />
                 </Section>
 
-                <Section style={{ height: "2vw", width: "25%", fontSize: "10px", color: "white", fontSize: "9px", fontWeight: "700", textAlign: "left" }}><Span container="unité: mm" /></Section>
+                <Section style={{ height: "2vw", width: "32.5%", fontSize: "10px", color: "white", fontSize: "9px", fontWeight: "700", textAlign: "left" }}><Span container="unité: mm" /></Section>
 
-                <Section style={{ height: "1.75vw", flex: "15%" }}>
-                    <Img 
-                        style={{maxHeight: "90%"}}
-                        src="assets/languages.png"  
-                        alt="
-                        languages" 
-                    />
+                <Section style={{ flex: "15%" }}> 
+                    <div onClick={ () => {makeModalTrialVersion(); setShowModal(() => true)} }>
+                        <Img 
+                            className={"showModalTrialVersion"}
+                            style={{ width: "23px", height: "23px" }}
+                            src="assets/languages.png"  
+                            alt="languages" 
+                        />
+                    </div>
                 </Section>
 
-                <Section style={{ flex: "7.5%", justifyContent: "center", alignItems: "center" }} key={"utility"} id="utility-smart" type="button" value="utility"
-                    children={
-                        <Section style={{ flex: "100%", position: "relative", justifyContent: "center", alignItems: "center", alignSelf: "center" }}>
-                            <Img    style={{ position: "absolute", zIndex: 100, height: "60%", left: "-15%", top: "-15%" }} 
-                                    className="Padlock-close"
-                                    src="assets/padlock-close.png"  
-                                    alt="setting" 
-                            />                         
-                            <Img 
-                                style={{ zIndex: 10, width: "90%", height: "90%", alignSelf: "center" }}
-                                src="assets/setting.png"  
-                                alt="settings" 
-                            />
-                        </Section>
-                    }
-                />
+                <Section style={{ display: "flex", width: "5%", justifyContent: "flex-end" }}> 
+                    <div onClick={ () => {makeModalTrialVersion(); setShowModal(() => true)} }>
+                        <Img 
+                            className={"showModalTrialVersion"}
+                            style={{ width: "23px", height: "23px" }}
+                            src="assets/setting.png"  
+                            alt="settings" 
+                        />
+                    </div>
+                </Section>
             </Section>
 
             <Section key={"buttons-screens"} value={"elbow"} className="App_buttons_smart">
                     
-                <Button id="elbow" className="Elbow" type="button" value={"elbow"} display={dispatchFunctions}   
+                <Button id="elbow" type="button" value={"elbow"} display={dispatchFunctions}   
                     children={
                         <Img 
                             className="Elbow"
-                            style={styleButtonElbow}
-                            value={props.values.elbow}
                             src="assets/elbow.png"  
                             alt="elbow-steel" 
                         />
@@ -1216,44 +1258,54 @@ const Sectionsmart = (props) => {
                         />
                     }
                 />     
-                    {(currentButtonLayerState === "elbow-double" || currentButtonLayerState === "elbow-double-oriented" ? <Input className="Button_turn" type="number" min={0} max={360} step={1} value={currentAngleScreen} displayChange={(e) => {e.stopPropagation(); setAngleScreenText(e.currentTarget.value); e.currentTarget.parentElement.parentElement.children[3].children[1].style.transform = `rotate(${e.target.value}deg)`}} /> : false)}  
+
             </Section>
 
+            
             <Section id="app-values" className="App_values">
-                <Section id="diameters" className="Diameters">
-                    <Span key="title-diameters" className="Title_diameters" container="Ø" />
-                    <Span key="diameter-mm" className="Diameter" container={currentDiameter[currentNorme] + " mm"} />
-                    <Span key="diameter-dn-inch" className="Diameter" container={`DN ${currentDiameter[0]}`} />
-                </Section>
-
                 { 
                     (
                         currentButtonLayerState !== "elbow-slice" ?
+                            [<Section key={"bloc-diameter"} id="diameters" style={{ width: "20%" }} className="Values_elbow">
+                                <Span key="title-diameters" className="Title_diameter" container="Ø" />
+                                <Span style={{ fontSize: "11px" }} key="diameter-mm" className="Diameter" container={currentDiameter[currentNorme] + " mm"} />
+                                <Span style={{ fontSize: "11px" }}  key="diameter-dn-inch" className="Diameter" container={`DN ${currentDiameter[0]}`} />
+                            </Section>,
 
-                            <Section id="values-elbow" className="Values_elbow">
-                                <Span className = "Title_values_elbow" container="Extrado/Intrado" />
+                            <Section key={"bloc-values-elbows-standard"} id="values-elbow" className="Values_principal">
+                                <Span className="Title_values_principal" container="Extrado/Intrado" />
                                     {
                                         (
                                             currentButtonLayerState === "elbow-double" ?
-                                                [<Span key={"elbow-double-intra-a"} container = {`A ${parseFloat(currentExtraA).toFixed(2)} - ${parseFloat(currentIntraA).toFixed(2)}`} />,
-                                                <Span key={"elbow-double-intra-b"} container = {`B ${parseFloat(currentExtraB).toFixed(2)} - ${parseFloat(currentIntraB).toFixed(2)}`} />]
+                                                <Section style={{ width: "max-content", display: "flex", flexDirection: "column" }}>
+                                                    <Span style={{ fontSize: "11px", color: "white" }} key={"elbow-double-intra-a"} container = {`A ${parseFloat(currentExtraA).toFixed(2)} - ${parseFloat(currentIntraA).toFixed(1)}`} />
+                                                    <Span style={{ fontSize: "11px", color: "white" }} key={"elbow-double-intra-b"} container = {`B ${parseFloat(currentExtraB).toFixed(2)} - ${parseFloat(currentIntraB).toFixed(1)}`} />
+                                                </Section>
                                             :
                                             (currentButtonLayerState === "elbow-double-oriented" ?
-                                                [<Span key={"elbow-double-o-intra-a"} container = {`A ${parseFloat(currentExtraAOriented).toFixed(2)} - ${parseFloat(currentIntraAOriented).toFixed(2)}`} />,
-                                                <Span key={"elbow-double-o-intra-b"} container = {`B ${parseFloat(currentExtraBOriented).toFixed(2)} - ${parseFloat(currentIntraBOriented).toFixed(2)}`} />]
+                                                <Section style={{ width: "max-content", display: "flex", flexDirection: "column" }}>
+                                                    <Span key={"elbow-double-o-intra-a"} style={{ fontSize: "11px", color: "white" }} container = {`A ${parseFloat(currentExtraAOriented).toFixed(1)} - ${parseFloat(currentIntraAOriented).toFixed(1)}`} />
+                                                    <Span key={"elbow-double-o-intra-b"} style={{ fontSize: "11px", color: "white" }} container = {`B ${parseFloat(currentExtraBOriented).toFixed(1)} - ${parseFloat(currentIntraBOriented).toFixed(1)}`} />
+                                                </Section>
                                             :
-                                                [<Span key={"elbow-intra"} container = {`${parseFloat(currentExtra).toFixed(2)} mm`} />,
-                                                <Span key={"elbow-extra"} container = {`${parseFloat(currentIntra).toFixed(2)} mm`} />])
+                                                [<Span style={{ fontSize: "11px", color: "white" }} key={"elbow-intra"} container = {`${parseFloat(currentExtra).toFixed(1)} mm`} />,
+                                                <Span style={{ fontSize: "11px", color: "white" }} key={"elbow-extra"} container = {`${parseFloat(currentIntra).toFixed(1)} mm`} />])
                                         )
                                     }
-                            </Section>
+                            </Section>]
 
                         :
                         
-                            [
-                                <Button key={"button-genes-in-slice"} thisFontSize = {"1vw"} className="Generatrices" container="Generatrices" display={(e) => {var f = makeGenesAndPaths(e); setCurrentGeneratrices(f);}}>
+                        <Section id="app-values" className="App_values-elbow-slices">
+                                <Section key={"bloc-diameter-in-elbow-slice"} style={{ display: "flex", minWidth: "64px", maxWidth: "64px", flexDirection: "column" }} id="diameters">
+                                    <Span key="title-diameters-in-elbow-slice" className="Title_diameter" container="Ø" />
+                                    <Span key="diameter-mm-in-elbow-slice" style={{ fontSize: "11px" }} className="Diameter" container={currentDiameter[currentNorme] + " mm"} />
+                                    <Span key="diameter-dn-inch-in-elbow-slice" style={{ fontSize: "11px" }} className="Diameter" container={`DN ${currentDiameter[0]}`} />
+                                </Section>
+                                
+                                <Button key={"button-genes-in-slice"} className="Generatrices" container="Generatrices" display={(e) => {var f = makeGenesAndPaths(e); setCurrentGeneratrices(f);}}>
                                     {`${(displayGeneratrices === false && currentButtonLayerState === "elbow-slice" ? currentNbrGeneratrices : "✔︎")}`}
-                                </Button>,
+                                </Button>
                                 
                                 <Section key={"section-norme-in-slice"} className="Normes_in_elbow_slices">
                                     <span key={"span-norme-in-slice"} className="Iso">ansi</span>
@@ -1262,7 +1314,24 @@ const Sectionsmart = (props) => {
                                         : false)}
                                     <span className="Ansi">iso</span>
                                 </Section>
-                            ]
+
+                                <Input className="Radius_elbow_slice" type="number" min={100} max={10000} step={1}
+                                    displayChange = {
+                                        (e) =>  {
+
+                                                    let innerRadiusElbowSlice = Number(e.target.value);
+                                                    
+                                                    setRadiusElbowSlice(() => innerRadiusElbowSlice);
+                                                    setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (innerRadiusElbowSlice-(currentDiameter[currentNorme]/2))).toFixed(1));
+                                                    setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (innerRadiusElbowSlice+(currentDiameter[currentNorme]/2))).toFixed(1));
+                                                    
+                                                    makeGeneValue(e, currentDiameter[currentNorme]);
+                                                    
+                                                }
+                                    } 
+                                    defaultValue={radiusElbowSlice} 
+                                />
+                        </Section>
                     )
                 } 
                 
@@ -1274,7 +1343,7 @@ const Sectionsmart = (props) => {
                             <Section id="values-principal" className="Values_principal">
                                 <Span className="Title_values_principal" container="Angle/Rayon" />
 
-                                <Span
+                                <Span style={{ fontSize: "11px", color: "rgb(47, 255, 40)" }}
                                     container = 
                                     {
                                         (currentButtonLayerState !== "elbow-double-oriented" ?
@@ -1286,7 +1355,7 @@ const Sectionsmart = (props) => {
                                     }
                                 />
 
-                                <Span
+                                <Span style={{ fontSize: "11px", color: "rgb(47, 255, 40)" }}
                                     container = 
                                     {
                                         (currentButtonLayerState !== "elbow-double-oriented" ?
@@ -1300,24 +1369,7 @@ const Sectionsmart = (props) => {
                                 
                             </Section>
 
-                        :
-
-                            <Input className="Radius_elbow_slice" type="number" min={100} max={5000} step={1}
-                                displayChange = {
-                                    (e) =>  {
-
-                                                let innerRadiusElbowSlice = Number(e.target.value);
-                                                
-                                                setRadiusElbowSlice(() => innerRadiusElbowSlice);
-                                                setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (innerRadiusElbowSlice-(currentDiameter[currentNorme]/2))).toFixed(2));
-                                                setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (innerRadiusElbowSlice+(currentDiameter[currentNorme]/2))).toFixed(2));
-                                                
-                                                makeGeneValue(e, currentDiameter[currentNorme]);
-                                                
-                                            }
-                                } 
-                                defaultValue={radiusElbowSlice} 
-                            />
+                        : false
                     )
 
                 }
@@ -1327,12 +1379,24 @@ const Sectionsmart = (props) => {
             <Section className="Elbow_svg">   
                     {
                         ((currentButtonLayerState === "elbow-double" || currentButtonLayerState === "elbow-double-oriented") ?           
-                            <Aside children={(currentButtonLayerState === "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? 
-                                [
-                                    <Span key={"entraxe"} id="entraxe" className="Entraxe" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? currentEntraxe.toFixed(2) : currentEntraxeDoubleOriented.toFixed(2))}></Span>, 
-                                    <Span key={"lengthEqualDoubleElbow"} id="lengthEqualDoubleElbow" className="LengthEqualDoubleElbow" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? lengthEqualDoubleElbow.toFixed(2) : currentLengthAxeToBaseDoubleOriented.toFixed(2))}></Span>, 
-                                    <Span key={"reset-orientation-screen"} className="Reset_orientation_screen" container="↺" display={resetOrientationScreen}></Span>
-                                ] 
+                            <Aside style={{ flexDirection: "row", width: "100%", marginTop: "5%" }} children={(currentButtonLayerState === "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? 
+                                [<Section style={{ display: "flex", width: "60%", flexDirection: "row", justifyContent: "flex-start" }}>
+                                    <Span key={"entraxe"} style={{ width: "50%" }} id="entraxe" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? currentEntraxe.toFixed(2) : currentEntraxeDoubleOriented.toFixed(2))}></Span>
+                                    <Span key={"lengthEqualDoubleElbow"} style={{ width: "50%", color: "#48dbfb" }} id="lengthEqualDoubleElbow" container={(currentButtonLayerState !== "elbow-double-oriented" || currentButtonLayerState === "elbow-double" ? lengthEqualDoubleElbow.toFixed(2) : currentLengthAxeToBaseDoubleOriented.toFixed(2))}></Span>
+                                </Section>,
+
+                                <Section key={"reset-orientation-screen"} style={{ flexDirection: "row", justifyContent: "row-reverse" }} className="Reset_orientation_screen"
+                                    children={
+                                        <div onClick={ () => {makeModalTrialVersion(); setShowModal(() => true)} }>
+                                            <Img 
+                                                className={"showModalTrialVersion"}
+                                                style={{ height: "21px" }}
+                                                src="assets/padlock-open.png"  
+                                                alt="elbow-double-oriented-steel"
+                                            />
+                                        </div>
+                                    }
+                                />]
                                 : false)}>
                             </Aside>
                         : (currentButtonLayerState === "elbow-slice" && displayGeneratrices !== true ? 
@@ -1500,9 +1564,9 @@ const Sectionsmart = (props) => {
 
                         <Section key="section-formats-normes" id="app-format-norme" className="App-format-norme">
                             <Section key="section-formats" id="formats" className="Formats">
-                                <Button key="button-2-d" id="2d" thisColorButton={(currentFormatButton === 0 ? "forestgreen" : "#525252")} className="Format" type="button" value="2D" display={getFormat}>2D</Button>
-                                <Button key="button-3-d" id="3d" thisColorButton={(currentFormatButton === 1 ? "forestgreen" : "#525252")} className="Format" type="button" value="3D" display={getFormat}>3D</Button>
-                                <Button key="button-5-d" id="5d" thisColorButton={(currentFormatButton === 2 ? "forestgreen" : "#525252")} className="Format" type="button" value="5D" display={getFormat}>5D</Button>
+                                <Button id="2D" className={"showModalTrialVersion"} display={ () => {makeModalTrialVersion(); setShowModal(() => true)} } key="button-2-d" thisColorButton={"#525252"} className="Format" type="button">2D</Button>
+                                <Button key="button-3-d" id="3d" thisColorButton={"forestgreen"} className="Format" type="button" value="3D" display={getFormat}>3D</Button>
+                                <Button id="5D" className={"showModalTrialVersion"} display={ () => {makeModalTrialVersion(); setShowModal(() => true)} } key="button-5-d" thisColorButton={"#525252"} className="Format" type="button">5D</Button>
                             </Section>
 
                             <Section key="section-normes" className="Normes">
@@ -1528,7 +1592,8 @@ const Sectionsmart = (props) => {
                     displayChange = {
                                         (e) => {
 
-                                                    if (datasPipe[e.target.value] !== 73 || datasPipe[e.target.value] !== 141) { setNormeState(2); }                                                      
+                                            if (datasPipe[e.target.value][0] == 15 || datasPipe[e.target.value][0] == 125 || datasPipe[e.target.value][0] == 1200) { 
+                                                    setShowModalDiameters(() => false);
                                                     setNormeButtonState(0);
                                                     setDiameter(datasPipe[e.target.value]);
                                                     setCurrentPosState("50%");
@@ -1539,13 +1604,18 @@ const Sectionsmart = (props) => {
                                                     setcurrentGeneratriceOne(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice-(datasPipe[e.target.value][2]/2))).toFixed(2));
                                                     setcurrentGeneratriceLast(() => Number(Math.tan(unDegre*15) * (radiusElbowSlice+(datasPipe[e.target.value][2]/2))).toFixed(2));
                                                     
-                                               }
+                                            
+                                            } else {
+                                                setShowModalDiameters(() => true);
+                                                setDiameterOnly(datasPipe[e.target.value]);
+                                            }
+                                        }
                                     } 
                     defaultValue={0} 
                 />
             </Section>
 
-        </div>        
+        </Section>        
     );
 
 }

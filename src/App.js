@@ -90,7 +90,9 @@ const displayLanguage = (e) => {
                 comment.textContent = languages.en.comment; 
                 publish.lastChild.value = languages.en.publish // bouton formulaire commentaire
                 fleche.style.transform = "rotate(180deg)";
-                badgeTrust.style.transform = "rotate(180deg)";
+                //badgeTrust.style.transform = "rotate(180deg)";
+                badgeTrust.setAttribute("src", "assets/badge-confiance-en.png");
+
                 ButtonGoogleStore.setAttribute("src", "assets/badge-google-en.png");
                 ButtonAppleStore.setAttribute("src", "assets/badge-apple-en.png");
               } ,700);
@@ -107,7 +109,9 @@ const displayLanguage = (e) => {
                 comment.textContent = languages.fr.comment;
                 publish.lastChild.value = languages.fr.publish // bouton formulaire commentaire
                 fleche.style.transform = "rotate(0deg)";
-                badgeTrust.style.transform = "rotate(0deg)";
+                //badgeTrust.style.transform = "rotate(0deg)";
+                badgeTrust.setAttribute("src", "assets/badge-confiance-fr.png");
+
                 ButtonGoogleStore.setAttribute("src", "assets/badge-google-fr.png");
                 ButtonAppleStore.setAttribute("src", "assets/badge-apple-fr.png");
 
@@ -146,7 +150,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
 
                 <Section className="App_link">
                     <Link
-                        href="https://codewithmosh.com/"
+                        href=""
                         className="link"
                         container="Piping-Infos.com"
                     />
@@ -187,33 +191,20 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
 
             <Section id="main" className="App_main">
 
-                <Aside className="Main_left">
-
+                <Aside>
                     <Section id="bloc_trust" className="Bloc_trust">
                         <Img 
+                            style={{ maxWidth: "100%", zIndex: 10 }}
                             id="badge_trust"
                             className="Badge_trust"
-                            src="assets/badge-trust-en-fr.png" 
+                            src="assets/badge-confiance-fr.png" 
                             alt="badge-trust"
                         />
                     </Section>
-
                 </Aside>
 
-                <Aside className="Main_principal">
-
-
-
-
-
-
+                <Aside>
                     <Sectionsmart className="Smart_vector" values={tabElbowsButtons} />
-
-
-
-
-
-
                 </Aside>
 
                 <Aside className="Main_right">
@@ -234,7 +225,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                             />
                         </Link>
 
-                        <Link href="https://codewithmosh.com/" className="App_link_apple">
+                        <Link href="https://apps.apple.com/fr/app/pipingdata/id6477729206" className="App_link_apple">
                             <Img   
                                 id="apple"  
                                 className="apple" 

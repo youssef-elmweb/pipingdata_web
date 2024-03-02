@@ -12,13 +12,11 @@
 }
 
 button {
-  width: 2.5vw;
+  width: 30px;
   height: auto;
   padding: 0;
   border: none;
   border-radius: 50%; 
-  background: none;
-  z-index: 999;
 }
 button:active:not(.Button_setting, .Turn, .Iso_Ansi) {
   outline-style: none;
@@ -48,7 +46,7 @@ a:hover {
 /**************************************** ELEMENTS FLEX ***************************************/
 .App, .App_main, .App_header, .App_logo, .App_link_logo, .App_buttons_smart, .link, 
 .App_link, .Logo, .App_buttons_smart, .App_setting_fast, .Smart_vector, #form_comment, 
-.play_stores, .Bloc_trust, .Badge_trust, .Price, .google, .apple, .App-range,
+.play_stores, rust, .Badge_trust, .Price, .google, .apple, .App-range,
 h1, button, aside, svg {
   display: flex;
 }
@@ -63,6 +61,7 @@ h1, button, aside, svg {
 .App_header {
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 1.5%;
   padding: 1% 1.5%;
   box-shadow: 0 4px 6px rgb(100, 100, 100);
   background-color: #252525;
@@ -124,54 +123,74 @@ h1 {
 
 
 /***************************************** STYLES MAIN ****************************************/
+
+@media screen and (min-width: 926px) {
+    aside:nth-child(3) {
+      width: 30%;
+    }
+}
+
+@media screen and (max-width: 750px) { 
+    .App_main {
+      flex-direction: column;
+    }
+
+    aside:first-child {
+      display: none;
+    }
+}
+
+@media screen and (min-width: 751px) and (max-width: 925px) { 
+    aside:first-child {
+      display: none;
+    }
+    
+    aside:nth-child(2) {
+      width: 40%;
+    }
+
+    aside:first-child(3) {
+      width: 60%;
+      background-color: red;
+    }
+}
+
+@media screen and (max-width: 329px) { 
+    .App_main, .App_header {
+      overflow-x: scroll;
+      width: 150%;
+      margin: 0;
+      padding: 0;
+      justify-content: "center";
+    }
+}
+
 .App_main {
-  flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
-  padding: 0 2%;
 }
 
 aside:first-child {
-  flex: 30%;
+  width: 25%;
 }
 
 aside:nth-child(2) {
-  flex: auto;
-  /*border: 1px solid red;*/
+  width: 330px;
 }
 
 aside:nth-child(3) {
-  flex: 30%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-/***************************************** STYLES MAIN ****************************************/
-
-
-/************************************ STYLES BLOC CONFIANCE ************************************/
-.Bloc_trust {
-  width: 300px;
-  margin: 0 auto;
   justify-content: flex-start;
-  overflow: hidden;
   align-items: center; 
 }
-.Badge_trust {
-  width: 200%;
-  transform: rotate(0deg);
-}
-/************************************ STYLES BLOC CONFIANCE ************************************/
-
+/***************************************** STYLES MAIN ****************************************/
 
 
 /***************************************** STYLES APPLI ***************************************/
 .Smart_vector {
   flex-direction: column;
-  width: 15vw;
-  flex: 1;
-  min-height: 40vw;
-  margin: 1.5vw auto 0;
+  width: 330px; 
+  height: 576px;
   background-image: url("./smartphone.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -180,44 +199,31 @@ aside:nth-child(3) {
 }
 
 .App_buttons_smart {
-  height: max-content;
-  margin: 1% 0 3.5%;
-  padding: 0 5%;
-  align-items: center;
   justify-content: space-evenly;
-  /* border: 1px solid red; */
+  margin-top: 2.5%;
 }
 
 .Elbow, .Elbow_double, .Elbow_double_section, .Elbow_double_oriented, .Elbow_slice {
-  width: 2.5vw;
-  height: 2.5vw;
+  display: flex;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;  
   background-color: #e74c3c;
 }
 
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-  opacity: 1;
-  width: 3vw;
-  height: 2.5vw;
-  padding: 0 1.35vw 0 0;
-}
+
 
 .Button_turn {
   appearance: none;
   border-radius: 25px;
-  width: 1.15vw;
-  height: 2.5vw;
+  width: 1vw;
+  height: 2.35vw;
   margin: 0;
-  padding: 0 1.3vw 0 0;
+  padding: 0 1.4vw 0 0;
 }
 
 .Test, .LengthEqualDoubleElbow {
   margin-left: 2vw;
-}
-
-.LengthEqualDoubleElbow {
-color: #48dbfb;
 }
 
 .Zoning_move_left, .Zoning_move_right {
@@ -229,14 +235,11 @@ color: #48dbfb;
 }
 
 .Screen_svg {
-  position: absolute;
-  bottom: 0;
   display: flex;
   justify-content: center;
-  width: 19vw;
-  height: 17vw;
-  margin: 0 auto; /* svg prend la moitié de la hauteur 40 vw regler hauteur du reste des éléments */
-  /*border: 1px dashed rgb(129, 123, 123);*/
+  width: 273px;
+  height: 244px;
+  margin: 7.5% auto; 
 }
 
 .Elbow_layer, .Double_elbow_layer, .Double_elbow_oriented_layer, .Elbow_slice_layer  {
@@ -244,12 +247,11 @@ color: #48dbfb;
 }
 
 .Elbow_svg { 
-  position: relative;
   color: #fdff83;
   font-size: 11px;
   font-weight: bold;
-  width: 19vw;
-  height: 18.25vw;
+  width: 273px;
+  height: 244px;
   margin: 0 auto;
   /*border: 1px solid rgb(214, 206, 206);*/
 }
@@ -345,9 +347,9 @@ p {
   align-items: center;
   width: 80%;
   border-radius: 25px;
-  padding: 2.5%;
+  padding: 5% 2.5%;
   color: white;
-  font-size: 26px;
+  font-size: 1.75vw;
   font-weight: bold;
   background-color: forestgreen;
 }
@@ -480,16 +482,15 @@ textarea {
   align-items: flex-start;
   font-size: 0.9vw;
   color: white;
-  /* border: 1px solid white; */
 }
 .App-format-norme {
   justify-content: space-between;
-  margin: 1.1vw 0 2.32vw;
-  padding: 0 2.7vw;
+  margin: 50px 0 30px;
+  padding: 0 10%;
 }
 .Generatrices_values {
   justify-content: space-evenly;
-  margin: 0.2vw 0 0.8vw;
+  margin: 10% 0 5%;
   padding: 0 1.75vw;
   min-height: 4vw;
   height: max-content;
@@ -501,6 +502,7 @@ textarea {
 }
 .Formats {
   flex-direction: row;
+  margin-left: 5%;
 }
 .Block_generatrices_values {
   flex-direction: column;
@@ -510,7 +512,7 @@ textarea {
   /*border: 1px solid goldenrod;*/
 }
 .Block_generatrices_values:last-child {
-  margin-block-start: -0.9vw;
+  /*margin-block-start: -0.9vw;*/
   /*border: 1px solid plum;*/
 }
 
@@ -518,6 +520,7 @@ textarea {
   display: flex;
   flex-direction: row;
   justify-content: right;
+  margin-right: 3%;
   flex-wrap: wrap;
   /*border: 1px solid plum;*/
 }
@@ -526,13 +529,10 @@ textarea {
   display: flex;
   justify-content: center;
   border-radius: 5px;
-  margin-right: 0.75vw;
-  padding-block-end: 0.25vw;
-  padding-block-start: 0.25vw;
-  padding-inline-end: 1.25vw;
-  padding-inline-start: 1.25vw;
-  height: max-content;
-  font-weight: 400;
+  margin-right: 15%;
+  padding: 5% 20%;
+  font-size: 13px;
+  font-weight: bold;
   background-color: #525252;
   color: white;
 }
@@ -541,19 +541,19 @@ textarea {
   display: inline-flex;
   width: max-content;
   color: white;
+  font-size: 11px;
 }
 .Gene {
   display: inline-flex;
   width: max-content;
-  font-size: 0.68vw;
   color: white;
+  font-weight: bold;
 }
 .Two_gene {
   display: flex;
   align-items: center;
   padding-inline-start: 0.3vw;
   padding-inline-end: 1.5vw;
-  font-size: 0.7vw;
   color: white;
 }
 
@@ -565,21 +565,22 @@ textarea {
   align-self: center;
   max-width: 74.05px;
   min-width: 74.05px;
-  height: 1.5vw;
+  height: 20px;
   border-radius: 5px;
   background-color: transparent;
   transition-property: "justify-content";
   transition-duration: 2s;
   transition-delay: 2s;
-  /* border: 1px solid pink; */
 }
 
 .Normes_in_elbow_slices {
   position: relative;
   display: flex;
-  flex: 4.5vw;
+  min-width: 21%;
+  max-width: 21%;
+  height: 30px;
   align-items: center;
-  margin: 0 2.4% 9% 2.5%;
+  padding: 0 0% 0 1%;
   border: 1px solid darkgray;
   border-radius: 6px;
   transition-property: "justify-content";
@@ -598,9 +599,6 @@ textarea {
   height: 100%;
   border-radius: 5px;
   margin: 0 auto;
-  line-height: 1vw;
-  text-align: center;
-  font-size: 1vw;
   color: white;
   font-weight: bold;
   transition: 0.15s left linear;
@@ -614,8 +612,8 @@ textarea {
   flex: 1;
   justify-content: space-around;
   align-items: center;
-  font-size: 1vw;
-  line-height: 1vw;
+  font-size: 13px;
+  line-height: 13px;
   font-weight: bold;
   color: white;
 }
@@ -623,63 +621,89 @@ textarea {
 /*************************************************************/
 
 .App_values {
+  padding: 0 1.5%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin: 0.25vw 2vw 1vw;
   font-weight: bold;
   color: white;
 }
 
-.Title_diameters, .Title_values_elbow, .Title_values_principal {
+.App_values-elbow-slices {
   display: flex;
+  min-width: 90.5%;
+  max-width: 90.5%;
+  margin-top: 5%;
+  padding-left: 3.75%;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-weight: bold;
+  color: white;
+}
+
+.Title_diameter {
+  margin-bottom: 3px;
+  font-size: 10px;
+  display: flex;
+  color: white;
+  justify-content: center;
+  text-align: center;
+  background-color: rgb(49, 82, 49);
+  border-radius: 10px;
+}
+
+.Title_values_elbow, .Title_values_principal {
   flex-direction: column;
   justify-content: center;
   color: white;
   text-align: center;
   background-color: rgb(49, 82, 49);
   border-radius: 10px;
-  margin: 0.25vw auto;
-}
-.Title_diameters {
-  font-size: 0.9vw;
-  padding: 0 1.7vw;
-}
-.Title_values_elbow, .Title_values_principal {
-  font-size: 0.7vw;
-  padding: 0 0.5vw;
+  margin-bottom: 3px;
 }
 
-.Diameters, .Values_elbow, .Values_principal {
-  display: flex;
-  width: max-content;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 0.7vw;
-  color: white;
-  line-height: 160%;
+.Title_values_elbow, .Title_values_principal {
+  font-size: 10px;
+  padding: 0 10%;
 }
+
 .Diameters {
-  align-items: left;
+  width: 10%;
 }
+
 .Values_elbow {
-  align-items: left;
-  color: aquamarine;
+  padding-left: 6.5%;
 }
+
 .Values_principal {
-  align-items: center;
+  width: 30%;
+  padding-right: 2.5%;
+  align-items: flex-start;
   color: rgb(47, 255, 40);
 }
 
-.Generatrices {
+
+.Diameters, .Values_elbow, .Values_principal {
   display: flex;
-  flex: auto;
+  margin-top: 5%;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 0.8em;
+  color: white;
+  line-height: max-content;
+  /*background-color: red;*/
+}
+
+.Generatrices {
+  height: 30px;
+  display: flex;
+  width: 15%;
   justify-content: center;
   align-items: center;
-  margin: 0 0 9% 2.5%;
+  margin-bottom: 10%;
   border: 1px solid darkgray;
   border-radius: 6px;
-  font-size: 1vw;
+  font-size: 1em;
   color: white;
   font-weight: bold;
   text-align: center;
@@ -695,12 +719,12 @@ textarea {
 
 .Radius_elbow_slice {
   display: flex;
-  flex: auto;
+  width: 23%;
+  height: 30px;
   border: 1px solid darkgray;
-  margin: 0 0 9% 0;
   padding: 0 0% 0 1%;
   border-radius: 6px;
-  font-size: 1vw;
+  font-size: 13px;
   background-color: #262626;
   color: white;
 }

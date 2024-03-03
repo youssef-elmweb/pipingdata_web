@@ -124,7 +124,7 @@ h1 {
 
 /***************************************** STYLES MAIN ****************************************/
 
-@media screen and (min-width: 926px) {
+@media screen and (min-width: 1200px) {
     aside:nth-child(3) {
       width: 30%;
     }
@@ -138,9 +138,17 @@ h1 {
     aside:first-child {
       display: none;
     }
+
+    aside:nth-child(2) {
+      margin-top: 5%;
+    }
+
+    aside:nth-child(3) {
+      margin-top: 10%;
+    }
 }
 
-@media screen and (min-width: 751px) and (max-width: 925px) { 
+@media screen and (min-width: 751px) and (max-width: 1201px) { 
     aside:first-child {
       display: none;
     }
@@ -151,7 +159,6 @@ h1 {
 
     aside:first-child(3) {
       width: 60%;
-      background-color: red;
     }
 }
 
@@ -348,9 +355,9 @@ p {
   align-items: center;
   width: 80%;
   border-radius: 25px;
-  padding: 5% 2.5%;
+  padding: 4.5% 2.5%;
   color: white;
-  font-size: 1.75vw;
+  font-size: 18px;
   font-weight: bold;
   background-color: forestgreen;
 }
@@ -376,7 +383,7 @@ p {
 }
 
 label, input, textarea {
-  padding: 3% 2%;
+  padding: 2%;
   border: none;
 }
 
@@ -386,15 +393,15 @@ input {
 }
 
 textarea {
-  height: 7vw;
+  height: 115px;
   resize: none;
   border-top: 1px solid #282c34;
 }
 
 .submit {
+  height: 65px;
   border-top: 1px solid #282c34;
   border-radius: 0 0 10px 10px;
-  padding: 1.5vw 0;
   color: white;
   background-color: #4b5463;
 }

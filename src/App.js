@@ -131,7 +131,6 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
         <Section id="app" className="App">
 
             <header className="App_header">
-
                 <Section className="App_logo">
                     <Link href="" className="App_link_logo">
                         <Img 
@@ -150,9 +149,11 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
 
                 <Section className="App_link">
                     <Link
-                        href=""
+                        href="https://elm-web.fr"
+                        target="_blank"
+                        rel="noopener"
                         className="link"
-                        container="Piping-Infos.com"
+                        container="Elm-web.com"
                     />
 
                     <Section className="App_setting_fast">
@@ -172,21 +173,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                                 </Button>
                         </Section>
                     </Section>
-                </Section>     
-                      
-                <Button
-                    className="Button_setting"
-                    type="button"
-                    value="setting"
-                        children={         
-                            <Img 
-                                id="setting" 
-                                className="Setting"
-                                src="assets/setting.png" 
-                                alt="setting"
-                            />
-                        }
-                />       
+                </Section>           
             </header>
 
             <Section id="main" className="App_main">
@@ -207,8 +194,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                     <Sectionsmart className="Smart_vector" values={tabElbowsButtons} />
                 </Aside>
 
-                <Aside className="Main_right">
-
+                <Aside style={{ width: "570px", justifyContent: "space-evenly" }}>
                     <Span  
                         id="version"
                         className="Price" 
@@ -237,6 +223,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
 
                     <Form
                         id="form_comment"
+                        className="Form_comment"
                         type="email"
                         value={language.publish}
                         placeholder="mail@you.com" 

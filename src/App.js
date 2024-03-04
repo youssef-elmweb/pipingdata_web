@@ -13,12 +13,12 @@ import './controller/display_icones.js';
 
 const languages = { // voir state de button langage et modifier dynamiquement à partir de l'indice basé sur id en/fr
                     // n'avoir qu'un objet dans l'objet languages.
-    'fr':   {'version': 'Version Premium 5,99€', 
+    'fr':   {'version': 'La data visualisation au service de la tuyauterie industrielle', 
              'comment': 'Publiez un Commentaire',
              'publish': 'Publiez'
             }, 
 
-    'en':   {'version': 'Premium Version 5,99€', 
+    'en':   {'version': 'Data visualization for industrial piping', 
              'comment': 'Publish one Comment',
              'publish': 'Publish'
             }
@@ -181,12 +181,16 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                 <Aside>
                     <Section id="bloc_trust" className="Bloc_trust">
                         <Img 
-                            style={{ maxWidth: "100%", zIndex: 10 }}
+                            style={{ maxWidth: "65%" }}
                             id="badge_trust"
                             className="Badge_trust"
                             src="assets/badge-confiance-fr.png" 
                             alt="badge-trust"
                         />
+
+                        <article id="bloc_text" className="Bloc_text">
+                            <Span>Avec PipingData 1.3.7 tester la puissance de la data visualisation pour récuprer en un clin d'oeil toutes les données dont vous avez besoin pour préparer vos ouvrages en tuyauterie</Span>
+                        </article>
                     </Section>
                 </Aside>
 
@@ -194,7 +198,7 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
                     <Sectionsmart className="Smart_vector" values={tabElbowsButtons} />
                 </Aside>
 
-                <Aside style={{ width: "570px", justifyContent: "space-evenly" }}>
+                <Aside style={{ maxWidth: "570px", justifyContent: "space-evenly" }}>
                     <Span  
                         id="version"
                         className="Price" 
@@ -234,7 +238,13 @@ var tabElbowsButtons = ["elbow", "elbow-double", "elbow-double-oriented", "elbow
 
                 </Aside>
 
-            </Section>        
+            </Section>   
+
+            <Section style={{ height: "300px", marginTop: "100px" }}>
+                <article>
+                    <Span style={{ color: "black", fontSize: "16px" }}>Avec PipingData 1.3.7 tester la puissance de la data visualisation pour récuprer en un clin d'oeil toutes les données dont vous avez besoin pour préparer vos ouvrages en tuyauterie</Span>
+                </article>
+            </Section>     
               
         </Section>
   

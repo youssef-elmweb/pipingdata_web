@@ -3,13 +3,6 @@
   outline: 0;
 }
 
-#root {
-  background-image: url("./reffinery_3.png");
-  background-repeat: repeat-x;
-  background-position: bottom;
-  background-size: cover;
-}
-
 button {
   width: 30px;
   height: auto;
@@ -82,6 +75,18 @@ h1, button, aside, svg {
   max-width: 100%;
 }
 
+.App_logo_footer {
+  width: 45%;
+  justify-content: center;
+  align-items: center;
+  padding-right: 3%;
+}
+
+.Logo_footer {
+  display: inline-flex;
+  max-width: 100%;
+}
+
 h1 {
   flex: 34%;
   justify-content: center;
@@ -122,13 +127,7 @@ h1 {
 
 /***************************************** STYLES MAIN ****************************************/
 
-@media screen and (min-width: 1200px) {
-    aside:nth-child(3) {
-      width: 30%;
-    }
-}
-
-@media screen and (max-width: 750px) { 
+@media screen and (max-width: 810px) { 
     .App_main {
       flex-direction: column;
     }
@@ -139,10 +138,6 @@ h1 {
 
     aside:nth-child(2) {
       margin-top: 5%;
-    }
-
-    aside:nth-child(3) {
-      margin-top: 80px;
     }
 
     .App_header {
@@ -198,19 +193,136 @@ h1 {
       width: 20px;
       height: 14px;
     }
+
+    #bloc-trust-list {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #bloc-trust-list:first-child {
+      width: 90%;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #bloc-trust-badge {
+      width: 100%;
+      margin-top: 35px;
+    }
+
+
+    #bloc-trust {
+      flex-direction: column;
+    }
+
+    #contain-bloc-trust, #contain-bloc-list {
+      padding: 50px 0 70px;
+    }
+
+    #bloc-trust-form, #bloc-trust-principle {
+      width: 90%;
+      margin: 60px 0 35px;
+      justify-content: center;
+    }
+    #bloc-trust-principle {
+      margin: 60px 0 35px;
+    }
+    #bloc-trust-form {
+      margin: 40px 0 35px;
+    }
+
+    #bloc-trust-beta {
+      flex-direction: column;
+      margin: 40px 0;
+    }
+
+    #trust-text, #text-data { 
+      text-align: center;
+      padding: 0 75px 50px;
+    }
+
+    #trust-text-beta { 
+      text-align: center;
+      padding: 0 50px;
+    }
+
+    .Bloc_title_beta {
+      justify-content: center;
+    }
 }
 
-@media screen and (min-width: 751px) and (max-width: 1201px) { 
+@media screen and (min-width: 811px) {
+  #list-functions {
+    line-height: 25px;
+  }
+}
+
+@media screen and (min-width: 1077px) {
+  #list-functions {
+    line-height: inherit;
+  }
+}
+
+@media screen and (min-width: 811px) { 
     aside:first-child {
-      display: none;
-    }
-    
-    aside:nth-child(2) {
-      width: 40%;
+      width: 70%;
     }
 
-    aside:first-child(3) {
-      width: 60%;
+    #version {
+      width: 100%;
+    }
+
+    #play_stores {
+      width: 110%;
+    }
+
+    #bloc-trust-list {
+      width: 70%;
+      flex-direction: row;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+
+    #bloc-trust-badge {
+      width: 100%;
+      margin-top: inherit;
+    }
+
+
+    #bloc-trust {
+      flex-direction: row;
+    }
+
+    #contain-bloc-list {
+      padding: 125px 0;
+    }
+
+    #contain-bloc-trust {
+      padding: 30px 0;
+    }
+
+    #bloc-trust-registered {
+      padding: 70px 0;
+    }
+
+    .Bloc_title_beta {
+      justify-content: flex-start;
+    }
+
+    #bloc-trust-form, #bloc-trust-principle, #bloc-trust-text, #bloc-trust-beta {
+      width: 100%;
+      margin-top: inherit;
+      justify-self: flex-end;
+    }
+
+    #bloc-trust-text, #bloc-trust-form, #bloc-trust-principle {
+      padding: 0 50px;
+    }
+
+    #trust-text, #text-data { 
+      text-align: left;
     }
 }
 
@@ -227,46 +339,60 @@ h1 {
 .App_main {
   justify-content: space-evenly;
   align-items: center;
+  background-image: url("./reffinery_3.png");
+  background-repeat: repeat-x;
+  background-position: 150% bottom;
+  background-size: contain;
 }
 
-aside:first-child {
-  width: 25%;
-}
-
-aside:nth-child(2) {
-  width: 330px;
-}
-
-aside:nth-child(3) {
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center; 
-}
-
-.Bloc_trust {
+#contain-bloc-list {
   display: flex;
-  height: 500px;
+  width: 100%;
+  flex-direction: row;
+  background-color: white;
+  justify-content: center;
+  align-items: "center";
+}
+
+#contain-bloc-trust, #bloc-trust-registered {
+  display: flex;
+  width: 100%;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
+  align-items: center;
+}
+#contain-bloc-trust {
+  background-color: #0D1224;
+}
+#bloc-trust-registered {
+  background-color: white;
+}
+
+#bloc-trust-comment {
+  padding: 75px 0;
+  background-color: #0D1224;
+}
+
+#bloc-trust, #bloc-trust-badge, #bloc-trust-text, #bloc-trust-beta {
+  display: flex;
+  justify-content: center;
   align-items: center;
 }
 
-.Bloc_text {
-  min-width: 350px;
-  max-width: 375px;
+#bloc-trust-list {
+  display: flex; 
   background-color: white;
-  padding: 7.5px;
-  font-weight: 500;
-  line-height: 1.5;
-  font-size: 17px;
-  border-radius: 10px;
-  border: 2px dashed black;
-  font-weight: 400;
-  line-height: 25px;
-  color: #202020;
-  font-weight: 700;
-  font-style: italic;
-  text-align: center;
+}
+
+#bloc-trust, #bloc-trust-text-beta {
+  width: "100%";
+}
+
+#trust-text, #bloc-trust-text-beta { 
+  display: flex;
+  width: auto;
+  justify-content: center;
+  align-items: center;
 }
 /***************************************** STYLES MAIN ****************************************/
 
@@ -276,6 +402,7 @@ aside:nth-child(3) {
   flex-direction: column;
   width: 330px; 
   height: 576px;
+  margin-bottom: 5%;
   background-image: url("./smartphone.png");
   background-repeat: no-repeat;
   background-position: center;
@@ -405,13 +532,18 @@ p {
 
 .App_link_google, .App_link_apple {
   display: flex;
-  flex: 1;
+  flex: 2;
   width: auto;
   margin: 0 3%;
   justify-content: center;
 }
 
-.google, .apple {
+.App_link_login {
+  display: flex;
+  width: 50px;
+}
+
+.google, .apple, .login {
   display: flex;
   max-width: 100%;
   border: 3px solid transparent;
@@ -422,6 +554,10 @@ p {
 .google:hover, .apple:hover {
   border: 3px solid slategray;
 }
+
+.Rgpd {
+  color: white;
+}
 /************************************* STYLES BUTTON STORES ***********************************/
 
 
@@ -431,13 +567,13 @@ p {
   justify-content: center;
   align-items: center;
   width: 80%;
-  line-height: 25px;
+  line-height: 30px;
   border-radius: 10px;
-  padding: 2%;
-  font-size: 15px;
+  padding: 3% 2%;
+  font-size: 18px;
   font-weight: bold;
-  background-color: #252525;
-  color: silver;
+  background-color: black;
+  color: whitesmoke;
   text-align: center;
   font-weight: bold;
   letter-spacing: 1.5px;
@@ -452,19 +588,16 @@ p {
 /****************************************** STYLES FORM ***************************************/
 #form_comment {
   flex-direction: column;
-  width: 85%;
-  padding: 0.5vw;
-  border: 1px solid #282c34;
-  border-radius: 10px;
+  border-radius: 5px;
   text-align: center;
   font-size: 15px;
   font-weight: bold;
   color: aliceblue;
-  background-color: #282c34;
+  background-color: #363636;
 }
 
 label, input, textarea {
-  padding: 2%;
+  padding: 3% 7.5px 3%;
   border: none;
 }
 
@@ -474,24 +607,37 @@ input {
 }
 
 textarea {
-  height: 115px;
+  height: 55px;
   resize: none;
   border-top: 1px solid #282c34;
 }
 
 .submit {
-  height: 65px;
-  border-top: 1px solid #282c34;
-  border-radius: 0 0 10px 10px;
+  height: 55px;
+  border-top: 1px solid #9b59b6;
+  border-radius: 0 0 5px 5px;
   color: white;
-  background-color: #4b5463;
+  background-color: #363636;
 }
 .submit:hover {
   transition-property: "background-color";
   transition-delay: 0.15s;
   transition-duration: 0.35s;
-  opacity: 1;
-  background-color: #282c34;
+  background-color: #252525;
+}
+
+.Submit_beta { 
+  display: flex;
+  width: 30%;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  color: white;
+  background-color: #161664;
+}
+
+.Submit_beta:hover { 
+  background-color: #252525;
 }
 /****************************************** STYLES FORM ***************************************/
 
@@ -616,16 +762,25 @@ textarea {
   /*border: 1px solid plum;*/
 }
 
-.Format {
+.Format, .Rgpd {
   display: flex;
   justify-content: center;
   border-radius: 5px;
-  margin-right: 15%;
-  padding: 5% 20%;
-  font-size: 13px;
   font-weight: bold;
   background-color: #525252;
   color: white;
+}
+
+.Format {
+  margin-right: 15%;
+  padding: 5% 20%;
+  font-size: 13px;
+}
+
+.Rgpd {
+  margin: 0 auto;
+  padding: 3.5% 20%;
+  align-self: center;
 }
 
 .Gene, .Two_gene {

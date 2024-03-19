@@ -33,7 +33,7 @@ const Button = (props) => {
       } 
 
     return (
-        <button style={buttonStyle} height={props.height} test={thisTest} id={thisId} className={thisClass} type={thisType} value={thisValue} onClick={thisDisplay || dispatchFunctions}>{thisContent}</button>
+        <button style={buttonStyle} alignSelf={props.alignSelf} height={props.height} test={thisTest} id={thisId} className={thisClass} type={thisType} value={thisValue} onClick={thisDisplay || dispatchFunctions}>{thisContent}</button>
     );
 
 }

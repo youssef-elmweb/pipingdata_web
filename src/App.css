@@ -18,11 +18,11 @@ button:active:not(.Button_setting, .Turn, .Iso_Ansi) {
   opacity: 0.7;
 }
 
-a {
+a:not(.Link_youtube) {
   color: white;
   text-decoration: none;
 }
-a:hover {
+a:hover:not(.Link_youtube) {
   color: white;
 }
 
@@ -61,8 +61,6 @@ h1, button, aside, svg {
 
 .App_logo {
   width: 5%;
-  border-right: 0.25px solid silver;
-  padding-right: 1.6vw;
 }
 
 .App_link_logo {
@@ -127,13 +125,43 @@ h1 {
 
 /***************************************** STYLES MAIN ****************************************/
 
+@media screen and (max-width: 329px) { 
+  .App_main, .App_header {
+    overflow-x: scroll;
+    width: 150%;
+    margin: 0;
+    padding: 0;
+    justify-content: "center";
+  }
+}
+
+@media screen and (min-width: 811px) {
+  #list-functions {
+    line-height: 25px;
+  }
+}
+
+@media screen and (min-width: 1077px) {
+  #list-functions {
+    line-height: inherit;
+  }
+}
+
 @media screen and (max-width: 810px) { 
     .App_main {
       flex-direction: column;
     }
 
-    aside:first-child {
-      display: none;
+    aside:first-child>#play_stores, aside:first-child>#version {
+      /*display: none;*/
+    }
+
+    #bloc-msg-for-smart {
+      margin: 5% 0;
+    }
+
+    .Msg_for_smart {
+      line-height: 2;
     }
 
     aside:nth-child(2) {
@@ -209,60 +237,74 @@ h1 {
 
     #bloc-trust-badge {
       width: 100%;
+      margin: 35px 0;
+    }
+    #bloc-trust-youtube {
+      display: flex;
+      width: 100%;
       margin-top: 35px;
     }
 
 
-    #bloc-trust {
-      flex-direction: column;
-    }
-
-    #contain-bloc-trust, #contain-bloc-list {
-      padding: 50px 0 70px;
-    }
-
-    #bloc-trust-form, #bloc-trust-principle {
+    /******************** TRUST ***********************************/
+    #contain-bloc-trust {
       width: 90%;
-      margin: 60px 0 35px;
-      justify-content: center;
+      font-size: 13px;
     }
-    #bloc-trust-principle {
-      margin: 60px 0 35px;
-    }
-    #bloc-trust-form {
-      margin: 40px 0 35px;
-    }
+    /******************** TRUST ***********************************/
 
-    #bloc-trust-beta {
+    /******************* PRINCIPLE ********************************/
+    #contain-bloc-principle, #contain-bloc-list {
+      padding: 45px 0 75px;
+    }
+    #bloc-principle {
       flex-direction: column;
-      margin: 40px 0;
     }
-
-    #trust-text, #text-data { 
+    #bloc-img-principle, #bloc-text-principle {
+      width: 90%;
+    }
+    #img-principle {
+      margin-top: 60px;
+    }
+    #text-principle { 
       text-align: center;
-      padding: 0 75px 50px;
     }
+    /******************* PRINCIPLE ********************************/
 
-    #trust-text-beta { 
-      text-align: center;
-      padding: 0 50px;
+
+    /***************** BETA & COMMENT *****************************/
+    #bloc-beta, #bloc-comment {
+      flex-direction: column;
     }
-
-    .Bloc_title_beta {
+    #bloc-comment {
+      padding: 45px 0 75px; 
+    }
+    #beta-registered, #comment-registered {
+      width: 80%;
       justify-content: center;
     }
-}
+    #comment-text {
+      margin: 0 7.5% 5%;
+    }
+    #beta-text {
+      margin: 7.5% 7.5% 0;
+    }
+    /***************** BETA & COMMENT *****************************/
 
-@media screen and (min-width: 811px) {
-  #list-functions {
-    line-height: 25px;
-  }
-}
 
-@media screen and (min-width: 1077px) {
-  #list-functions {
-    line-height: inherit;
-  }
+    /********************* FOOTER *********************************/
+    #bloc-footer {
+      flex-direction: column;
+    }
+
+    #contact-footer {
+      margin: 10% auto 5%;
+    }
+
+    #list-ul-footer {
+      padding-left: 0;
+    }
+    /********************* FOOTER *********************************/
 }
 
 @media screen and (min-width: 811px) { 
@@ -279,62 +321,92 @@ h1 {
     }
 
     #bloc-trust-list {
-      width: 70%;
+      width: 100%;
       flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
     }
 
-    #bloc-trust-badge {
+    #bloc-trust-badge, #bloc-trust-youtube {
       width: 100%;
       margin-top: inherit;
     }
 
+    #bloc-msg-for-smart {
+      margin: 0 0 10%;
+    }
 
-    #bloc-trust {
-      flex-direction: row;
+    .Msg_for_smart {
+      line-height: 1;
     }
 
     #contain-bloc-list {
-      padding: 125px 0;
+      padding: 115px 0;
     }
 
+
+    /******************** TRUST ***********************************/
     #contain-bloc-trust {
+      width: 40%;
+      font-size: inherit;
+    }
+    /******************** TRUST ***********************************/
+
+
+    /******************* PRINCIPLE ********************************/
+    #contain-bloc-principle {
       padding: 30px 0;
     }
-
-    #bloc-trust-registered {
-      padding: 70px 0;
+    #bloc-principle {
+      flex-direction: row;
     }
-
-    .Bloc_title_beta {
-      justify-content: flex-start;
+    #bloc-img-principle, #bloc-text-principle {
+      width: 50%;
+      justify-content: "center";
     }
+    #bloc-text-principle {
+      padding-left: 9.5vw;
+    }
+    /******************* PRINCIPLE ********************************/
 
-    #bloc-trust-form, #bloc-trust-principle, #bloc-trust-text, #bloc-trust-beta {
+
+    /***************** BETA & COMMENT *****************************/
+    #contain-bloc-beta {
+      padding: 60px 0;
+    }
+    #bloc-beta, #bloc-comment {
       width: 100%;
       margin-top: inherit;
       justify-self: flex-end;
     }
+    #bloc-comment {
+      padding: 120px 0px; 
+    }
+    /***************** BETA & COMMENT *****************************/
 
-    #bloc-trust-text, #bloc-trust-form, #bloc-trust-principle {
+    /********************* FOOTER *********************************/
+    #bloc-footer {
+      flex-direction: row;
+    }
+
+    #contact-footer {
+      margin: inherit;
+    }
+
+    #list-ul-footer {
+      padding-left: inherit;
+    }
+    /********************* FOOTER *********************************/
+
+    #beta-registered, #beta-text, #comment-registered, #comment-text {
+      width: 50%;
+    }
+
+    #beta-registered, #beta-text, #comment-registered, #comment-text {
       padding: 0 50px;
     }
-
-    #trust-text, #text-data { 
-      text-align: left;
-    }
 }
 
-@media screen and (max-width: 329px) { 
-    .App_main, .App_header {
-      overflow-x: scroll;
-      width: 150%;
-      margin: 0;
-      padding: 0;
-      justify-content: "center";
-    }
-}
 
 .App_main {
   justify-content: space-evenly;
@@ -345,55 +417,112 @@ h1 {
   background-size: contain;
 }
 
+#contain-bloc-trust {
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+#contain-bloc-list, #contain-bloc-beta {
+  background-color: white;
+}
+
+/********************* LIST ***********************************/
 #contain-bloc-list {
   display: flex;
   width: 100%;
   flex-direction: row;
-  background-color: white;
   justify-content: center;
   align-items: "center";
 }
+/********************* LIST ***********************************/
 
-#contain-bloc-trust, #bloc-trust-registered {
+
+/********************* Trust *********************************/
+#bloc-msg-for-smart {
+  width: 100%;
+  font-size: 13px;
+  text-align: center;
+  padding: 1% 10%;
+  line-height: 0.9;
+  background-color: transparent;
+  border-radius: 10px;
+}
+
+.Msg_for_smart {
+  color: black;
+  font-weight: bold;
+}
+/********************* Trust *********************************/
+
+
+/******************* PRINCIPLE ********************************/
+#contain-bloc-principle {
+  background-color: #0D1224;
+}
+#bloc-principle {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#bloc-text-principle, #bloc-img-principle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#img-principle {
+  width: 60%;
+}
+/******************* PRINCIPLE ********************************/
+
+
+/***************** BETA & COMMENT *****************************/
+#bloc-comment {
+  background-color: #0D1224;
+}
+#bloc-beta {
+  padding: 35px 0;
+}
+/***************** BETA & COMMENT *****************************/
+
+
+/********************* FOOTER *********************************/
+#bloc-footer {
+  display: flex;
+  width: 100%;
+  padding: 50px 0;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #252525;
+}
+
+#contact-footer {
+    display: flex;
+    flex: 45%;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+}
+
+#list-ul-footer {
   display: flex;
   width: 100%;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  background-color: transparent;
 }
-#contain-bloc-trust {
-  background-color: #0D1224;
-}
-#bloc-trust-registered {
-  background-color: white;
-}
+/********************* FOOTER *********************************/
 
-#bloc-trust-comment {
-  padding: 75px 0;
-  background-color: #0D1224;
-}
 
-#bloc-trust, #bloc-trust-badge, #bloc-trust-text, #bloc-trust-beta {
+#bloc-trust-list, #bloc-trust-badge, #bloc-trust-youtube, #bloc-beta, #bloc-comment {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#bloc-trust-list {
-  display: flex; 
-  background-color: white;
-}
 
-#bloc-trust, #bloc-trust-text-beta {
-  width: "100%";
-}
-
-#trust-text, #bloc-trust-text-beta { 
-  display: flex;
-  width: auto;
-  justify-content: center;
-  align-items: center;
-}
 /***************************************** STYLES MAIN ****************************************/
 
 
@@ -407,7 +536,6 @@ h1 {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
-  /*border: 1px solid green;*/
 }
 
 .App_buttons_smart {
@@ -464,13 +592,9 @@ h1 {
   width: 273px;
   height: 244px;
   margin: 0 auto;
-  /*border: 1px solid rgb(214, 206, 206);*/
 }
 
 .Reset_orientation_screen {
-  /*position: relative;
-  top: 0vw;
-  left: 50%;*/
   display: flex;
   flex: 1;
   justify-content: flex-end;
@@ -527,7 +651,7 @@ p {
   flex-direction: row;
   justify-content: center;
   width: 90%;
-  margin: 10% 0 13%;
+  margin: 10% 0 5%;
 }
 
 .App_link_google, .App_link_apple {
@@ -555,6 +679,18 @@ p {
   border: 3px solid slategray;
 }
 
+.Link_youtube {
+  padding: 3.5px 10px;
+  color: white;
+  font-weight: bold;
+  background-color: red;
+  border-radius: 15px;
+  text-decoration: none;
+}
+.Link_youtube:hover {
+  text-decoration: underline;
+}
+
 .Rgpd {
   color: white;
 }
@@ -562,14 +698,14 @@ p {
 
 
 /****************************************** STYLES SPAN ***************************************/
-.Price {
+.Version {
   font-family: "Orbitron";
   justify-content: center;
   align-items: center;
   width: 80%;
+  padding: 3% 2%;
   line-height: 30px;
   border-radius: 10px;
-  padding: 3% 2%;
   font-size: 18px;
   font-weight: bold;
   background-color: black;
@@ -778,9 +914,10 @@ textarea {
 }
 
 .Rgpd {
+  display: flex;
   margin: 0 auto;
   padding: 3.5% 20%;
-  align-self: center;
+  align-self: flex-end;
 }
 
 .Gene, .Two_gene {

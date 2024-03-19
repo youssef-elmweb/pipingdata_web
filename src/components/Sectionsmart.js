@@ -1147,9 +1147,6 @@ const Sectionsmart = (props) => {
                 </Section> : 
             false)}
 
-
-
-
             <Section style={{ display: "flex", marginTop: "12.5%", padding: "0 10%", flexDirection: "row", justifyContent: "space-evenly", alignItems: "center" }} id="app-setting-smart" value="app-setting-smart">
                 <Section style={{ flex: "7.5%", justifyContent: "center", alignItems: "center" }} key={"utility"} id="utility-smart" type="button" value="utility"
                     children={

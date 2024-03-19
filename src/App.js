@@ -190,10 +190,15 @@ const [showRgpd, setShowRgpd] = useState(false);
             </header>
 
             <Section id="main" className="App_main">
-                <Aside style={{ flexDirection: "column", width: "40%", justifyContent: "space-evenly", alignItems: "center" }}>
+                <Aside id="contain-bloc-trust">
+                    <Section id="bloc-msg-for-smart">
+                        <p className="Msg_for_smart">Essai en ligne optimisée pour ordinateur</p>
+                        <p className="Msg_for_smart">pour les smarts regarder sur <Span style={{ borderRadius: "15px" }}><Link className="Link_youtube" href="" target="_blank" container="youtube" /></Span></p>
+                    </Section>
+                    
                     <Span  
                         id="version"
-                        className="Price" 
+                        className="Version" 
                         container={language.version}
                     />
 
@@ -247,7 +252,7 @@ const [showRgpd, setShowRgpd] = useState(false);
                         </Section>
                     </Section>
 
-                    <Section id="bloc-trust-badge">
+                    <Section id="bloc-trust-youtube">
                         <Section style={{ display: "flex", width: "150px", flexDirection: "column", justifyContent: "flex-end", alignItems: "center" }}>
                             <Img 
                                 id="badge_trust"
@@ -262,20 +267,10 @@ const [showRgpd, setShowRgpd] = useState(false);
 
 
 
-            <Aside id="contain-bloc-trust">
-                <Section id="bloc-trust">
-                    <Section id="bloc-trust-principle">
-                        <Section style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center" }}>
-                            <Img 
-                                style={{ maxWidth: "80%" }}
-                                src="assets/principle.jpg" 
-                                alt="badge-trust"
-                            />
-                        </Section>
-                    </Section>
-
-                    <Section id="bloc-trust-text">
-                        <article id="text-data">
+            <Aside id="contain-bloc-principle">
+                <Section id="bloc-principle">
+                    <Section id="bloc-text-principle">
+                        <article id="text-principle">
                             <h2 style={{ color: "#3498db" }}>Pourquoi parler de data-visualisation</h2>
 
                             <p style={{ fontSize: "15px", lineHeight: "40px", fontFamily: "Orbitron", color: "white" }}>
@@ -285,18 +280,28 @@ const [showRgpd, setShowRgpd] = useState(false);
                             </p>
                         </article>
                     </Section>
+
+                    <Section id="bloc-img-principle">
+                        <Section id="img-principle">
+                            <Img 
+                                style={{ maxWidth: "100%" }}
+                                src="assets/principle.jpg" 
+                                alt="badge-trust"
+                            />
+                        </Section>
+                    </Section>
                 </Section>
             </Aside> 
 
 
-            <Aside id="bloc-trust-registered">
-                <Section id="bloc-trust-beta">
-                    <Section id="bloc-trust-form">
+            <Aside id="contain-bloc-beta">
+                <Section id="bloc-beta">
+                    <Section id="beta-registered">
                         <FormNewsLetter value={"S'inscrire"} />
                     </Section>
 
-                    <Section id="bloc-trust-text">
-                        <article id="trust-text-beta">
+                    <Section id="beta-text">
+                        <article>
                             <h2 style={{ textAlign: "center" }}>Informations</h2>
                             <p style={{ fontSize: "18px", lineHeight: "40px", color: "black", textAlign: "center" }}>
                             Inscrivez-vous à notre newsletter pour suivre notre actualité et être informé des mises à jour. Vous aurez également l'opportunité d'essayer les nouvelles fonctionnalités en participant en avant-première à nos programmes bêta, 
@@ -307,10 +312,11 @@ const [showRgpd, setShowRgpd] = useState(false);
                 </Section>
             </Aside> 
 
-            <Aside id="bloc-trust-comment">
-                <Section id="bloc-trust-beta">
-                    <Section id="bloc-trust-text">
-                        <article id="trust-text-beta">
+
+            <Aside id="contain-bloc-comment">
+                <Section id="bloc-comment">
+                    <Section id="comment-text">
+                        <article>
                             <h2 style={{ textAlign: "center", color: "white" }}>Participez</h2>
                             <p style={{ fontSize: "18px", lineHeight: "40px", color: "white", textAlign: "center" }}>
                                 N'hésitez pas à nous laisser un commentaire ! 
@@ -319,7 +325,7 @@ const [showRgpd, setShowRgpd] = useState(false);
                         </article>
                     </Section>
 
-                    <Section id="bloc-trust-form">
+                    <Section id="comment-registered">
 
                         <Form
                             id="form_comment"
@@ -337,8 +343,8 @@ const [showRgpd, setShowRgpd] = useState(false);
 
 
             <Aside style={{ display: "flex", flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "center" }}>
-                <Section style={{ display: "flex", width: "100%", padding: "50px 0", justifyContent: "space-evenly", alignItems: "center", backgroundColor: "#252525" }}>
-                    <Section style={{ display: "flex", flex: "20%", justifyContent: "space-evenly", alignItems: "center", backgroundColor: "#252525" }}>
+                <Section id="bloc-footer">
+                    <Section style={{ display: "flex", flex: "25%", justifyContent: "space-evenly", alignItems: "center", backgroundColor: "#252525" }}>
                         <Section className="App_logo_footer">
                             <Link href="#" className="App_link_logo_footer">
                                 <Img 
@@ -351,10 +357,10 @@ const [showRgpd, setShowRgpd] = useState(false);
                         </Section>
                     </Section>
                     
-                    <Section style={{ display: "flex", flex: "45%", justifyContent: "center", alignItems: "center", backgroundColor: "transparent" }}>
-                        <article style={{ display: "flex", width: "auto", justifyContent: "center", alignItems: "center", fontSize: "18px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
+                    <Section id="contact-footer">
+                        <article style={{ display: "flex", width: "auto", justifyContent: "center", alignItems: "center", fontSize: "16px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
                             <ul style={{ display: "flex", width: "100%", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", backgroundColor: "transparent" }}>
-                                <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#127968;</Span>PipingData by ELM-web</p></li>
+                                <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#127968;</Span><Span>PipingData by <Span style={{ textDecoration: "underline" }}><Link href="https://elm-web.fr" target="_blank" container="Elm-web.fr"/></Span></Span></p></li>
                                 <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#9742;</Span>+33761302846</p></li>
                                 <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#x1F4E7;</Span>contact.pipingdata@gmail.com</p></li>
                                 <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#x1F512;</Span><Button id="rgpd" thisMargin={"0 1%"} thisPadding={"2.5% 0"} thisWidth={"30%"} thisFontSize={"13px"} className="Rgpd" thisColorButton={"#484848"} type="button" value="rgpd" display={() => (!showRgpd ? setShowRgpd(true) : setShowRgpd(false))}>RGPD</Button></p></li>
@@ -362,38 +368,53 @@ const [showRgpd, setShowRgpd] = useState(false);
                         </article>
                     </Section>
 
-                    <Section style={{ display: "flex", flex: "35%", justifyContent: "center", alignItems: "center", backgroundColor: "transparent" }}>
-                        <article style={{ display: "flex", width: "auto", justifyContent: "center", alignItems: "center", fontSize: "18px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
-                            <ul style={{ display: "flex", width: "100%", flexDirection: "column", justifyContent: "space-evenly", alignItems: "flex-start", backgroundColor: "transparent" }}>
-                                <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}>-</Span><p style={{ marginLeft: "10px", textDecoration: "underline", lineHeight: "15px", fontSize: "calc(1vw+0.5em)", color: "white", textAlign: "left" }}><Link href="https://elm-web.fr" target="_blank" container="Elm-web.fr"/></p></li>                                
-                                
+                    <Section style={{ display: "flex", flex: "30%", justifyContent: "center", alignItems: "center", backgroundColor: "transparent" }}>
+                        <article style={{ display: "flex", width: "auto", justifyContent: "center", alignItems: "center", fontSize: "16px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
+                            <ul id="list-ul-footer">
                                 <div style={{ lineHeight: "1" }}>
-                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}>-</Span><h4 style={{ marginLeft: "10px", fontSize: "calc(1vw+0.5em)", color: "white", textAlign: "left" }}>Autres Applications</h4></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><h4 style={{ marginLeft: "10px", fontSize: "calc(0.5vw+0.25em)", color: "white", textAlign: "left" }}>Autres Applications</h4></li>
+                                    
                                     <div style={{ lineHeight: "0.25" }}>
-                                        <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}></Span><p style={{ marginLeft: "10px", fontSize: "calc(1vw+0.5em)", color: "white", textAlign: "left" }}>ElbowData</p></li>
-                                        <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}>-</Span><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}></Span><p style={{ marginLeft: "10px", textDecoration: "underline", fontSize: "calc(1vw+0.5em)", color: "white", textAlign: "left" }}><Link href="https://play.google.com/store/apps/details?id=com.trigotube&gl=FR" target="_blank" container="Android"/></p></li>
-                                        <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}>-</Span><Span style={{ fontSize: "calc(1vw+0.75em)", color: "white", fontWeight: "bold" }}></Span><p style={{ marginLeft: "10px", textDecoration: "underline", fontSize: "calc(1vw+0.5em)", color: "white", textAlign: "left" }}><Link href="https://apps.apple.com/fr/app/pipingdata/id6477729206" target="_blank" container="IOS"/></p></li>
+                                        <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(0.5vw+0.5em)", color: "white", fontWeight: "bold" }}></Span><p style={{ marginLeft: "10px", fontSize: "calc(0.5vw+0.25em)", color: "white", textAlign: "left" }}>ElbowData</p></li>
+                                        <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(0.5vw+0.5em)", color: "white", fontWeight: "bold" }}>-</Span><Span style={{ fontSize: "calc(0.5vw+0.5em)", color: "white", fontWeight: "bold" }}></Span><p style={{ marginLeft: "10px", textDecoration: "underline", fontSize: "calc(0.5vw+0.25em)", color: "white", textAlign: "left" }}><Link href="https://play.google.com/store/apps/details?id=com.trigotube&gl=FR" target="_blank" container="Android"/></p></li>
+                                        <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "calc(0.5vw+0.5em)", color: "white", fontWeight: "bold" }}>-</Span><Span style={{ fontSize: "calc(0.5vw+0.5em)", color: "white", fontWeight: "bold" }}></Span><p style={{ marginLeft: "10px", textDecoration: "underline", fontSize: "calc(0.5vw+0.25em)", color: "white", textAlign: "left" }}><Link href="https://apps.apple.com/fr/app/pipingdata/id6477729206" target="_blank" container="IOS"/></p></li>
                                     </div>
                                 </div>
                             </ul>
                         </article>
                     </Section>
                 </Section>
-
-                <Section style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "20px 0" }}><p style={{ display: "flex", justifyContent: "center", alignItems: "center", lineHeight: "calc(0.75vw+0.5em)", fontSize: "calc(0.75vw+0.5em)", color: "black" }}><Span style={{ padding: "0 5px", color: "black", lineHeight: "calc(2vw+1em)", fontSize: "calc(2vw+1em)", fontWeight: "bold" }}>©</Span> 2023 Tous droits réservés. ELM-web - PipingData</p></Section>
             </Aside>
+
+            <Section style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "5px 0", backgroundColor: "white" }}><p style={{ display: "flex", justifyContent: "center", alignItems: "center", lineHeight: "calc(0.75vw+0.5em)", fontSize: "calc(0.75vw+0.5em)", color: "black" }}><Span style={{ padding: "0 5px", color: "black", lineHeight: "calc(2vw+1em)", fontSize: "calc(2vw+1em)", fontWeight: "bold" }}>©</Span> 2023 Tous droits réservés. ELM-web - PipingData</p></Section>
         </Section> 
         
         : 
 
-        <Section style={{ position: "absolute", display: "flex", margin: "0", padding: "0", justifyContent: "center", alignItems: "center", width: "100%", alignSelf: "center", margin: "auto", height: "100%", backgroundColor: "green" }}>
-            <Section style={{ position: "absolute", display: "flex", top : "12.5%", width: "70%", height: "70%", paddingBottom: "2.5%", justifyContent: "center", alignItems: "flex-end", backgroundColor: "red" }}>
-                <Section style={{ display: "flex", width: "70%", justifyContent: "center", alignItems: "center" }}>
-                    <Button id="rgpd" thisFontSize={"18px"} className="Rgpd" thisColorButton={"#484848"} type="button" value="rgpd" display={() => (showRgpd ? setShowRgpd(false) : setShowRgpd(true))}>Retour</Button>
+        <Section style={{ position: "absolute", display: "flex", margin: "0", padding: "0", justifyContent: "center", alignItems: "center", width: "100%", alignSelf: "center", margin: "auto", height: "100%", backgroundColor: "white" }}>
+            <Section style={{ position: "absolute", display: "flex", width: "70%", height: "80%", padding: "2.5%", justifyContent: "center", alignItems: "flex-evenly" }}>
+                <Section style={{ display: "flex", flexDirection: "column", width: "80%", justifyContent: "center", alignItems: "flex-start", border: "1px solid black", borderRadius: "10px" }}>
+                    <article style= {{ padding: "0 5%", overflow: "scroll" }}>
+                        <h2 style={{ textAlign: "center", color: "black" }}>Confidentialité</h2>
+                        <p style={{ fontSize: "14px", lineHeight: "30px", color: "black", textAlign: "center" }}>
+                            Cher utilisateur,
+
+                            Nous tenons à vous informer que notre site Web respecte pleinement le Règlement Général sur la Protection des Données (RGPD) de l'Union européenne.
+
+                            En ce qui concerne les avis que vous fournissez, veuillez noter que nous les collectons uniquement dans le but de les afficher aux visiteurs de notre site. Vos avis contribuent à améliorer notre service et à informer d'autres utilisateurs sur leur expérience potentielle avec nos produits ou services.
+
+                            En ce qui concerne les adresses e-mail, nous les collectons uniquement lorsque vous vous inscrivez volontairement à notre newsletter ou à notre programme bêta en fournissant votre consentement explicite. Ces adresses e-mail ne seront utilisées que dans le cadre spécifié et ne seront en aucun cas partagées, vendues ou louées à des tiers.
+
+                            Nous prenons la sécurité et la confidentialité de vos données personnelles très au sérieux. Si vous avez des questions ou des préoccupations concernant la façon dont nous utilisons vos données, n'hésitez pas à nous contacter à l'adresse [votre adresse e-mail de contact].
+
+                            Merci pour votre confiance et votre soutien continu.
+                        </p>
+                    </article>
+                    
+                    <Button id="rgpd" className="Rgpd" type="button" value="rgpd" display={() => (showRgpd ? setShowRgpd(false) : setShowRgpd(true))}>Retour</Button>
                 </Section>
             </Section>
         </Section>)
-
   
   );
 

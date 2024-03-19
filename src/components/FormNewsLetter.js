@@ -12,8 +12,8 @@ const FormNewsLetter = (props) => {
 
     return (
         <form style={{ width: "100%" }}>
-            <div className="Bloc_title_beta" style={{ display: "flex", flex: 1, backgroundColor: "white" }}>
-                <label><h3 className="Title_beta">S'nscrire à la newsletter et au programme Bêta</h3></label>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white" }}>
+                <label><h3 style={{ textAlign: "center" }}>S'nscrire à la newsletter et au programme Bêta</h3></label>
             </div>
 
             <div style={{ display: "flex", width: "100%", padding: "2% 0", justifyContent: "space-evenly", alignItems: "center", backgroundColor: "#e74c3c", borderRadius: "7.5px" }}>

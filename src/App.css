@@ -915,8 +915,8 @@ textarea {
 
 .Rgpd {
   display: flex;
-  margin: 0 auto;
-  padding: 3.5% 20%;
+  margin: 10px auto;
+  padding: 2.5% 15%;
   align-self: flex-end;
 }
 

@@ -30,36 +30,36 @@ var language = languages.fr; // default language
 const displayTheme = (e) => {
     e.stopPropagation(); 
 
-  var buttonTheme = document.getElementById("buttonTheme");
-  var fleche = document.getElementsByClassName("fleche_theme")[0];
+    var buttonTheme = document.getElementById("buttonTheme");
+    var fleche = document.getElementsByClassName("fleche_theme")[0];
 
-      buttonTheme.style.transitionProperty = "left, background-color, transform";
-      document.body.style.transitionDuration = "2s";
-      document.body.style.transitionDelay = "0.5s";
-      buttonTheme.style.transitionDuration = "0.35s";
-      buttonTheme.style.transitionDelay = "0.2s";
-      fleche.style.transitionDuration = "1.5s";
-      fleche.style.transitionDelay = "0.25s";
+    buttonTheme.style.transitionProperty = "left, background-color, transform";
+    document.body.style.transitionDuration = "2s";
+    document.body.style.transitionDelay = "0.5s";
+    buttonTheme.style.transitionDuration = "0.35s";
+    buttonTheme.style.transitionDelay = "0.2s";
+    fleche.style.transitionDuration = "1.5s";
+    fleche.style.transitionDelay = "0.25s";
 
-          if (buttonTheme.offsetLeft === 0) {
+    if (buttonTheme.offsetLeft === 0) {
 
-          buttonTheme.style.left = "48%";
-              setTimeout(() => {
-              buttonTheme.parentElement.style.backgroundColor = "deepskyblue";
-              fleche.style.transform = "rotate(180deg)";
-              document.body.style.backgroundColor = "rgb(4, 113, 221)";
-              } ,300);
+        buttonTheme.style.left = "48%";
+            setTimeout(() => {
+            buttonTheme.parentElement.style.backgroundColor = "deepskyblue";
+            fleche.style.transform = "rotate(180deg)";
+            document.body.style.backgroundColor = "rgb(4, 113, 221)";
+            } ,300);
 
-          } else {
+        } else {
 
-              buttonTheme.style.left = "0%";
-              setTimeout(() => { 
-              buttonTheme.parentElement.style.backgroundColor = "steelblue";
-              fleche.style.transform = "rotate(0deg)";
-              document.body.style.backgroundColor = "white";
-              }, 300);
+            buttonTheme.style.left = "0%";
+            setTimeout(() => { 
+            buttonTheme.parentElement.style.backgroundColor = "steelblue";
+            fleche.style.transform = "rotate(0deg)";
+            document.body.style.backgroundColor = "white";
+            }, 300);
 
-          }
+        }
 
 }
 
@@ -192,8 +192,8 @@ const [showRgpd, setShowRgpd] = useState(false);
             <Section id="main" className="App_main">
                 <Aside id="contain-bloc-trust">
                     <Section id="bloc-msg-for-smart">
-                        <p className="Msg_for_smart">Essai en ligne optimisée pour ordinateur</p>
-                        <p className="Msg_for_smart">pour les smarts regarder sur <Span style={{ borderRadius: "15px" }}><Link className="Link_youtube" href="" target="_blank" container="youtube" /></Span></p>
+                        <p className="Msg_for_smart">Essayer en ligne, "optimisé pour ordinateur"</p>
+                        <p className="Msg_for_smart">Regarder sur <Span style={{ borderRadius: "15px" }}><Link className="Link_youtube" href="https://www.youtube.com/channel/UCkQUv_60E5QB1sjDRLYTbbQ" target="_blank" container="youtube" /></Span></p>
                     </Section>
                     
                     <Span  
@@ -391,12 +391,12 @@ const [showRgpd, setShowRgpd] = useState(false);
         
         : 
 
-        <Section style={{ position: "absolute", display: "flex", margin: "0", padding: "0", justifyContent: "center", alignItems: "center", width: "100%", alignSelf: "center", margin: "auto", height: "100%", backgroundColor: "white" }}>
-            <Section style={{ position: "absolute", display: "flex", width: "70%", height: "80%", padding: "2.5%", justifyContent: "center", alignItems: "flex-evenly" }}>
-                <Section style={{ display: "flex", flexDirection: "column", width: "80%", justifyContent: "center", alignItems: "flex-start", border: "1px solid black", borderRadius: "10px" }}>
-                    <article style= {{ padding: "0 5%", overflow: "scroll" }}>
+            <Section style={{ display: "flex", height: "100vh", alignSelf: "center", justifyContent: "center", alignItems: "center", backgroundColor: "white" }}>
+                <Section style={{ width: "70%", height: "75vh", lineHeight: "35px", padding: "0 17.5px 10px 17.5px", display: "flex", flexDirection: "column", alignSelf: "center", justifyContent: "center", alignItems: "center", textAlign: "center", border: "1px solid black", borderRadius: "10px" }}>
+                    <article style= {{ overflow: "scroll" }}>
                         <h2 style={{ textAlign: "center", color: "black" }}>Confidentialité</h2>
-                        <p style={{ fontSize: "14px", lineHeight: "30px", color: "black", textAlign: "center" }}>
+                        
+                        <p style={{ fontSize: "14px", color: "black", textAlign: "center" }}>
                             Cher utilisateur,
 
                             Nous tenons à vous informer que notre site Web respecte pleinement le Règlement Général sur la Protection des Données (RGPD) de l'Union européenne.
@@ -405,15 +405,13 @@ const [showRgpd, setShowRgpd] = useState(false);
 
                             En ce qui concerne les adresses e-mail, nous les collectons uniquement lorsque vous vous inscrivez volontairement à notre newsletter ou à notre programme bêta en fournissant votre consentement explicite. Ces adresses e-mail ne seront utilisées que dans le cadre spécifié et ne seront en aucun cas partagées, vendues ou louées à des tiers.
 
-                            Nous prenons la sécurité et la confidentialité de vos données personnelles très au sérieux. Si vous avez des questions ou des préoccupations concernant la façon dont nous utilisons vos données, n'hésitez pas à nous contacter à l'adresse [votre adresse e-mail de contact].
-
-                            Merci pour votre confiance et votre soutien continu.
+                            Nous prenons la sécurité et la confidentialité de vos données personnelles très au sérieux. Si vous avez des questions ou des préoccupations concernant la façon dont nous utilisons vos données, n'hésitez pas à nous contacter à l'adresse: <Link id="" target="_blank" href="mailto:contact.pipingdata@gmail.com"><Span style={{ color: "blue", textDecoration: "underline" }}>contact.pipingdata@gmail.com</Span></Link><br />
+                            Merci pour votre confiance et votre soutien.
                         </p>
                     </article>
                     
-                    <Button id="rgpd" className="Rgpd" type="button" value="rgpd" display={() => (showRgpd ? setShowRgpd(false) : setShowRgpd(true))}>Retour</Button>
+                    <Button id="rgpd" className="Rgpd" type="button" value="rgpd" display={() => { document.body.style.backgroundColor = "white"; (showRgpd ? setShowRgpd(false) : setShowRgpd(true)) } }>Retour</Button>
                 </Section>
-            </Section>
         </Section>)
   
   );

@@ -10,11 +10,11 @@ const Form = (props) => {
     const thisValue = props.value;
 
     return (
-      <form id={thisId}>
+      <form onSubmit={props.onSubmit} id={thisId}>
           {thisLabel}
-          <input type={thisType} className={thisClass} placeholder={thisPlaceholder} />
-          <textarea className={thisClass}>{ThisText}</textarea>
-          <input type="submit" className="submit" value={thisValue} />
+          <input ref={props.mail} type={thisType} className={thisClass} placeholder={thisPlaceholder} />
+          <textarea ref={props.commentRef} className={thisClass}>{ThisText}</textarea>
+          <input ref={props.submitComment} type="submit" className="submit" value={thisValue} />
       </form>
     );
 

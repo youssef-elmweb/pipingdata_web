@@ -289,6 +289,9 @@ h1 {
     #beta-text {
       margin: 7.5% 7.5% 0;
     }
+    #submit-beta { 
+      font-size: 2.5vw;
+    }
     /***************** BETA & COMMENT *****************************/
 
 
@@ -372,7 +375,7 @@ h1 {
 
     /***************** BETA & COMMENT *****************************/
     #contain-bloc-beta {
-      padding: 60px 0;
+      padding: 65px 0;
     }
     #bloc-beta, #bloc-comment {
       width: 100%;
@@ -380,7 +383,10 @@ h1 {
       justify-self: flex-end;
     }
     #bloc-comment {
-      padding: 120px 0px; 
+      padding: 90px 0px; 
+    }
+    #submit-beta { 
+      font-size: 1.5vw;
     }
     /***************** BETA & COMMENT *****************************/
 
@@ -664,7 +670,9 @@ p {
 
 .App_link_login {
   display: flex;
-  width: 50px;
+  min-width: 37px;
+  max-width: 37px;
+  margin-left: 3%;
 }
 
 .google, .apple, .login {
@@ -767,6 +775,7 @@ textarea {
   width: 30%;
   justify-content: center;
   align-items: center;
+  font-size: 1.5vw;
   border-radius: 5px;
   color: white;
   background-color: #161664;

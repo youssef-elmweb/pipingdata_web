@@ -1,5 +1,6 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import { FacebookShare, FacebookCount } from 'react-share-kit';
 import Aside from './components/Aside';
 import Button from './components/Button';
 import Form from './components/Form';
@@ -8,12 +9,19 @@ import Link from './components/Link';
 import Section from './components/Section';
 import Sectionsmart from './components/Sectionsmart';
 import FormNewsLetter from './components/FormNewsLetter';
+import FormComment from './components/FormComment';
 import Span from './components/Span';
 import Title from './components/Title';
 import './controller/display_icones.js';
 
-const languages = { // voir state de button langage et modifier dynamiquement à partir de l'indice basé sur id en/fr
-                    // n'avoir qu'un objet dans l'objet languages.
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, limit } from "firebase/firestore";
+import { firebaseConfig, setUsers, getUsers, getLastIndex, increaseIndex } from "./api/config";
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+const languages = { 
     'fr':   {'version': 'La data visualisation au service de la tuyauterie industrielle', 
              'comment': 'Publiez un Commentaire',
              'publish': 'Publiez'
@@ -89,9 +97,8 @@ const displayLanguage = (e) => {
               setTimeout(() => {
                 version.textContent = languages.en.version; 
                 comment.textContent = languages.en.comment; 
-                publish.lastChild.value = languages.en.publish // bouton formulaire commentaire
+                publish.lastChild.value = languages.en.publish 
                 fleche.style.transform = "rotate(180deg)";
-                //badgeTrust.style.transform = "rotate(180deg)";
                 badgeTrust.setAttribute("src", "assets/badge-confiance-en.png");
 
                 ButtonGoogleStore.setAttribute("src", "assets/badge-google-en.png");
@@ -108,9 +115,8 @@ const displayLanguage = (e) => {
               setTimeout(() => { 
                 version.textContent = languages.fr.version;
                 comment.textContent = languages.fr.comment;
-                publish.lastChild.value = languages.fr.publish // bouton formulaire commentaire
+                publish.lastChild.value = languages.fr.publish 
                 fleche.style.transform = "rotate(0deg)";
-                //badgeTrust.style.transform = "rotate(0deg)";
                 badgeTrust.setAttribute("src", "assets/badge-confiance-fr.png");
 
                 ButtonGoogleStore.setAttribute("src", "assets/badge-google-fr.png");
@@ -159,6 +165,11 @@ const [showRgpd, setShowRgpd] = useState(false);
                         container="Elm-web.com"
                     />
 
+                    <FacebookShare url={"https://www.facebook.com/profile.php?id=61558354162664"} size={"30px"} round={true}> 
+                        <FacebookCount url={"https://www.facebook.com/profile.php?id=61558354162664"} appId='your-app-id' appSecret='your-app-secret' />
+                        {shareCount => <span className="wrapper">{shareCount}</span>}
+                    </FacebookShare>
+
                     <Link id="App_link_login" href="" className="App_link_login">
                         <Img 
                             style={{ maxWidth: "1OO%" }}
@@ -192,8 +203,8 @@ const [showRgpd, setShowRgpd] = useState(false);
             <Section id="main" className="App_main">
                 <Aside id="contain-bloc-trust">
                     <Section id="bloc-msg-for-smart">
-                        <p className="Msg_for_smart">Essayer en ligne, "optimisé pour ordinateur"</p>
-                        <p className="Msg_for_smart">Regarder sur <Span style={{ borderRadius: "15px" }}><Link className="Link_youtube" href="https://www.youtube.com/channel/UCkQUv_60E5QB1sjDRLYTbbQ" target="_blank" container="youtube" /></Span></p>
+                        <p className="Msg_for_smart">Essayer en ligne, <span style={{ fontSize: "11px", color: "forestgreen" }}>(optimal pour ordinateur)</span></p>
+                        <p className="Msg_for_smart">Ou voir sur <Span style={{ borderRadius: "15px" }}><Link className="Link_youtube" href="https://www.youtube.com/channel/UCkQUv_60E5QB1sjDRLYTbbQ" target="_blank" container="youtube" /></Span></p>
                     </Section>
                     
                     <Span  
@@ -326,17 +337,7 @@ const [showRgpd, setShowRgpd] = useState(false);
                     </Section>
 
                     <Section id="comment-registered">
-
-                        <Form
-                            id="form_comment"
-                            className="Form_comment"
-                            type="email"
-                            value={language.publish}
-                            placeholder="mail@you.com" 
-                                children={
-                                    <label id="comment">{language.comment}</label>
-                                }
-                        />
+                        <FormComment value={"S'inscrire"} />
                     </Section>
                 </Section>
             </Aside>
@@ -363,7 +364,7 @@ const [showRgpd, setShowRgpd] = useState(false);
                                 <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#127968;</Span><Span>PipingData by <Span style={{ textDecoration: "underline" }}><Link href="https://elm-web.fr" target="_blank" container="Elm-web.fr"/></Span></Span></p></li>
                                 <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#9742;</Span>+33761302846</p></li>
                                 <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#x1F4E7;</Span>contact.pipingdata@gmail.com</p></li>
-                                <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#x1F512;</Span><Button id="rgpd" thisMargin={"0 1%"} thisPadding={"2.5% 0"} thisWidth={"30%"} thisFontSize={"13px"} className="Rgpd" thisColorButton={"#484848"} type="button" value="rgpd" display={() => (!showRgpd ? setShowRgpd(true) : setShowRgpd(false))}>RGPD</Button></p></li>
+                                <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><p style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-end", marginLeft: "10px", fontSize: "1em", lineHeight: "15px", color: "white" }}><Span style={{ display: "flex", justifyContent: "flex-start", alignItems: "center", alignSelf: "center", fontSize: "1em", padding: "0 10px 0 0" }}>&#x1F512;</Span><Button id="rgpd" thisMargin={"0 1%"} thisPadding={"2.5% 0"} thisWidth={"30%"} thisFontSize={"13px"} className="Rgpd" thisColorButton={"#484848"} type="button" value="rgpd" display={(e) => { e.stopPropagation(); (!showRgpd ? setShowRgpd(true) : setShowRgpd(false)); } }>RGPD</Button></p></li>
                             </ul>
                         </article>
                     </Section>
@@ -391,7 +392,7 @@ const [showRgpd, setShowRgpd] = useState(false);
         
         : 
 
-            <Section style={{ display: "flex", height: "100vh", alignSelf: "center", justifyContent: "center", alignItems: "center", backgroundColor: "white" }}>
+            <Section style={{ display: "flex", height: "100vh", justifyContent: "center", alignItems: "center", backgroundColor: "white" }}>
                 <Section style={{ width: "70%", height: "75vh", lineHeight: "35px", padding: "0 17.5px 10px 17.5px", display: "flex", flexDirection: "column", alignSelf: "center", justifyContent: "center", alignItems: "center", textAlign: "center", border: "1px solid black", borderRadius: "10px" }}>
                     <article style= {{ overflow: "scroll" }}>
                         <h2 style={{ textAlign: "center", color: "black" }}>Confidentialité</h2>

@@ -5,6 +5,9 @@ import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+const days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+const months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre"];
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
@@ -41,7 +44,18 @@ export async function getUsers(db) {
     return tabUsers;
 }
 
-export async function getComments(db) {
+export async function getPseudos(db) {
+    let tabPseudos = [];
+
+    const pseudosCol = collection(db, 'opinions-pipingdata.app');
+
+    const pseudosSnapshot = await getDocs(pseudosCol);
+    const pseudosList = pseudosSnapshot.docs.map(doc => { tabPseudos.push(doc.data().name); });
+        
+    return tabPseudos;
+}
+
+export async function getMailsOfComments(db) {
     let tabComments = [];
 
     const commentsCol = collection(db, 'comments-pipingdata.app');
@@ -50,6 +64,50 @@ export async function getComments(db) {
     const commentsList = commentsSnapshot.docs.map(doc => { tabComments.push(doc.data().mail); });
         
     return tabComments;
+}
+
+export async function getNamesOfComments(db) {
+    let tabComments = [];
+
+    const commentsCol = collection(db, 'comments-pipingdata.app');
+
+    const commentsSnapshot = await getDocs(commentsCol);
+    const commentsList = commentsSnapshot.docs.map(doc => { tabComments.push(doc.data().name); });
+        
+    return tabComments;
+}
+
+export async function getNamesOfOpinions(db) {
+    let tabOpinions = [];
+
+    const opinionsCol = collection(db, 'opinions-pipingdata.app');
+
+    const opinionsSnapshot = await getDocs(opinionsCol);
+    const opinionsList = opinionsSnapshot.docs.map(doc => { tabOpinions.push(doc.data().name); });
+        
+    return tabOpinions;
+}
+
+export async function getComments(db) {
+    let tabComments = [];
+
+    const commentsCol = collection(db, 'comments-pipingdata.app');
+
+    const commentsSnapshot = await getDocs(commentsCol);
+    const commentsList = commentsSnapshot.docs.map(doc => { tabComments.push(doc.data()); });
+        
+    return tabComments;
+}
+
+export async function getOpinions(db) {
+    let tabOpinions = [];
+
+    const opinionsCol = collection(db, 'opinions-pipingdata.app');
+
+    const opinionsSnapshot = await getDocs(opinionsCol);
+    const opinionsList = opinionsSnapshot.docs.map(doc => { tabOpinions.push(doc.data()); });
+        
+    return tabOpinions;
 }
 
 export const increaseIndex = (result) => {
@@ -75,24 +133,43 @@ export async function addUsers(db, userData) {
 
 export async function addComments(db, userData) { 
     const commentsCol = collection(db, 'comments-pipingdata.app');
+
+    let newDate = new Date();
+
+    let day = newDate.getDay();
+    let date = newDate.getDate();
+    let month = newDate.getMonth();
+    let year = newDate.getFullYear();
+    let hour = newDate.getHours();
+    let minute = newDate.getMinutes();
+
+    let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
         
     addDoc(commentsCol, {
-        mail: userData.mail,
-        comment: userData.comment
+        name: userData.name,
+        comment: userData.comment,
+        date: dateNow
     });
 }
 
-export function setUsers(db, userData) { 
-    const usersCol = collection(db, 'users-pipingdata.app');
-    let lastIndexUser = getLastIndex(usersCol);
+export async function addOpinions(db, userData) { 
+    const opinionsCol = collection(db, 'opinions-pipingdata.app');
 
-    lastIndexUser.then(function(index) {
-        const userCol = doc(db, 'users-pipingdata.app', `${increaseIndex(Number(index))}`);
+    let newDate = new Date();
+
+    let day = newDate.getDay();
+    let date = newDate.getDate();
+    let month = newDate.getMonth();
+    let year = newDate.getFullYear();
+    let hour = newDate.getHours();
+    let minute = newDate.getMinutes();
+
+    let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
         
-        setDoc(userCol, {
-            mail: userData.mail,
-            job: userData.job
-        });
+    addDoc(opinionsCol, {
+        name: userData.name,
+        opinion: userData.opinion,
+        date: dateNow
     });
 }
 

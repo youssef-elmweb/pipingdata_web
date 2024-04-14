@@ -8,7 +8,7 @@ const Link = (props) => {
     const thisChilds = props.children;
 
     return (
-        <a href={thisHref} rel={props.rel} target={props.target} className={thisClass} title={thisTitle}>{thisContainer || thisChilds}</a> 
+        <a href={thisHref} id={props.id} rel={props.rel} target={props.target} className={thisClass} title={thisTitle}>{thisContainer || thisChilds}</a> 
     );
 
 }

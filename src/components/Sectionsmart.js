@@ -1216,9 +1216,10 @@ const Sectionsmart = (props) => {
 
             <Section key={"buttons-screens"} value={"elbow"} className="App_buttons_smart">
                     
-                <Button id="elbow" type="button" value={"elbow"} display={dispatchFunctions}   
+                <Button key={"button-elbow"} id="elbow" type="button" value={"elbow"} display={dispatchFunctions}   
                     children={
                         <Img 
+                            key="icone-elbow"
                             className="Elbow"
                             src="assets/elbow.png"  
                             alt="elbow-steel" 
@@ -1226,9 +1227,10 @@ const Sectionsmart = (props) => {
                     }
                 />
 
-                <Button id="elbow-double" type="button" value="elbow-double" display={dispatchFunctions}
+                <Button key={"button-elbow-double"} id="elbow-double" type="button" value="elbow-double" display={dispatchFunctions}
                     children={
                         <Img 
+                            key="icone-elbow-double"
                             className="Elbow_double"
                             src="assets/elbow_double.png"  
                             alt="elbow-double-steel" 
@@ -1236,9 +1238,10 @@ const Sectionsmart = (props) => {
                     }
                 />      
 
-                <Button id="elbow-double-oriented" type="button" value="elbow-double-oriented" display={dispatchFunctions}
+                <Button key={"button-elbow-double-oriented"} id="elbow-double-oriented" type="button" value="elbow-double-oriented" display={dispatchFunctions}
                     children={
                         <Img 
+                            key="icone-elbow-double-oriented"
                             className="Elbow_double_oriented"                                  
                             src="assets/elbow_double_oriented.png"  
                             alt="elbow-double-oriented-steel"
@@ -1246,9 +1249,10 @@ const Sectionsmart = (props) => {
                     }
                 />
 
-                <Button id="elbow-slice" type="button" value="elbow-slice" display={dispatchFunctions}
+                <Button key={"button-slices"} id="elbow-slice" type="button" value="elbow-slice" display={dispatchFunctions}
                     children={
                         <Img 
+                            key="icone-elbow-slices"
                             className="Elbow_slice" 
                             src="assets/elbow_slice.png" 
                             alt="elbow-slice-steel"
@@ -1264,9 +1268,9 @@ const Sectionsmart = (props) => {
                     (
                         currentButtonLayerState !== "elbow-slice" ?
                             [<Section key={"bloc-diameter"} id="diameters" style={{ width: "20%" }} className="Values_elbow">
-                                <Span key="title-diameters" className="Title_diameter" container="Ø" />
-                                <Span style={{ fontSize: "11px" }} key="diameter-mm" className="Diameter" container={currentDiameter[currentNorme] + " mm"} />
-                                <Span style={{ fontSize: "11px" }}  key="diameter-dn-inch" className="Diameter" container={`DN ${currentDiameter[0]}`} />
+                                <Span key={"title-diameters"} className="Title_diameter" container="Ø" />
+                                <Span key={"diameter-mm"} style={{ fontSize: "11px" }} className="Diameter" container={currentDiameter[currentNorme] + " mm"} />
+                                <Span key={"diameter-dn-inch"} style={{ fontSize: "11px" }} className="Diameter" container={`DN ${currentDiameter[0]}`} />
                             </Section>,
 
                             <Section key={"bloc-values-elbows-standard"} id="values-elbow" className="Values_principal">
@@ -1274,19 +1278,19 @@ const Sectionsmart = (props) => {
                                     {
                                         (
                                             currentButtonLayerState === "elbow-double" ?
-                                                <Section style={{ width: "max-content", display: "flex", flexDirection: "column" }}>
-                                                    <Span style={{ fontSize: "11px", color: "white" }} key={"elbow-double-intra-a"} container = {`A ${parseFloat(currentExtraA).toFixed(2)} - ${parseFloat(currentIntraA).toFixed(1)}`} />
-                                                    <Span style={{ fontSize: "11px", color: "white" }} key={"elbow-double-intra-b"} container = {`B ${parseFloat(currentExtraB).toFixed(2)} - ${parseFloat(currentIntraB).toFixed(1)}`} />
+                                                <Section key={"bloc-extra-a-b"} style={{ width: "max-content", display: "flex", flexDirection: "column" }}>
+                                                    <Span key={"extra-a"} style={{ fontSize: "11px", color: "white" }} key={"elbow-double-intra-a"} container = {`A ${parseFloat(currentExtraA).toFixed(2)} - ${parseFloat(currentIntraA).toFixed(1)}`} />
+                                                    <Span key={"extra-b"} style={{ fontSize: "11px", color: "white" }} key={"elbow-double-intra-b"} container = {`B ${parseFloat(currentExtraB).toFixed(2)} - ${parseFloat(currentIntraB).toFixed(1)}`} />
                                                 </Section>
                                             :
                                             (currentButtonLayerState === "elbow-double-oriented" ?
-                                                <Section style={{ width: "max-content", display: "flex", flexDirection: "column" }}>
-                                                    <Span key={"elbow-double-o-intra-a"} style={{ fontSize: "11px", color: "white" }} container = {`A ${parseFloat(currentExtraAOriented).toFixed(1)} - ${parseFloat(currentIntraAOriented).toFixed(1)}`} />
-                                                    <Span key={"elbow-double-o-intra-b"} style={{ fontSize: "11px", color: "white" }} container = {`B ${parseFloat(currentExtraBOriented).toFixed(1)} - ${parseFloat(currentIntraBOriented).toFixed(1)}`} />
+                                                <Section key={"bloc-orient-intra-a-b"} style={{ width: "max-content", display: "flex", flexDirection: "column" }}>
+                                                    <Span key={"elbow-double-orient-intra-a"} style={{ fontSize: "11px", color: "white" }} container = {`A ${parseFloat(currentExtraAOriented).toFixed(1)} - ${parseFloat(currentIntraAOriented).toFixed(1)}`} />
+                                                    <Span key={"elbow-double-orient-intra-b"} style={{ fontSize: "11px", color: "white" }} container = {`B ${parseFloat(currentExtraBOriented).toFixed(1)} - ${parseFloat(currentIntraBOriented).toFixed(1)}`} />
                                                 </Section>
                                             :
-                                                [<Span style={{ fontSize: "11px", color: "white" }} key={"elbow-intra"} container = {`${parseFloat(currentExtra).toFixed(1)} mm`} />,
-                                                <Span style={{ fontSize: "11px", color: "white" }} key={"elbow-extra"} container = {`${parseFloat(currentIntra).toFixed(1)} mm`} />])
+                                                [<Span key={"elbow-intra"} style={{ fontSize: "11px", color: "white" }} container = {`${parseFloat(currentExtra).toFixed(1)} mm`} />,
+                                                <Span key={"elbow-extra"} style={{ fontSize: "11px", color: "white" }} container = {`${parseFloat(currentIntra).toFixed(1)} mm`} />])
                                         )
                                     }
                             </Section>]
@@ -1309,7 +1313,7 @@ const Sectionsmart = (props) => {
                                         {(currentDiameter[currentNorme] === 76.1 || currentDiameter[currentNorme] === 139.7 || currentDiameter[currentNorme] === 73 || currentDiameter[currentNorme] === 141 ? 
                                             <Button key={"button-norme-in-slice"} thisLeft={currentPos} colorButton={"forestgreen"} name="iso-ansi" id="iso-ansi" className="Iso_Ansi" type="radio" value="iso-ansi" display={getNorme}>{currentNormeLabel}</Button> 
                                         : false)}
-                                    <span className="Ansi">iso</span>
+                                    <span key={"ansi"} className="Ansi">iso</span>
                                 </Section>
 
                                 <Input className="Radius_elbow_slice" type="number" min={100} max={10000} step={1}

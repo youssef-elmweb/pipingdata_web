@@ -152,10 +152,6 @@ h1 {
       flex-direction: column;
     }
 
-    aside:first-child>#play_stores, aside:first-child>#version {
-      /*display: none;*/
-    }
-
     #bloc-msg-for-smart {
       margin: 5% 0;
     }
@@ -273,21 +269,24 @@ h1 {
 
 
     /***************** BETA & COMMENT *****************************/
-    #bloc-beta, #bloc-comment {
-      flex-direction: column;
+    #contain-bloc-beta {
+      padding: 70px 0 30px;
     }
-    #bloc-comment {
+    #contain-bloc-opinion {
       padding: 45px 0 75px; 
     }
-    #beta-registered, #comment-registered {
+    #bloc-beta, #bloc-opinion {
+      flex-direction: column;
+    }
+    #beta-registered, #opinion-registered {
       width: 80%;
       justify-content: center;
     }
-    #comment-text {
+    #opinion-text {
       margin: 0 7.5% 5%;
     }
     #beta-text {
-      margin: 7.5% 7.5% 0;
+      margin: 0 7.5% 0;
     }
     #submit-beta { 
       font-size: 2.5vw;
@@ -313,10 +312,6 @@ h1 {
 @media screen and (min-width: 811px) { 
     aside:first-child {
       width: 70%;
-    }
-
-    #version {
-      width: 100%;
     }
 
     #play_stores {
@@ -347,7 +342,6 @@ h1 {
       padding: 115px 0;
     }
 
-
     /******************** TRUST ***********************************/
     #contain-bloc-trust {
       width: 40%;
@@ -374,16 +368,16 @@ h1 {
 
 
     /***************** BETA & COMMENT *****************************/
-    #contain-bloc-beta {
-      padding: 65px 0;
+    #contain-bloc-opinion, #contain-bloc-beta {
+      padding: 110px 0;
     }
-    #bloc-beta, #bloc-comment {
+    #bloc-beta, #bloc-opinion {
       width: 100%;
       margin-top: inherit;
       justify-self: flex-end;
     }
-    #bloc-comment {
-      padding: 90px 0px; 
+    #beta-text {
+      margin: 0 3% 0 0;
     }
     #submit-beta { 
       font-size: 1.5vw;
@@ -404,11 +398,11 @@ h1 {
     }
     /********************* FOOTER *********************************/
 
-    #beta-registered, #beta-text, #comment-registered, #comment-text {
+    #beta-registered, #beta-text, #opinion-registered, #opinion-text {
       width: 50%;
     }
 
-    #beta-registered, #beta-text, #comment-registered, #comment-text {
+    #beta-registered, #opinion-registered, #opinion-text {
       padding: 0 50px;
     }
 }
@@ -431,6 +425,11 @@ h1 {
 
 #contain-bloc-list, #contain-bloc-beta {
   background-color: white;
+}
+
+#form-opinion, #form-comment {
+  display: flex;
+  flex-direction: column;
 }
 
 /********************* LIST ***********************************/
@@ -484,11 +483,26 @@ h1 {
 
 
 /***************** BETA & COMMENT *****************************/
-#bloc-comment {
+#contain-bloc-opinion {
   background-color: #0D1224;
 }
-#bloc-beta {
-  padding: 35px 0;
+
+.Text_comment {
+  display: flex;
+  height: 100px;
+  margin: 1% 0;
+  padding: 5px 5px;
+  border: 0.5px solid black;
+}
+
+.Submit_comment {
+  margin: 0;
+  padding: 15px 0;
+  text-align: center;
+  border-radius: 0 0 10px 10px;
+}
+.Submit_comment:hover {
+  background-color: #2ecc71;
 }
 /***************** BETA & COMMENT *****************************/
 
@@ -522,7 +536,7 @@ h1 {
 /********************* FOOTER *********************************/
 
 
-#bloc-trust-list, #bloc-trust-badge, #bloc-trust-youtube, #bloc-beta, #bloc-comment {
+#bloc-trust-list, #bloc-trust-badge, #bloc-trust-youtube, #bloc-beta, #bloc-opinion {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -653,10 +667,10 @@ p {
 
 /************************************* STYLES BUTTON STORES ***********************************/
 .play_stores {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
-  width: 90%;
   margin: 10% 0 5%;
 }
 
@@ -664,8 +678,17 @@ p {
   display: flex;
   flex: 2;
   width: auto;
-  margin: 0 3%;
   justify-content: center;
+}
+.App_link_google{
+  margin-right: 5%;
+}
+.App_link_apple {
+  margin-left: 5%;
+}
+
+#version {
+  width: 100%;
 }
 
 .App_link_login {
@@ -677,7 +700,7 @@ p {
 
 .google, .apple, .login {
   display: flex;
-  max-width: 100%;
+  max-width: 110%;
   border: 3px solid transparent;
   justify-content: center;
   border-radius: 12px;
@@ -1137,6 +1160,15 @@ input[type=number]::-webkit-outer-spin-button {
   text-anchor: end;
 }
 
+/********************************************************************************/
+
+.Edit_icone {
+  opacity: 0.5;
+}
+
+.Edit_icone:hover {
+  opacity: 1;
+}
 
 
 

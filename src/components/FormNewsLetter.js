@@ -23,7 +23,7 @@ const FormNewsLetter = (props) => {
     const jobRef = useRef(null);
     const commentRef = useRef(null);
     const submitBeta = useRef(null);
-    const submitComment = useRef(null);
+    //const submitComment = useRef(null);
 
     const userData = {mail: null, job: null, comment: null};
 
@@ -78,7 +78,6 @@ const FormNewsLetter = (props) => {
             users.then((elmt) => {
                 return elmt.includes(userData.mail);
             }).then((elmt) => {
-
                 if (elmt != true) {
                     addUsers(db, userData).then(() => {
                         displayMsg(`${messages.subscription_beta_succes} ${"\u2714"}`);
@@ -113,7 +112,7 @@ const FormNewsLetter = (props) => {
             <div style={{ padding: "0 30px 10px", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", borderWidth: "0.5px", borderStyle: "solid", borderColor: "black", borderRadius: "15px", backgroundColor: "white" }}>
                 <form onSubmit={processUser} style={{ width: "100%" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", backgroundColor: "white" }}>
-                        <label><h3 style={{ textAlign: "center" }}>S'inscrire à la newsletter et au programme Bêta</h3></label>
+                        <label><h3 style={{ textAlign: "center" }}>{props.register_beta}</h3></label>
                     </div>
 
                     <div style={{ display: "flex", width: "100%", padding: "2% 0", justifyContent: "space-evenly", alignItems: "center", backgroundColor: "#e74c3c", borderRadius: "7.5px" }}>
@@ -126,7 +125,7 @@ const FormNewsLetter = (props) => {
                             <input onChange={() => setJob("tuyauteur")} checked={(job == "pipefitter" ? true : false)} required="required" type="radio" name={"job"} value={job} id="pipefitter" />
                             
                             <label htmlFor="pipefitter">
-                                Tuyauteur
+                                {props.pipeFitter}
                             </label>
                         </div>
 
@@ -134,7 +133,7 @@ const FormNewsLetter = (props) => {
                             <input onChange={() => setJob("boilermaker")} checked={(job == "boilermaker" ? true : false)} required="required" type="radio" name={"job"} value={job} id="boilermaker" />
                             
                             <label htmlFor="boilermaker">
-                                Chaudronnier
+                                {props.boilerMaker}
                             </label>
                         </div>
                     </div>

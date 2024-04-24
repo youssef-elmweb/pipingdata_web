@@ -358,7 +358,7 @@ function App() {
                     </Aside>
 
                     <Aside key={`bloc-smart-vector`}>
-                        <Sectionsmart className="Smart_vector" values={tabElbowsButtons} />
+                        <Sectionsmart trialVersion={language.trial_version} textTrialVersion={language.text_trial_version} back={language.back} className="Smart_vector" values={tabElbowsButtons} />
                     </Aside>
                 </Section>  
 
@@ -428,7 +428,7 @@ function App() {
                 <Aside key={"contain-bloc-beta"} id="contain-bloc-beta">
                     <Section id="bloc-beta">
                         <Section key={"beta-registered"} id="beta-registered">
-                            <FormNewsLetter value={"S'inscrire"} register_beta={language.register_beta} pipeFitter={language.pipefitter} boilerMaker={language.boilermaker} />
+                            <FormNewsLetter value={language.signup} register_beta={language.register_beta} pipeFitter={language.pipefitter} boilerMaker={language.boilermaker} />
                         </Section>
 
                         <Section key={"beta-text"} id="beta-text">
@@ -469,7 +469,7 @@ function App() {
                         </Section>
 
                         <Section key={"opinion-registered"} id="opinion-registered">
-                            <FormOpinion labelComment={language.comment} labelSubmit={language.publish} />
+                            <FormOpinion labelComment={language.review} labelSubmit={language.publish} />
                         </Section>
                     </Section>
                 </Aside>

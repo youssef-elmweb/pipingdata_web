@@ -99,6 +99,22 @@ export async function getComments(db) {
     return tabComments;
 }
 
+
+
+/*export async function getColComments(db) {
+    let tabComments = [];
+
+    const commentsCol = collection(db, 'comments-pipingdata.app');
+
+    const commentsSnapshot = await getDocs(commentsCol);
+    const commentsList = commentsSnapshot.docs.map(doc => { tabComments.push(doc.data()); });
+        
+    return tabComments;
+}*/
+
+
+
+
 export async function getOpinions(db) {
     let tabOpinions = [];
 
@@ -132,7 +148,7 @@ export async function addUsers(db, userData) {
 }
 
 export async function addComments(db, userData) { 
-    const commentsCol = collection(db, 'comments-pipingdata.app');
+    const commentsCol = collection(db, 'comments-pipingdata.app'); // récuperer l'id de la discution enregistré sur firestore comme cette ligne pour en faire une collection
 
     let newDate = new Date();
 
@@ -145,11 +161,29 @@ export async function addComments(db, userData) {
 
     let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
         
-    addDoc(commentsCol, {
+    /*addDoc(commentsCol, {
         name: userData.name,
         comment: userData.comment,
         date: dateNow
+    });*/
+
+    const q = query(collection(db, "comments-pipingdata.app"));
+
+    const querySnapshot = await getDocs(q);
+
+    let lastDoc;
+
+    querySnapshot.forEach((doc) => {
+        console.log(doc.id, " => ", doc.data());
+        lastDoc = doc.id;
     });
+
+    const qs = collection(db, `default/comments-pipingdata.app/${lastDoc}`);
+
+    addDoc(qs, {
+        name: "youssef"
+    });
+
 }
 
 export async function addOpinions(db, userData) { 

@@ -5,7 +5,7 @@ import { languages } from './../languages.js';
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, addDoc, getDoc, getDocs, query, limit } from "firebase/firestore";
-import { firebaseConfig, setUsers, addUsers, addComments, addOpinions, getPseudos, getNamesOfOpinions,  getOpinions, getLastIndex, increaseIndex } from "./../api/config";
+import { firebaseConfig, setUsers, addUsers, addComments, addCollectionOfComments, addOpinions, getPseudos, getNamesOfOpinions,  getOpinions, getLastIndex, increaseIndex } from "./../api/config";
 
 const FormComment = (props) => {
 
@@ -96,7 +96,7 @@ const FormComment = (props) => {
     const thisPlaceholder = props.placeholder;
     const ThisText = props.textContent;
     const thisValue = props.value;
-
+// ICI METTRE LES CLES KEY
     return (
         <div style={{ position: "relative", marginBottom: "5%" }}>
             <form onSubmit={processComment} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }} id={thisId}>

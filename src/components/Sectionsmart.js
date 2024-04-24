@@ -1127,9 +1127,9 @@ const Sectionsmart = (props) => {
 
             {(showModal == true ?
                 <Section style={{ zIndex: 10000, position: "absolute", width: "86%", minHeight: "545px", maxHeight: "566px", left: "7%", marginTop: "15px", backgroundColor: "black", borderRadius: "35px", textAlign: "center", backgroundImage:`url(${image})`, backgroundRepeat:"no-repeat", backgroundSize: "cover", backgroundPosition: "bottom center", opacity: 1 }}>
-                    <p style={{ color: "white", fontWeight: "bold" }}>{"Version d'essai."}</p>
-                    <p style={{ color: "white", fontWeight: "bold", margin: "0 5px" }}>{"Voir les Screenshots pour cette section"}</p>
-                    <Section className="hideModalTrialVersion" style={{ margin: "20px", padding: "20px 10px", color: "white", fontWeight: "bold", borderRadius: "5px", backgroundColor: "#0000FF" }} display={() => {makeModalTrialVersion(); setShowModal(() => false)} }>Revenir</Section>
+                    <p style={{ color: "white", fontWeight: "bold" }}>{props.trialVersion}</p>
+                    <p style={{ color: "white", fontWeight: "bold", margin: "0 5px" }}>{props.textTrialVersion}</p>
+                    <Section className="hideModalTrialVersion" style={{ margin: "20px", padding: "20px 10px", color: "white", fontWeight: "bold", borderRadius: "5px", backgroundColor: "#0000FF" }} display={() => {makeModalTrialVersion(); setShowModal(() => false)} }>{props.back}</Section>
                     <Img                            
                         id={"padlock-close"} 
                         style={{ zIndex: 10, height: "15%", marginTop: "15%", alignSelf: "center" }}

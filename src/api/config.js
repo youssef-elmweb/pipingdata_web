@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, addDoc, getDoc, getDocs, query, limit } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, where, addDoc, getDoc, getDocs, orderBy, query, limit, increment } from "firebase/firestore";
 import { getAnalytics } from "firebase/analytics";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -91,10 +91,12 @@ export async function getNamesOfOpinions(db) {
 export async function getComments(db) {
     let tabComments = [];
 
-    const commentsCol = collection(db, 'comments-pipingdata.app');
+    const commentsCol = collection(db, 'pipingdata/comments/discussion');
 
     const commentsSnapshot = await getDocs(commentsCol);
     const commentsList = commentsSnapshot.docs.map(doc => { tabComments.push(doc.data()); });
+
+    //console.log(tabComments);
         
     return tabComments;
 }
@@ -148,8 +150,6 @@ export async function addUsers(db, userData) {
 }
 
 export async function addComments(db, userData) { 
-    const commentsCol = collection(db, 'comments-pipingdata.app'); // récuperer l'id de la discution enregistré sur firestore comme cette ligne pour en faire une collection
-
     let newDate = new Date();
 
     let day = newDate.getDay();
@@ -160,30 +160,50 @@ export async function addComments(db, userData) {
     let minute = newDate.getMinutes();
 
     let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
-        
-    /*addDoc(commentsCol, {
-        name: userData.name,
-        comment: userData.comment,
-        date: dateNow
-    });*/
 
-    const q = query(collection(db, "comments-pipingdata.app"));
+    let addComments = [];
+    
+    const docRef = collection(db, `pipingdata/comments/discussion`);
+
+    const qDocRef = query(docRef, orderBy("id_discussion", "desc"));
+
+    const docSnap = await getDocs(qDocRef);
+
+    docSnap.docs.map(element => {
+        addComments.push(element);
+    });
+
+    let id_discussion = Number(addComments.length + 1);
+
+    addDoc(docRef, {
+        id_discussion,
+        name: "youssef",
+        comment: userData.comment,
+        job: "pipefitter",
+        archived: false,
+        date: dateNow
+    });
+
+    const q = query(docRef, where("id_discussion", "==", id_discussion));
+
+    let tabComments = [];
 
     const querySnapshot = await getDocs(q);
 
-    let lastDoc;
-
     querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
-        lastDoc = doc.id;
+      console.log(doc.id, " => ", doc.data());
+
+      const docRef = collection(db, `pipingdata/comments/discussion/${doc.id}/discussion_${id_discussion}`);
+      
+      addDoc(docRef, {
+        id_discussion,
+        name: "youssef",
+        comment: userData.comment,
+        job: "pipefitter",
+        archived: false,
+        date: dateNow
     });
-
-    const qs = collection(db, `default/comments-pipingdata.app/${lastDoc}`);
-
-    addDoc(qs, {
-        name: "youssef"
-    });
-
+    })
 }
 
 export async function addOpinions(db, userData) { 

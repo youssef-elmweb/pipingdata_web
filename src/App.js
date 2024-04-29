@@ -17,7 +17,7 @@ import EditableBar from './components/EditableBar';
 import { languages } from './languages.js';
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, getDoc, getDocs, query, limit } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, orderBy, addDoc, query, limit } from "firebase/firestore";
 import { firebaseConfig, setUsers, getUsers, getComments, getLastIndex, increaseIndex } from "./api/config";
 
 const admin = {
@@ -135,13 +135,16 @@ const LINKS_APP =    <Section key={`play-stores`} id="play-stores" className="pl
 
 function App() {
 
-    const queryComments = getDocs(collection(db, "comments-pipingdata.app"));
+    const queryComments = query(collection(db, "pipingdata/comments/discussion"), orderBy("id_discussion", "desc"));
+    
     const queryOpinions = getDocs(collection(db, "opinions-pipingdata.app"));
 
     const [currentLanguage, setCurrentLanguage] = useState("fr"); 
     var language = languages[currentLanguage]; // default language
 
-    const [comment, setComment] = useState(null); 
+    const [comment, setComment] = useState(useMemo(() => [])); 
+    const [commentList, setCommentList] = useState(useMemo(() => []));
+    const [commentId, setCommentId] = useState(useMemo(() => [])); 
     const [commentUser, setCommentUser] = useState('');
     const [commentAdmin, setCommentAdmin] = useState('');
 
@@ -149,16 +152,42 @@ function App() {
     const [opinionUser, setOpinionUser] = useState('');
     const [opinionAdmin, setOpinionAdmin] = useState('');
 
-    const comments = [];
-    let commentsCollection = [];
+    const comments = useMemo(() => []);
+    const commentsList = useMemo(() => []);
+    const commentsId = useMemo(() => []);
+    let commentsCollection = useMemo(() => []);
 
     const opinions = [];
     let opinionsCollection = [];
 
     useEffect(() => {        
-        queryComments.then((doc) => {
-            doc.docs.map((e) => { comments.push(e.data()); });
-            setComment(comments);
+        let lastIndex, index;
+        const querySnapshot = getDocs(queryComments);
+
+        querySnapshot.then((doc) => {
+            doc.docs.map((e) => { comments.push(e.data()); setComment(comments); console.log(e.id); index = e.data().id_discussion; lastIndex = e._key.path.segments[e._key.path.segments.length-1]; });
+
+            const queryCommentsList = getDocs(collection(db, `pipingdata/comments/discussion/${lastIndex}/discussion_${index}`));
+
+            queryCommentsList.then((doc) => {
+                doc.docs.map((e) => { commentsList.push(e.data()); });
+                setCommentList(commentsList);
+            })
+
+        });
+        /*const querySnapshot = getDocs(queryComments);
+            querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            console.log(doc.id, " => ", doc.data());
+        });*/
+    }, []);
+
+    useEffect(() => {     
+        const querySnapshot = getDocs(queryComments);
+
+        querySnapshot.then((doc) => {
+            doc.docs.map((e) => { commentsId.push(e.id); });
+            setCommentId(commentsId);
         });
     }, []);
 
@@ -167,8 +196,8 @@ function App() {
     }   else if (comment.length < 1) {
             commentsCollection = language.no_comment;
         }   else {
-                for (let i = 0; i < comment.length; i++)   {
-                    commentsCollection[i]   =   <div>
+                for (let i = 0; i < comment.length; i++) {
+                    commentsCollection[i]   =   <div key={`bloc_comment_${i}`}>
                                                     <div key={`comment_${i}`} style={{ margin: "10px 0 25px" }}>
                                                         <div key={`bloc_header_comment_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
                                                             <small key={`header_comment_${i}`}><strong style={{ color: "blue" }}>{ `${comment[i].name}` }</strong><span style={{ fontSize: "11px", fontWeight: "bold", color: "maroon" }}>{ ` ${comment[i].date}` }</span></small>
@@ -191,7 +220,6 @@ function App() {
                                                             </div>     
 
                                                             <textarea key={`body_comment_admin_${i}`} onChange={e => setCommentAdmin(e.target.value)} defaultValue={comment[i].comment} disabled={(comment[i].archived != true ? false : true)} style={{ margin: "5px 0", padding: "7.5px", display: "flex", border: (comment[i].archived != true ? "0.5px solid silver" : "none"), borderRadius: "5px", color: "black", backgroundColor: (comment[i].archived != true ? false : "transparent") }} id="comment" name="comment" rows="3" cols="25">
-
                                                             </textarea>
 
                                                             {

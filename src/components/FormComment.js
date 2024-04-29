@@ -75,7 +75,7 @@ const FormComment = (props) => {
                 addComments(db, userData).then(() => {
                     displayMsg(`${messages.comment_succes} ${"\u2714"}`);
                     setMsgColor(() => "lightgreen");
-                    getDocs(collection(db, "comments-pipingdata.app"));
+                    //getDocs(collection(db, "comments-pipingdata.app"));
                 }).catch((e) => {
                     console.log("error!", e);
                 });

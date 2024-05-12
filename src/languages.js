@@ -15,7 +15,7 @@ export const languages = {
              register_beta: 'S\'inscrire à la newsletter et au programme Bêta',
              pipefitter: 'Tuyauteur',
              boilermaker: 'Chaudronnier',
-             text_informations: 'Inscrivez-vous à notre newsletter pour suivre notre actualité et être informé des mises à jour. Vous aurez également l\'opportunité d\'essayer les nouvelles fonctionnalités en participant en avant-première à nos programmes bêta, ouverts en partie aux suggestions et commentaires.',
+             text_informations: 'Bientôt notre newsletter pour suivre notre actualité et être informé des mises à jour. Vous aurez également l\'opportunité d\'essayer les nouvelles fonctionnalités en participant en avant-première à nos programmes bêta, ouverts en partie aux suggestions et commentaires.',
              label_comment: 'Poster un commentaire',
              send: 'Envoyer',
              participate: 'Participez',
@@ -40,7 +40,8 @@ export const languages = {
              polices_size: 'tailles des polices',
              formats_elbow: '(2D, 3D, 5D)',
              normes_diameter: '(ISO / ANSI)',
-             progress: '(En cours...)'
+             progress: '(En cours...)',
+             annoucement_comment: 'Bientôt ici un espace pour commentaires, avis et suggestions'
             }, 
 
     'en':   {text_hook: 'Data visualization for industrial piping', 
@@ -59,7 +60,7 @@ export const languages = {
              register_beta: 'Subscribe to the newsletter and beta program',
              pipefitter: 'Pipefitter',
              boilermaker: 'Boilermaker',
-             text_informations: 'Sign up for our newsletter to stay updated on our latest news and receive updates. You\'ll also have the opportunity to try out new features by participating in our beta programs, which are partially open to suggestions and feedback.',
+             text_informations: 'Soon our newsletter to stay updated on our latest news and receive updates. You\'ll also have the opportunity to try out new features by participating in our beta programs, which are partially open to suggestions and feedback.',
              label_comment: 'Post a comment',
              send: 'Send',
              participate: 'Participate',
@@ -84,6 +85,7 @@ export const languages = {
              polices_size: 'Font size',
              formats_elbow: '(2D, 3D, 5D)',
              normes_diameter: '(ISO / ANSI)',
-             progress: '(In progress...)'
+             progress: '(In progress...)',
+             annoucement_comment: 'Soon here a space for comments, opinions and suggestions'
             }
 }

@@ -496,7 +496,18 @@ function App( {allComments} ) {
                 <Aside key={"contain-bloc-beta"} id="contain-bloc-beta">
                     <Section id="bloc-beta">
                         <Section key={"beta-registered"} id="beta-registered">
-                            <FormNewsLetter value={language.signup} register_beta={language.register_beta} pipeFitter={language.pipefitter} boilerMaker={language.boilermaker} />
+                        <div style={{ display: "flex", flexDirection: "column" }}>
+                        
+                        <Section style={{ width: "75%", alignSelf: "center" }} key={"comment-form"} id="comment-form">
+                            <h3>{language.annoucement_comment}</h3>
+                        </Section>
+
+                    <Aside key={"comments-collection"} style={{ flex: "100%", flexDirection: "row", justifyContent: "center", alignItems: "center", padding: "25px 150px", borderTop: "0.5px solid black", backgroundColor: "#FFFFEF" }}>                    
+                        <div style={{ display: "flex", flex: "50%", flexDirection: "column-reverse" }}>
+                            { "Pas de commentaires" }
+                        </div>
+                    </Aside>
+                </div>
                         </Section>
 
                         <Section key={"beta-text"} id="beta-text">
@@ -510,44 +521,6 @@ function App( {allComments} ) {
                         </Section>
                     </Section>
                 </Aside> 
-
-                <div style={{ display: "flex", flexDirection: "column" }}>
-                    <Section style={{ width: "75%", alignSelf: "center" }} key={"comment-form"} id="comment-form">
-                        <h3>Bientôt ici un espace pour commentaires et suggestions</h3>
-                    </Section>
-
-                    <Aside key={"comments-collection"} style={{ flex: "100%", flexDirection: "row", justifyContent: "center", alignItems: "center", padding: "25px 150px", borderTop: "0.5px solid black", backgroundColor: "#FFFFEF" }}>                    
-                        <div style={{ display: "flex", flex: "50%", flexDirection: "column-reverse" }}>
-                            { "Pas de commentaires" }
-                        </div>
-                    </Aside>
-                </div>
-
-
-                <Aside key={"contain-bloc-opinion"} id="contain-bloc-opinion">
-                    <Section id="bloc-opinion">
-                        <Section key={"opinion-text"} id="opinion-text">
-                            <article>
-                                <h2 key={"opinion-title"} style={{ textAlign: "center", color: "white" }}>{language.participate}</h2>
-                                
-                                <p key={"opinion-msg"} style={{ fontSize: "18px", lineHeight: "40px", color: "white", textAlign: "center" }}>
-                                    {language.text_participate}
-                                </p>
-                            </article>
-                        </Section>
-
-                        <Section key={"opinion-registered"} id="opinion-registered">
-                            <FormOpinion labelComment={language.review} labelSubmit={language.publish} />
-                        </Section>
-                    </Section>
-                </Aside>
-
-
-                <Aside key={"opinions-collection"} style={{ flex: "100%", flexDirection: "row", justifyContent: "center", alignItems: "center", padding: "25px 150px", backgroundColor: "white" }}>                    
-                    <div style={{ flex: "50%" }}>
-                        { opinionsCollection }
-                    </div>
-                </Aside>
 
 
                 <Aside key={"contain-bloc-footer"} style={{ display: "flex", flexDirection: "column", width: "100%", justifyContent: "center", alignItems: "center" }}>

@@ -4,8 +4,8 @@ import Form from './../components/Form';
 import { languages } from './../languages.js';
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, addDoc, getDoc, getDocs, query, limit } from "firebase/firestore";
-import { firebaseConfig, setUsers, addUsers, addComments, addCollectionOfComments, addOpinions, getPseudos, getNamesOfOpinions,  getOpinions, getLastIndex, increaseIndex } from "./../api/config";
+import { getFirestore, collection, doc, setDoc, addDoc, getDoc, getDocs, query, orderBy, limit } from "firebase/firestore";
+import { firebaseConfig, setUsers, addUsers, addComments, getComments, addCollectionOfComments, addOpinions, getPseudos, getNamesOfOpinions,  getOpinions, getLastIndex, increaseIndex } from "./../api/config";
 
 const FormComment = (props) => {
 
@@ -17,6 +17,14 @@ const FormComment = (props) => {
     const [msgComment, setMsgComment] = useState(false);
     const [msgContentComment, setMsgContentComment] = useState("");
     const [msgColor, setMsgColor] = useState("");
+
+
+
+
+    const [allComments, setAllComments] = useState(useMemo(() => []));
+
+
+
     
     let messages = {
         comment_succes: "Commentaire posté",
@@ -55,6 +63,28 @@ const FormComment = (props) => {
         }, "5000");
     }
 
+
+async function getAllComments (db) {
+    const q = query(collection(db, `pipingdata/comments/discussion`), orderBy("id_discussion", "desc"));
+
+    const querySnapshot = await getDocs(q);
+
+    let tab = [];
+    let i = 0;
+
+    querySnapshot.forEach((doc) => {
+        tab[i] = {id: doc.id, data: doc.data()};
+        i++;
+    });
+
+    i = 0;
+    
+    return tab;
+}
+
+
+
+
     const processComment = (e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -75,7 +105,14 @@ const FormComment = (props) => {
                 addComments(db, userData).then(() => {
                     displayMsg(`${messages.comment_succes} ${"\u2714"}`);
                     setMsgColor(() => "lightgreen");
-                    //getDocs(collection(db, "comments-pipingdata.app"));
+                    getDocs(collection(db, "comments-pipingdata.app"));
+
+                    let resultComments = getAllComments(db);
+
+                    return resultComments;
+                }).then((elm) => {
+                    //console.log(elm);
+                    setAllComments(() => elm);
                 }).catch((e) => {
                     console.log("error!", e);
                 });
@@ -86,8 +123,12 @@ const FormComment = (props) => {
             setMsgColor(() => "orange");
         } 
 
+        
+
         resetComment();
     };
+
+    //console.log(comments);
 
     const thisId = props.id;
     const thisClass = props.className;
@@ -98,7 +139,7 @@ const FormComment = (props) => {
     const thisValue = props.value;
 // ICI METTRE LES CLES KEY
     return (
-        <div style={{ position: "relative", marginBottom: "5%" }}>
+        <div allcomments={props.allComments} style={{ position: "relative", marginBottom: "5%" }}>
             <form onSubmit={processComment} style={{ display: "flex", flexDirection: "column", justifyContent: "center" }} id={thisId}>
                 <label style={{ padding: "15px 0", backgroundColor: "gray", textAlign: "center", borderRadius: "15px 15px 0 0", color: "white", fontSize: "14px", fontWeight: "bold" }} id="opinion">{props.labelComment}</label>
                 <textarea ref={commentRef} className={"Text_comment"}>{ThisText}</textarea>

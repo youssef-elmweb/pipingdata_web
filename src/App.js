@@ -17,7 +17,7 @@ import EditableBar from './components/EditableBar';
 import { languages } from './languages.js';
 
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, doc, setDoc, getDoc, getDocs, orderBy, addDoc, query, limit } from "firebase/firestore";
+import { getFirestore, collection, doc, setDoc, getDoc, getDocs, addDoc, orderBy, where, query, limit } from "firebase/firestore";
 import { firebaseConfig, setUsers, getUsers, getComments, getLastIndex, increaseIndex } from "./api/config";
 
 const admin = {
@@ -133,17 +133,20 @@ const LINKS_APP =    <Section key={`play-stores`} id="play-stores" className="pl
                         </Link>
                     </Section>
 
-function App() {
+function App( {allComments} ) {
 
-    const queryComments = query(collection(db, "pipingdata/comments/discussion"), orderBy("id_discussion", "desc"));
-    
+    const queryComments = getDocs(query(collection(db, "pipingdata/comments/discussion"), orderBy("id_discussion", "desc")));
+    const queryResponsesComments = getDocs(query(collection(db, "pipingdata/comments/discussion"), orderBy("id_discussion_admin", "desc")));
     const queryOpinions = getDocs(collection(db, "opinions-pipingdata.app"));
 
     const [currentLanguage, setCurrentLanguage] = useState("fr"); 
     var language = languages[currentLanguage]; // default language
 
-    const [comment, setComment] = useState(useMemo(() => [])); 
-    const [commentList, setCommentList] = useState(useMemo(() => []));
+console.log(allComments);
+    
+
+    const [comment, setComment] = useState([]); 
+    const [responseComment, setResponseComment] = useState([]);
     const [commentId, setCommentId] = useState(useMemo(() => [])); 
     const [commentUser, setCommentUser] = useState('');
     const [commentAdmin, setCommentAdmin] = useState('');
@@ -153,42 +156,62 @@ function App() {
     const [opinionAdmin, setOpinionAdmin] = useState('');
 
     const comments = useMemo(() => []);
-    const commentsList = useMemo(() => []);
+    const responsesComments = useMemo(() => []);
+    
     const commentsId = useMemo(() => []);
     let commentsCollection = useMemo(() => []);
 
     const opinions = [];
     let opinionsCollection = [];
+    
+    let index;
+    
+    useEffect(() => {        
+        let tableResult = {id: null, commentData: null};
+        let tableResponseResult = {id: null, commentData: null};
+
+        queryComments.then((doc) => {
+            doc.docs.map((e, i) => { 
+                tableResult.id = e.id;
+                tableResult.commentData = e.data();
+
+                comments[i] = {id: e.id, commentData: e.data()}; 
+                
+                //console.log(comments[i].id);
+                //console.log(comments[i].commentData.id);
+                //console.log("");
+
+            });
+        });
+
+
+        queryResponsesComments.then((doc) => {
+            doc.docs.map((e, i) => { 
+                tableResult.id = e.id;
+                tableResult.commentData = e.data();
+
+                comments[i] = {id: e.id, commentData: e.data()}; 
+                
+                tableResponseResult.id = e.id;
+                tableResponseResult.commentData = e.data();
+
+                responsesComments[i] = {id: e.id, commentData: e.data()}; 
+            });
+        });
+
+        
+
+        //let commentsOrdered = comments.filter((e) => comments.id);
+
+        setComment(comments); 
+        setResponseComment(responsesComments);
+    }, []);  
 
     useEffect(() => {        
-        let lastIndex, index;
-        const querySnapshot = getDocs(queryComments);
-
-        querySnapshot.then((doc) => {
-            doc.docs.map((e) => { comments.push(e.data()); setComment(comments); console.log(e.id); index = e.data().id_discussion; lastIndex = e._key.path.segments[e._key.path.segments.length-1]; });
-
-            const queryCommentsList = getDocs(collection(db, `pipingdata/comments/discussion/${lastIndex}/discussion_${index}`));
-
-            queryCommentsList.then((doc) => {
-                doc.docs.map((e) => { commentsList.push(e.data()); });
-                setCommentList(commentsList);
-            })
-
-        });
-        /*const querySnapshot = getDocs(queryComments);
-            querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data());
-        });*/
-    }, []);
-
-    useEffect(() => {     
-        const querySnapshot = getDocs(queryComments);
-
-        querySnapshot.then((doc) => {
+        queryComments.then((doc) => {
             doc.docs.map((e) => { commentsId.push(e.id); });
-            setCommentId(commentsId);
         });
+        setCommentId(commentsId);
     }, []);
 
     if (comment == null) {
@@ -196,39 +219,35 @@ function App() {
     }   else if (comment.length < 1) {
             commentsCollection = language.no_comment;
         }   else {
+            //console.log(comment, "ici");
                 for (let i = 0; i < comment.length; i++) {
-                    commentsCollection[i]   =   <div key={`bloc_comment_${i}`}>
-                                                    <div key={`comment_${i}`} style={{ margin: "10px 0 25px" }}>
-                                                        <div key={`bloc_header_comment_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
-                                                            <small key={`header_comment_${i}`}><strong style={{ color: "blue" }}>{ `${comment[i].name}` }</strong><span style={{ fontSize: "11px", fontWeight: "bold", color: "maroon" }}>{ ` ${comment[i].date}` }</span></small>
+                    commentsCollection[i]   =   <div key={`bloc_comment_${i}`} style={{ backgroundColor: "pink" }}>
+
+
+                                                    <div key={`comment_${i}`} style={{ display: "inline-flex", flexDirection: "column", margin: "25px 0", backgroundColor: "green" }}>
+                                                        <div key={`bloc_name_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
+                                                            <small key={`name_${i}`}><strong style={{ color: "blue" }}>{ `${comment[i].commentData.name}` }</strong><span style={{ fontSize: "11px", fontWeight: "bold", color: "maroon" }}>{ ` le ${comment[i].commentData.date}` }</span><i>{`${comment[i].commentData.id_discussion}`}</i></small>
                                                         </div>    
 
-                                                        <textarea key={`body_comment_${i}`} onChange={e => setCommentUser(e.target.value)} defaultValue={comment[i].comment} disabled={(comment[i].archived != true ? false : true)} style={{ margin: "5px 0", padding: "7.5px", display: "flex", border: (comment[i].archived != true ? "0.5px solid silver" : "none"), borderRadius: "5px", color: "black", backgroundColor: (comment[i].archived != true ? false : "transparent") }} id="comment" name="comment" rows="3" cols="25">
+                                                        <div key={`bloc_comment_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
+                                                            <small key={`comment_${i}`}><strong style={{ color: "blue" }}>{ `${comment[i].commentData.comment}` }</strong></small>
+                                                        </div>  
+
+                                                        <textarea key={`omment_response_edit${i}`} onChange={e => setCommentUser(e.target.value)} defaultValue={""} disabled={(comment[i].commentData.archived != true ? false : true)} style={{ margin: "5px 0", padding: "7.5px", display: "flex", border: (comment[i].commentData.archived != true ? "0.5px solid silver" : "none"), borderRadius: "5px", color: "black", backgroundColor: (comment[i].commentData.archived != true ? false : "transparent") }} id="comment" name="comment" rows="3" cols="25">
                                                         </textarea>
 
                                                         {
-                                                            (comment[i].archived != true ? 
-                                                                <EditableBar key={`editable_bar_user${i}`} i={i} idUserDelete={user.delete} idUserEdit={user.edit} idUserUpdate={user.update} idUserClose={user.close} />
+                                                            (comment[i].commentData.archived != true ? 
+                                                                <EditableBar id={comment[i].id} id_discussion={comment[i].commentData.id_discussion} commentUser={commentUser} key={`editable_bar_user${i}`} i={i} idUserDelete={user.delete} idUserEdit={user.edit} idUserUpdate={user.update} idUserClose={user.close} />
                                                             : false)
                                                         }
-                                                    </div>
+                                                    </div> 
 
-                                                    <div key={`comment_admin_${i}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>{/* alignItems: "flex-end" for mobile */}
-                                                        <div key={`bloc_comment_admin_${i}`} style={{ display: "inline-flex", flexDirection: "column" }}>
-                                                            <div key={`bloc_header_comment_admin_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
-                                                                <small key={`header_comment_admin_${i}`}><strong style={{ color: "forestgreen" }}>{ "Admin" }</strong><span style={{ fontSize: "11px", fontWeight: "bold", color: "maroon" }}>{ ` ${comment[i].date}` }</span></small>
-                                                            </div>     
 
-                                                            <textarea key={`body_comment_admin_${i}`} onChange={e => setCommentAdmin(e.target.value)} defaultValue={comment[i].comment} disabled={(comment[i].archived != true ? false : true)} style={{ margin: "5px 0", padding: "7.5px", display: "flex", border: (comment[i].archived != true ? "0.5px solid silver" : "none"), borderRadius: "5px", color: "black", backgroundColor: (comment[i].archived != true ? false : "transparent") }} id="comment" name="comment" rows="3" cols="25">
-                                                            </textarea>
 
-                                                            {
-                                                                (comment[i].archived != true ? 
-                                                                    <EditableBar key={`editable_bar_admin${i}`} i={i} idAdminDelete={admin.delete} idAdminEdit={admin.edit} idAdminUpdate={admin.update} idAdminClose={admin.close} />
-                                                                : false)
-                                                            }
-                                                        </div>
-                                                    </div>
+
+                                               
+
                                                 </div>
                 }
             }
@@ -473,11 +492,11 @@ function App() {
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <Section style={{ width: "75%", alignSelf: "center" }} key={"comment-form"} id="comment-form">
-                        <FormComment labelComment={language.label_comment} send={language.send} />
+                        <FormComment allcomments={allComments} labelComment={language.label_comment} send={language.send} />
                     </Section>
 
                     <Aside key={"comments-collection"} style={{ flex: "100%", flexDirection: "row", justifyContent: "center", alignItems: "center", padding: "25px 150px", borderTop: "0.5px solid black", backgroundColor: "#FFFFEF" }}>                    
-                        <div style={{ flex: "50%" }}>
+                        <div style={{ display: "flex", flex: "50%", flexDirection: "column-reverse" }}>
                             { commentsCollection }
                         </div>
                     </Aside>

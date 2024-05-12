@@ -156,8 +156,8 @@ export async function addComments(db, userData) {
     let date = newDate.getDate();
     let month = newDate.getMonth();
     let year = newDate.getFullYear();
-    let hour = newDate.getHours();
-    let minute = newDate.getMinutes();
+    let hour = String(newDate.getHours()).padStart(2, '0');
+    let minute = String(newDate.getMinutes()).padStart(2, '0');
 
     let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
 
@@ -181,21 +181,67 @@ export async function addComments(db, userData) {
         comment: userData.comment,
         job: "pipefitter",
         archived: false,
-        date: dateNow
+        date: dateNow,
+        admin: false
     });
 
-    const q = query(docRef, where("id_discussion", "==", id_discussion));
-
-    let tabComments = [];
+    const q = query(collection(db, `pipingdata/comments/discussion`), orderBy("id_discussion", "desc"));
 
     const querySnapshot = await getDocs(q);
 
     querySnapshot.forEach((doc) => {
-      console.log(doc.id, " => ", doc.data());
-
-      const docRef = collection(db, `pipingdata/comments/discussion/${doc.id}/discussion_${id_discussion}`);
+      //console.log(doc.id, " => ", doc.data());
       
-      addDoc(docRef, {
+    })
+}
+
+
+
+
+export async function responseComments(db, userData) { 
+    let newDate = new Date();
+
+    let day = newDate.getDay();
+    let date = newDate.getDate();
+    let month = newDate.getMonth();
+    let year = newDate.getFullYear();
+    let hour = String(newDate.getHours()).padStart(2, '0');
+    let minute = String(newDate.getMinutes()).padStart(2, '0');
+
+    let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
+
+    let addComments = [];
+    
+    const docRef = collection(db, `pipingdata/comments/discussion`);
+
+    const qDocRef = query(docRef, orderBy("id_discussion", "desc"));
+
+    const docSnap = await getDocs(qDocRef);
+
+    docSnap.docs.map(element => {
+        addComments.push(element);
+    });
+
+    let id_discussion = Number(addComments.length + 1);
+
+    addDoc(docRef, {
+        id: userData.id,
+        id_discussion_admin: Number(userData.id_discussion_admin),
+        name: "admin",
+        comment: userData.comment,
+        archived: true,
+        date: dateNow,
+        admin: userData.admin
+    });
+
+    /*const q = query(docRef, where("id_discussion", "==", id_discussion));
+
+    const querySnapshot = await getDocs(q);
+
+    querySnapshot.forEach((doc) => {
+      //console.log(doc.id, " => ", doc.data());
+      
+      /*addDoc(docRef, {
         id_discussion,
         name: "youssef",
         comment: userData.comment,
@@ -203,8 +249,11 @@ export async function addComments(db, userData) {
         archived: false,
         date: dateNow
     });
-    })
+    })*/
 }
+
+
+
 
 export async function addOpinions(db, userData) { 
     const opinionsCol = collection(db, 'opinions-pipingdata.app');

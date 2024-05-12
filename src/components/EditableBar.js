@@ -1,8 +1,91 @@
-import React from 'react';
+import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import Section from '.././components/Section';
 import Link from '.././components/Link';
+import Button from '.././components/Button';
+
+import { initializeApp } from "firebase/app";
+import { getFirestore, collection, doc, setDoc, addDoc, getDoc, getDocs, query, limit } from "firebase/firestore";
+import { firebaseConfig, setUsers, addUsers, responseComments, addCollectionOfComments, addOpinions, getPseudos, getNamesOfOpinions,  getOpinions, getLastIndex, increaseIndex } from "./../api/config";
 
 const EditableBar = (props) => {
+
+    const days = ["dimanche", "lundi", "mardi", "mercredi", "jeudi", "vendredi", "samedi"];
+    const months = ["janvier", "février", "mars", "avril", "mai", "juin", "juillet", "aout", "septembre", "octobre", "novembre", "décembre"];
+
+    const [userData] = useState({name: "admin", id: null, id_discussion_admin: null, comment: null, date: null, admin: true});
+
+    const [msg, setMsg] = useState(false);
+    const [msgContent, setMsgContent] = useState("");
+    const [msgComment, setMsgComment] = useState(false);
+    const [msgContentComment, setMsgContentComment] = useState("");
+    const [msgColor, setMsgColor] = useState("");
+
+    let messages = {
+        comment_succes: "Commentaire posté",
+        comment_fail: "Avis entre 3 et 90 caractères"
+    };
+
+    const displayMsg = (msg_content) => {
+        setMsg(() => true);
+        setMsgContent(() => msg_content);
+
+        setMsgComment(() => true);
+        setMsgContentComment(() => msg_content);
+
+        setTimeout(() => {
+            setMsg(() => false);
+            setMsgContent(() => "");
+
+            setMsgComment(() => false);
+            setMsgContentComment(() => "");
+
+            setMsgColor(() => "");
+        }, "5000");
+    }
+
+    const processComment = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let newDate = new Date();
+
+        let day = newDate.getDay();
+        let date = newDate.getDate();
+        let month = newDate.getMonth();
+        let year = newDate.getFullYear();
+        let hour = String(newDate.getHours()).padStart(2, '0');
+        let minute = String(newDate.getMinutes()).padStart(2, '0');
+    
+        let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
+
+        userData.id = props.id;
+        userData.id_discussion_admin = `${props.id_discussion}`;
+        userData.comment = props.commentUser;
+        userData.date = dateNow;
+        userData.admin = true;
+
+        let app = initializeApp(firebaseConfig);
+        let db = getFirestore(app);
+
+        let commentToArray = props.commentUser.split("");
+        
+        if (commentToArray.length > 2 && commentToArray.length < 135) {
+            responseComments(db, userData).then(() => {
+                displayMsg(`${messages.comment_succes} ${"\u2714"}`);
+                setMsgColor(() => "lightgreen");
+            }).catch((e) => {
+                console.log("error!", e);
+            });
+        }   
+        if (props.commentUser.length < 2 || props.commentUser.length > 91) {
+            displayMsg(`${messages.comment_fail} ${"\u24D8"}`);
+            setMsgColor(() => "orange");
+        } 
+
+        console.log(userData);
+    };
+
+
 
     return ( 
         <Section style={{ display: "inline-flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start" }}>
@@ -12,11 +95,11 @@ const EditableBar = (props) => {
                 </svg>
             </Link>
 
-            <Link key={`edit_${props.i}`} id={props.idUserEdit || props.idAdminEdit} className={"Edit_icone"} style={{ width: "20px", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start"  }} href="#">
+            <Button commentUser={props.commentUser} display={(e) => { processComment(e) }} key={`edit_${props.i}`} id={props.idUserEdit || props.idAdminEdit} className={"Edit_icone"} style={{ width: "20px", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start"  }} href="#">
                 <svg style={{ margin: "0 7.5px" }} xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">
                     <path d="M760-200v-160q0-50-35-85t-85-35H273l144 144-57 56-240-240 240-240 57 56-144 144h367q83 0 141.5 58.5T840-360v160h-80Z"/>
                 </svg>
-            </Link>
+            </Button>
 
             <Link key={`update_${props.i}`} id={props.idUserUpdate || props.idAdminUpdate} className={"Edit_icone"} style={{ width: "20px", display: "flex", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start"  }} href="#">
                 <svg style={{ margin: "0 7.5px" }} xmlns="http://www.w3.org/2000/svg" height="20" viewBox="0 -960 960 960" width="20">

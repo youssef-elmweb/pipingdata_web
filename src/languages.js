@@ -31,8 +31,16 @@ export const languages = {
              thank: 'Merci pour votre confiance et votre soutien.',
              trial_version: 'Version d\'essai',
              text_trial_version: 'Voir sur youTube pour cette fonctionnalité',
-             back: 'Revenir'
-
+             back: 'Revenir',
+             features: 'Fonctionalités :',
+             diameters_sms: 'diamètres SMS',
+             languages_number: '18 languages',
+             units_measure: 'mm et pouces',
+             settings_number: 'reglages des chiffres',
+             polices_size: 'tailles des polices',
+             formats_elbow: '(2D, 3D, 5D)',
+             normes_diameter: '(ISO / ANSI)',
+             progress: '(En cours...)'
             }, 
 
     'en':   {text_hook: 'Data visualization for industrial piping', 
@@ -67,6 +75,15 @@ export const languages = {
              thank: 'Thank you for your trust and support.',
              trial_version: 'Trial version',
              text_trial_version: 'Watch on YouTube for this feature',
-             back: 'Back'
+             back: 'Back',
+             features: 'Features :',
+             diameters_sms: 'SMS diameters',
+             languages_number: '(18 languages)',
+             units_measure: 'Mm and inches',
+             settings_number: 'Settings the numbers',
+             polices_size: 'Font size',
+             formats_elbow: '(2D, 3D, 5D)',
+             normes_diameter: '(ISO / ANSI)',
+             progress: '(In progress...)'
             }
 }

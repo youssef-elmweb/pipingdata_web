@@ -26,7 +26,7 @@ const FormOpinion= (props) => {
     const opinionRef = useRef(null);
     const submitOpinion = useRef(null);
 
-    const [userData] = useState({name: null, opinion: null});
+    const [userData] = useState({name: null, opinion: null, opinion_admin: ""});
 
     useEffect(() => {
         submitOpinion.current.addEventListener('click', processOpinion);

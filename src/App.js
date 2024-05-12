@@ -137,13 +137,10 @@ function App( {allComments} ) {
 
     const queryComments = getDocs(query(collection(db, "pipingdata/comments/discussion"), orderBy("id_discussion", "desc")));
     const queryResponsesComments = getDocs(query(collection(db, "pipingdata/comments/discussion"), orderBy("id_discussion_admin", "desc")));
-    const queryOpinions = getDocs(collection(db, "opinions-pipingdata.app"));
+    const queryOpinions = getDocs(query(collection(db, "pipingdata/opinions/discussion"), orderBy("date", "desc")));
 
     const [currentLanguage, setCurrentLanguage] = useState("fr"); 
-    var language = languages[currentLanguage]; // default language
-
-console.log(allComments);
-    
+    var language = languages[currentLanguage]; // default language    
 
     const [comment, setComment] = useState([]); 
     const [responseComment, setResponseComment] = useState([]);
@@ -200,9 +197,6 @@ console.log(allComments);
         });
 
         
-
-        //let commentsOrdered = comments.filter((e) => comments.id);
-
         setComment(comments); 
         setResponseComment(responsesComments);
     }, []);  
@@ -266,10 +260,11 @@ console.log(allComments);
     if (opinion == null) {
         opinionsCollection = "Chargement...";
     }   else if (opinion.length < 1) {
+        console.log(opinion)
             opinionsCollection = language.no_opinion;
         }   else {
                 for (let i = 0; i < opinion.length; i++) {
-                    opinionsCollection[i]   =   <div>
+                    opinionsCollection[i]   =   <div key={`bloc-opinion_${i}`}>
                                                     <div key={`opinion_${i}`} style={{ margin: "10px 0 25px" }}>
                                                         <div key={`bloc_header_opinion_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
                                                             <small key={`header_opinion_${i}`}><strong style={{ color: "blue" }}>{ `${opinion[i].name}` }</strong><span style={{ fontSize: "11px", fontWeight: "bold", color: "maroon" }}>{ ` ${opinion[i].date}` }</span></small>
@@ -278,16 +273,18 @@ console.log(allComments);
                                                         <p key={`body_opinion_user_${i}`} id={`body_opinion_user_${i}`} style={{ margin: "5px 0", padding: "7.5px", display: "flex", color: "black" }}>{opinion[i].opinion}</p>
                                                     </div>
 
+                                                {(opinion[i].opinion_admin !== "" ?
                                                     <div key={`opinion_admin_${i}`} style={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>{/* alignItems: "flex-end" for mobile */}
                                                         <div key={`bloc_opinion_admin_${i}`} style={{ display: "inline-flex", flexDirection: "column" }}>
                                                             <div key={`bloc_header_opinion_admin_${i}`} style={{ padding: "5px 7.5px", display: "inline-flex", borderRadius: "10px" }}>
                                                                 <small key={`header_opinion_admin_${i}`}><strong style={{ color: "forestgreen" }}>{ "Admin" }</strong><span style={{ fontSize: "11px", fontWeight: "bold", color: "maroon" }}>{ ` ${opinion[i].date}` }</span></small>
                                                             </div>     
 
-                                                            <p key={`body_opinion_admin_${i}`} id={`body_opinion_admin_${i}`} style={{ margin: "5px 0", padding: "7.5px", display: "flex", color: "black" }}>{opinion[i].opinion}</p>
+                                                            <p key={`body_opinion_admin_${i}`} id={`body_opinion_admin_${i}`} style={{ margin: "5px 0", padding: "7.5px", display: "flex", color: "black" }}>{opinion[i].opinion_admin}</p>
                                                         </div>
-                                                    </div>
-                                                </div>
+                                                    </div> 
+                                                : false)}
+                                                </div> 
                 }
             }
             
@@ -409,21 +406,45 @@ console.log(allComments);
                     </Aside>
                 </Section>  
 
-                <Aside key={`contain-bloc-trust-list`} id="contain-bloc-list">
-                    <Section id={"bloc-trust-list"}>
-                        <Section key={`trust-list`} style={{ display: "flex", width: "100%", justifyContent: "center", alignItems: "center", backgroundColor: "transparent" }}>
-                            <article style={{ display: "flex", width: "auto", justifyContent: "center", alignItems: "center", fontSize: "18px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
+
+
+                <Aside key={`contain-bloc-trust-list`} id="contain-bloc-functions">
+                    <Section id={"bloc-trust-functions"}>
+                        <Section key={`bloc-trust-badge`} key={`bloc-trust-badge`} id="bloc-trust-badge">
+                            <article style={{ display: "flex", flexDirection: "column", width: "auto", marginTop: "7.5%", marginBottom: "7.5%", justifyContent: "center", alignItems: "center", fontSize: "18px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
+                                <h4 style={{ color: "white", textDecoration: "underline", alignSelf: "flex-start" }}>{language.features}</h4>
                                 <ul id="list-functions" style={{ display: "flex", width: "100%", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", backgroundColor: "transparent" }}>
-                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "26px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ marginLeft: "10px", fontSize: "18px", color: "black", textAlign: "left" }}>{language.simple_elbow}</p></li>
-                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "26px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ marginLeft: "10px", fontSize: "18px", color: "black", textAlign: "left" }}>{language.double_elbow}</p></li>
-                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "26px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ marginLeft: "10px", fontSize: "18px", color: "black", textAlign: "left" }}>{language.double_elbow_oriented}</p></li>
-                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "26px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ marginLeft: "10px", fontSize: "18px", color: "black", textAlign: "left" }}>{language.slices_elbow}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.simple_elbow}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.double_elbow}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.double_elbow_oriented}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.slices_elbow}</p></li>
                                 </ul>
                             </article>
                         </Section>
 
+                        <Section key={`bloc-trust-youtube`} id="bloc-trust-youtube">
+                            <article style={{ display: "flex", flexDirection: "column", width: "auto", marginTop: "7.5%", marginBottom: "7.5%", justifyContent: "center", alignItems: "center", fontSize: "18px", textAlign: "center", lineHeight: "0.25", backgroundColor: "transparent" }}>
+                                <h4 style={{ color: "white", textDecoration: "underline", alignSelf: "flex-start" }}>Options :</h4>
+                                <ul id="list-functions" style={{ display: "flex", width: "100%", flexDirection: "column", justifyContent: "flex-start", alignItems: "flex-start", backgroundColor: "transparent" }}>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.languages_number}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.units_measure}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.settings_number}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.slices_elbow}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.polices_size}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.formats_elbow}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "green", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{language.normes_diameter}</p></li>
+                                    <li style={{ display: "flex", width: "100%", flexDirection: "row", justifyContent: "flex-start", alignItems: "center", backgroundColor: "transparent" }}><Span style={{ fontSize: "21px", color: "orange", fontWeight: "bold" }}>&#x2714;</Span><p style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left" }}>{`${language.diameters_sms}`}</p><span style={{ lineHeight: "1.25", marginLeft: "10px", fontSize: "18px", color: "white", textAlign: "left", fontSize: "12px" }}>{language.progress}</span></li>
+                                </ul>
+                            </article>
+                        </Section>
+                    </Section>
+                </Aside> 
+
+
+                <Aside key={`contain-bloc-trust-list`} id="contain-bloc-list">
+                    <Section id={"bloc-trust-list"}>
                         <Section key={`bloc-trust-badge`} key={`bloc-trust-badge`} id="bloc-trust-badge">
-                            <Section style={{ display: "flex", width: "150px", justifyContent: "flex-end", alignItems: "center" }}>
+                            <Section style={{ display: "flex", width: "200px", justifyContent: "flex-end", alignItems: "center" }}>
                                 <Img 
                                     id="badge_trust"
                                     style={{ maxWidth: "100%" }}
@@ -434,7 +455,7 @@ console.log(allComments);
                         </Section>
 
                         <Section key={`bloc-trust-youtube`} id="bloc-trust-youtube">
-                            <Section style={{ display: "flex", width: "150px", flexDirection: "column", justifyContent: "flex-end", alignItems: "center" }}>
+                            <Section style={{ display: "flex", width: "200px", flexDirection: "column", justifyContent: "flex-end", alignItems: "center" }}>
                                 <Img 
                                     id="badge_trust"
                                     style={{ maxWidth: "100%" }}
@@ -492,12 +513,12 @@ console.log(allComments);
 
                 <div style={{ display: "flex", flexDirection: "column" }}>
                     <Section style={{ width: "75%", alignSelf: "center" }} key={"comment-form"} id="comment-form">
-                        <FormComment allcomments={allComments} labelComment={language.label_comment} send={language.send} />
+                        <h3>Bientôt ici un espace pour commentaires et suggestions</h3>
                     </Section>
 
                     <Aside key={"comments-collection"} style={{ flex: "100%", flexDirection: "row", justifyContent: "center", alignItems: "center", padding: "25px 150px", borderTop: "0.5px solid black", backgroundColor: "#FFFFEF" }}>                    
                         <div style={{ display: "flex", flex: "50%", flexDirection: "column-reverse" }}>
-                            { commentsCollection }
+                            { "Pas de commentaires" }
                         </div>
                     </Aside>
                 </div>

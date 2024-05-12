@@ -141,7 +141,7 @@ export const increaseIndex = (result) => {
 }
 
 export async function addUsers(db, userData) { 
-    const usersCol = collection(db, 'users-pipingdata.app');
+    const usersCol = collection(db, 'pipingdata/users/list');
         
     addDoc(usersCol, {
         mail: userData.mail,
@@ -256,7 +256,7 @@ export async function responseComments(db, userData) {
 
 
 export async function addOpinions(db, userData) { 
-    const opinionsCol = collection(db, 'opinions-pipingdata.app');
+    const opinionsCol = collection(db, 'pipingdata/opinions/discussion');
 
     let newDate = new Date();
 
@@ -266,12 +266,14 @@ export async function addOpinions(db, userData) {
     let year = newDate.getFullYear();
     let hour = newDate.getHours();
     let minute = newDate.getMinutes();
+    let second = newDate.getSeconds();
 
-    let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}`;
+    let dateNow = `${days[day]} ${date} ${months[month]} ${year} à ${hour}:${minute}:${second}`;
         
     addDoc(opinionsCol, {
         name: userData.name,
         opinion: userData.opinion,
+        opinion_admin: userData.opinion_admin,
         date: dateNow
     });
 }

@@ -225,6 +225,13 @@ h1 {
       align-items: center;
     }
 
+    #bloc-trust-functions {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+
     #bloc-trust-list:first-child {
       width: 90%;
       justify-content: center;
@@ -318,7 +325,7 @@ h1 {
       width: 110%;
     }
 
-    #bloc-trust-list {
+    #bloc-trust-list, #bloc-trust-functions {
       width: 100%;
       flex-direction: row;
       justify-content: space-evenly;
@@ -425,6 +432,10 @@ h1 {
 
 #contain-bloc-list, #contain-bloc-beta {
   background-color: white;
+}
+
+#contain-bloc-functions {
+  background-color: #0D1224;
 }
 
 #form-opinion, #form-comment {
@@ -536,10 +547,16 @@ h1 {
 /********************* FOOTER *********************************/
 
 
-#bloc-trust-list, #bloc-trust-badge, #bloc-trust-youtube, #bloc-beta, #bloc-opinion {
+#bloc-trust-list, #bloc-trust-functions, #bloc-trust-badge, #bloc-trust-youtube, #bloc-beta, #bloc-opinion {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+#bloc-trust-functions {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
 
 

@@ -15,6 +15,7 @@ import Span from './components/Span';
 import Title from './components/Title';
 import EditableBar from './components/EditableBar';
 import { languages } from './languages.js';
+import ReactPlayer from 'react-player'
 
 import { initializeApp } from "firebase/app";
 import { getFirestore, collection, doc, setDoc, getDoc, getDocs, addDoc, orderBy, where, query, limit } from "firebase/firestore";
@@ -401,10 +402,22 @@ function App( {allComments} ) {
                         {LINKS_APP}
                     </Aside>
 
-                    <Aside key={`bloc-smart-vector`}>
-                        <Sectionsmart trialVersion={language.trial_version} textTrialVersion={language.text_trial_version} back={language.back} className="Smart_vector" values={tabElbowsButtons} />
-                    </Aside>
+                        {
+                            (navigator.userAgent.match(/iPhone/i) || navigator.userAgent.match(/webOS/i) || navigator.userAgent.match(/Android/i) || navigator.userAgent.match(/iPad/i) || navigator.userAgent.match(/iPod/i) || navigator.userAgent.match(/BlackBerry/i) || navigator.userAgent.match(/Windows Phone/i) ?
+
+                                <ReactPlayer style={{padding: "0", marginBottom: "30px"}} width={"350px"} controls playing={true} loop={true} autoplay={true} url="./../assets/videos/pipingdata_promotion.mp4" type="video/mp4" />
+                                
+                                : 
+
+                                <Aside key={`bloc-smart-vector`}>
+                                    <Sectionsmart trialVersion={language.trial_version} textTrialVersion={language.text_trial_version} back={language.back} className="Smart_vector" values={tabElbowsButtons} />
+                                </Aside>
+                            )
+
+                        }
                 </Section>  
+                    
+                    
 
 
 
